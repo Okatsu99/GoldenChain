@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
+		<script src="https://kit.fontawesome.com/e4cf9541ab.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/style.css">
   </head>
@@ -70,49 +70,27 @@
                 <i class="fa fa-bars"></i>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Appointments</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Patient Record</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">E-Prescription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">E-Receipt</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Inventory.html">Inventory</a>
-                </li>
-              </ul>
-            </div>
+            
           </div>
         </nav>
 
         <h2 class="mb-4"><!-- Title --></h2>
           <div class="container">
-           <ul class="nav">
-              <li class="nav-item">
-                <a class="nav-link"> <input style="margin-right:95px; padding-right: 150px;" type="text" placeholder="Search.."></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" ><button  style=" margin-right:85px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPatient">Add Record</button></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link"><button style=" margin-right:85px;" type="button" class="btn btn-secondary">Edit Record</button></a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"style="font-size: 22px;">Filter by</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Last Name A-Z</a>
-                  <a class="dropdown-item" href="#">Last Name Z-A</a>
-                  <a class="dropdown-item" href="#">Clinic/Hospital</a>
-                </div>
-              </li>
-            </ul>
+            
+
+            <input style="margin-right:5%;" type="text" placeholder="Search..">
+            <button  style=" margin: 2.5%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPatient">Add Record</button>
+            <button style=" margin: 2.5%;" type="button" class="btn btn-success">Edit Record</button>
+            
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Filter By <i class="fas fa-caret-down"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Last Name A-Z</a>
+              <a class="dropdown-item" href="#">Last Name Z-A</a>
+              <a class="dropdown-item" href="#">Clinic/Hospital</a>
+            </div>
+
             <br>
             <br>
             <table class="table table-striped table-dark">
