@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title>Appointment Page</title>
+    <title>Patient Record</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<script src="https://kit.fontawesome.com/e4cf9541ab.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/setting.css">
-    <link rel="stylesheet" href="css/manage.css">
-
+    <script src="https://kit.fontawesome.com/e4cf9541ab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-		
-		<div class="wrapper d-flex align-items-stretch">
-			<nav id="sidebar">
-				<div class="p-4 pt-5">
-		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/Doctor.jpg);"></a>
-	        <ul class="list-unstyled components mb-5">
-	          <li>
-	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Christian Gaspar</a><!--  Accoount name -->
-	            <ul class="collapse list-unstyled" id="homeSubmenu">
+    
+    <div class="wrapper d-flex align-items-stretch">
+      <nav id="sidebar">
+        <div class="p-4 pt-5">
+          <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/Doctor.jpg);"></a>
+          <ul class="list-unstyled components mb-5">
+            <li >
+              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Christian Gaspar</a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
                     <a data-toggle="modal" data-target="#manageModal">Manage Secretary</a>
                 </li>
@@ -34,11 +29,11 @@
                 <li>
                     <a href="LoginPage.html">Logout</a>
                 </li>
-	            </ul>
-	          </li>
-	          <li>
-	              <a href="index.html">Appointments</a>
-	          </li>
+              </ul>
+            </li>
+             <li >
+                <a href="index.html">Appointments</a>
+            </li>
              <li class="active">
                 <a href="#">Patient Records</a>
             </li>
@@ -46,20 +41,19 @@
                 <a href="E-Prescription.html">E-Prescription</a>
             </li>
              <li>
-                <a href="E-Receipt.html">E-Receipt</a>
+                <a href="EReceipt.html">E-Receipt</a>
             </li>
              <li>
                 <a href="Inventory.html">Inventory</a>
             </li>
-	        </ul>
+          </ul>
 
-	        <div class="footer">
-	        	<p>
-            </p>
-	        </div>
+          <div class="footer">
+          
+          </div>
 
-	      </div>
-    	</nav>
+        </div>
+      </nav>
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5">
@@ -75,11 +69,11 @@
                 <i class="fa fa-bars"></i>
             </button>
 
-            
           </div>
         </nav>
 
-        <h2 class="mb-4"><!-- Title --></h2>
+
+              <h2 class="mb-4"><!-- Title --></h2>
           <div class="container">
             
 
@@ -126,200 +120,103 @@
           </div>
 
 
-          <!-- Modal -->
-            <div class="modal fade " id="AddPatient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Creating Record</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                        <div class="col">
-                          <div>
-                         Patient First Name: 
-                        <input type="text" name="patientname" placeholder="Enter your Name" style="width: 225px;"></div>
-                      </div>
-                      <br>
-                      <div class="col">
-                          <div>
-                         Patient Last Name: 
-                        <input type="text" name="patientname" placeholder="Enter your Name" style="width: 225px;"></div>
-                      </div>
-                      <br>
-                        <div class="col">
 
-                          Gender: 
-                          <select style="padding-right: ">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                          </select>
-                          &ensp;&ensp;
-                         
-                          Contact #: 
-                        <input type="text" name="contactnumber" placeholder="Enter your Contact #..." style="width: 200px;">
-                      </div>
-                      <br>
-                      <div class="col">
-                          Birthdate: 
-                        <input type="date" name="birthdate"  placeholder="0"style="width: 150px;">
-                      </div>
-                      <br>
-                       <div class="col">
-                        Email: 
-                        <input type="email" name="email" placeholder="Enter your Email..."style="width: 250px;">
-                      </div>
-                      <br>
-                      <div class="row">
-                        Address: 
-                        <div style="padding-left:10px;">
-                        <textarea rows="4" cols="55" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
-                        </div>
-                      </div>
-                      <br>
-                       <div class="col">
-                            <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Clinic
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="#">Hospital Clinic</a>
-                              <a class="dropdown-item" href="#">Medical Clinic</a>
+                      <!-- Manage Secretary Modal -->
+            <div class="modal fade" id="manageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg ">
+                    <div class="modal-content">
+                      <div>
+                            <div class="modal-header">
+                              <h3>Secretaries</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                          </div>
+
+                            <div class="modal-body"> 
+                              <div class="row">
+                                <div style="width: 50px; padding-left: 10px;">Search</div>
+                                  <div style="width: 450px; padding-left: 30px; padding-right: 70px;"><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"required="autofocus" width="20px";>
+                                  </div>
+                                    <div style="width: 85px";><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSecretaryModal">Add</button>
+                                    </div>
+                                      <div style="width: 85px";><button type="button" class="btn btn-secondary">Edit</button>
+                                      </div>
+                                        <div style="width: 85px";><button type="button" class="btn btn-danger">Delete</button>
+                                        </div>
+                                        
+                              </div>  
+                          <br>
+
+                          <table class="Manager">
+                            <tr>
+                              <th>ID</th>
+                              <th>Secretary ID</th>
+                              <th>Secretary Name</th>
+                              <th>Clinic</th>
+                            </tr>
+                            <tr>
+                              <td>1</td>
+                              <td>123456tf</td>
+                              <td>Christian Gaspar</td>
+                              <td>Clinic 1</td>
+                            </tr>
+                    
+
+                          </table>
+                                  </div>
+
+                                  <div class="modal-footer">
+
+                                  </div>
+                              </div>
                       </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+                          <!-- Modal setting -->
+           <div class="modal fade" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header setting">
+                  <h5 class="modal-title" id="exampleModalLabel" style="padding-left: 350px;">Settings</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body setting">
+                 <center>
+                 <table>
+                  <tr>
+                    <th rowspan="1"><img src="../GoldenChain/images/Doctor.jpg" class="img logo rounded-circle mb-5" width="250px"; height="250px";></th>
+                    <h4>Christian Gaspar</h4>
+                    <br>
+                  </tr>
 
-      </div>
-		</div>
-
-        <!-- Modal setting -->
-     <div class="modal fade" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header setting">
-            <h5 class="modal-title" id="exampleModalLabel" style="padding-left: 350px;">Settings</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body setting">
-           <center>
-           <table>
-            <tr>
-              <th rowspan="1"><img src="../GoldenChain/images/Doctor.jpg" class="img logo rounded-circle mb-5" width="250px"; height="250px";></th>
-              <h4>Christian Gaspar</h4>
-              <br>
-            </tr>
-
-            <tr>
-              <th>
-              <input type="password" class="form-control" id="NewPassword" placeholder="Enter a New Password" required="autofocus">
-              <br>
-              <input type="password" class="form-control" id="NewPasswordCheck" placeholder="Confirm New Password" required="autofocus"></th>
-            </tr>
-           </table></center>
-           
-          </div>
-
-          <div class="modal-footer setting">
-              <br><br><br><br>
-              <div>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Set New Password</button>
-              </div>
-
-              <div> 
-                <button type="button" class="btn btn-primary" data-dismiss="modal" >Save Changes</button>
-              </div>
-
-          </div>
-        </div>
-      </div> 
-    </div>
-
-<!-- Manage Secretary Modal -->
-<div class="modal fade" id="manageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg ">
-        <div class="modal-content">
-          <div>
-                <div class="modal-header">
-                  <h3>Secretaries</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                  <tr>
+                    <th>
+                    <input type="password" class="form-control" id="NewPassword" placeholder="Enter a New Password" required="autofocus">
+                    <br>
+                    <input type="password" class="form-control" id="NewPasswordCheck" placeholder="Confirm New Password" required="autofocus"></th>
+                  </tr>
+                 </table></center>
+                 
                 </div>
 
-                <div class="modal-body"> 
-                  <div class="row">
-                    <div style="width: 50px; padding-left: 10px;">Search</div>
-                      <div style="width: 450px; padding-left: 30px; padding-right: 70px;"><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"required="autofocus" width="20px";>
-                      </div>
-                        <div style="width: 85px";><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSecretaryModal">Add</button>
-                        </div>
-                          <div style="width: 85px";><button type="button" class="btn btn-secondary">Edit</button>
-                          </div>
-                            <div style="width: 85px";><button type="button" class="btn btn-danger">Delete</button>
-                            </div>
-                            
-                  </div>  
-              <br>
+                <div class="modal-footer setting">
+                    <br><br><br><br>
+                    <div>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Set New Password</button>
+                    </div>
 
-              <table class="Manager">
-                <tr>
-                  <th>ID</th>
-                  <th>Secretary ID</th>
-                  <th>Secretary Name</th>
-                  <th>Clinic</th>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>123456tf</td>
-                  <td>Christian Gaspar</td>
-                  <td>Clinic 1</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                    <div> 
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" >Save Changes</button>
+                    </div>
 
-              </table>
-                      </div>
-
-                      <div class="modal-footer">
-
-                      </div>
-                  </div>
+                </div>
+              </div>
+            </div> 
           </div>
-        </div>
       </div>
     </div>
 
@@ -327,8 +224,5 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
 </html>
