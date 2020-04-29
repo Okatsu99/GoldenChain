@@ -3,3 +3,8 @@
   border-collapse: collapse;
   width: 100%;
 }
+
+.bgcolor{
+	background-color: #b8b6cb;
+	color: black;
+}
