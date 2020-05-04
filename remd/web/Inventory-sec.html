@@ -107,6 +107,61 @@
 
           </div>
 
+           <!-- Modal -->
+            <div class="modal fade " id="AddPatient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title w-100 text-center" id="exampleModalLabel">Settings</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                        <div class="col">
+                          <div>
+                         Item Name: 
+                        <input type="text" name="patientname" placeholder="Enter Item Name" style="width: 52%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+                          <div>
+                         Description: 
+                        <input type="text" name="patientname" placeholder="Enter Description" style="width: 52%;"></div>
+                      </div>
+                      <br>
+                        <div class="col">
+                          Quantity:
+                          <input type="number" name="quantity"  placeholder="0"style="width: 10%;">
+                          &ensp;&ensp;
+                         
+                          Category: 
+                        <input type="text" name="contactnumber" placeholder="Enter Category..." style="width: 50%;">
+                      </div>
+                      <br>
+                      <div class="col">
+                          Expiration Date: 
+                        <input type="date" name="birthdate"  placeholder="0"style="width: 40%;">
+                      </div>
+                      <br>
+                      <div class="row">
+                       Doctor Notes: 
+                        <div style="padding-left:1%;">
+                        <textarea rows="4" cols="45" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
+                        </div>
+                      </div>
+                      <br>
+                       
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      </div>
 
                           <!-- Modal setting -->
            <div class="modal fade" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
