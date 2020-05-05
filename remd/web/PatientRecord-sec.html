@@ -70,7 +70,7 @@
 
             <input style="margin-right:5%;" type="text" placeholder="Search..">
             <button  style=" margin: 2.5%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPatient">Add Record</button>
-            <button style=" margin: 2.5%;" type="button" class="btn btn-success">Edit Record</button>
+            <button style=" margin: 2.5%;" type="button" class="btn btn-success" data-toggle="modal" data-target="#EditPatient">Edit Record</button>
             
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Filter By <i class="fas fa-caret-down"></i>
@@ -110,12 +110,12 @@
 
           </div>
 
-           <!-- Modal -->
+          <!-- Add Patient Modal-->
             <div class="modal fade " id="AddPatient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Creating Record</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create Record</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -124,16 +124,16 @@
                         <div class="col">
                           <div>
                          Patient First Name: 
-                        <input type="text" name="patientname" placeholder="Enter your Name" style="width: 52%;"></div>
+                        <input type="text" name="patientFname" placeholder="Enter your Name" style="width: 52%;"></div>
                       </div>
                       <br>
                       <div class="col">
                           <div>
                          Patient Last Name: 
-                        <input type="text" name="patientname" placeholder="Enter your Name" style="width: 52%;"></div>
+                        <input type="text" name="patientLname" placeholder="Enter your Name" style="width: 52%;"></div>
                       </div>
                       <br>
-                        <div class="col">
+                      <div class="col">
 
                           Gender: 
                           <select style="padding-right: ">
@@ -141,7 +141,11 @@
                             <option value="female">Female</option>
                           </select>
                           &ensp;&ensp;
-                         
+
+                      </div>
+                      <br>
+                      <div class="col">
+                                                   
                           Contact #: 
                         <input type="text" name="contactnumber" placeholder="Enter your Contact #..." style="width: 40%;">
                       </div>
@@ -156,7 +160,7 @@
                         <input type="email" name="email" placeholder="Enter your Email..."style="width: 50%;">
                       </div>
                       <br>
-                      <div class="row">
+                      <div class="col">
                         Address: 
                         <div style="padding-left:1%;">
                         <textarea rows="4" cols="50" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
@@ -177,12 +181,88 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary">Create Record</button>
                   </div>
                 </div>
               </div>
             </div>
+      </div>
 
+      <!-- Edit Patient Modal -->
+            <div class="modal fade " id="EditPatient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Record</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                        <div class="col">
+                          <div>
+                         Secretary First Name: 
+                        <input type="text" name="secretaryFname" placeholder="Enter your Name" style="width: 52%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+                          <div>
+                         Secretary Last Name: 
+                        <input type="text" name="secretaryLname" placeholder="Enter your Name" style="width: 52%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+                        Contact #: 
+                        <input type="text" name="contactnumber" placeholder="Enter your Contact #..." style="width: 40%;">
+                      </div>
+                      <br>
+                      <div class="col">
+
+                          Gender: 
+<!--                           <select style="padding-right: ">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select> -->
+                          &ensp;&ensp;
+                      </div>
+                      <br>
+                      <div class="col">
+                          Birthdate: 
+                        <input type="date" name="birthdate"  placeholder="0"style="width: 50%;">
+                      </div>
+                      <br>
+                       <div class="col">
+                        Email: 
+                        <input type="email" name="email" placeholder="Enter your Email..."style="width: 50%;">
+                      </div>
+                      <br>
+                      <div class="col">
+                        Address: 
+                        <div style="padding-left:1%;">
+                        <textarea rows="4" cols="50" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
+                        </div>
+                      </div>
+                      <br>
+                       <div class="col">
+                          Clinic: 
+                          <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Clinic
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Hospital Clinic</a>
+                              <a class="dropdown-item" href="#">Medical Clinic</a>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
                           <!-- Modal setting -->
