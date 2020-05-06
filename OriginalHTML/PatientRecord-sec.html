@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Patient Record</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e4cf9541ab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/setting.css">
+    <link rel="stylesheet" href="css/manage.css">
+  </head>
+  <body>
+    
+    <div class="wrapper d-flex align-items-stretch backgroundColorSec">
+      <nav id="sidebar">
+        <div class="p-4 pt-5">
+          <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/Assistant.jpg);"></a>
+          <ul class="list-unstyled components mb-5">
+            <li >
+              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ivan Magsino</a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a data-toggle="modal" data-target="#settingModal">Settings</a>
+                </li>
+                <li>
+                    <a href="LoginPage.html">Logout</a>
+                </li>
+              </ul>
+            </li>
+             <li >
+                <a href="index-sec.html">Appointments</a>
+            </li>
+             <li class="active">
+                <a href="#">Patient Records</a>
+            </li>
+             <li>
+                <a href="Inventory-sec.html">Inventory</a>
+            </li>
+          </ul>
+
+          <div class="footer">
+          
+          </div>
+
+        </div>
+      </nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+          </div>
+        </nav>
+
+
+              <h2 class="mb-4"><!-- Title --></h2>
+          <div class="container">
+            
+
+            <input style="margin-right:5%;" type="text" placeholder="Search..">
+            <button  style=" margin: 2.5%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPatient">Add Record</button>
+            <button style=" margin: 2.5%;" type="button" class="btn btn-success" data-toggle="modal" data-target="#EditPatient">Edit Record</button>
+            
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Filter By <i class="fas fa-caret-down"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Last Name A-Z</a>
+              <a class="dropdown-item" href="#">Last Name Z-A</a>
+              <a class="dropdown-item" href="#">Clinic/Hospital</a>
+            </div>
+
+            <br>
+            <br>
+            <table class="table table-striped table-dark">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Patient ID</th>
+                  <th scope="col">Patient FirstName</th>
+                  <th scope="col">Patient LastName</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Contact #</th>
+                  <th scope="col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><input type="checkbox" name="checkbx"></th>
+                  <td>20180056</td>
+                  <td>MArk</td>
+                  <td>Batuista</td>
+                  <td>Male</td>
+                  <td>09164927839</td>
+                  <td>bau@gmail.com</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <!-- Add Patient Modal-->
+            <div class="modal fade " id="AddPatient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header colorModal">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create Record</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body colorModal">
+                        <div class="col">
+                          <div>
+                         Patient First Name: 
+                        <input class="form form-control" type="text" name="patientFname" placeholder="Enter your Name" style="width: 52%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+                          <div>
+                         Patient Last Name: 
+                        <input  class="form form-control" type="text" name="patientLname" placeholder="Enter your Name" style="width: 52%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+
+                          Gender: 
+                          <select style="padding-right: ">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
+                          &ensp;&ensp;
+
+                      </div>
+                      <br>
+                      <div class="col">
+                                                   
+                          Contact #: 
+                        <input class="form form-control" type="text" name="contactnumber" placeholder="Enter your Contact #..." style="width: 40%;">
+                      </div>
+                      <br>
+                      <div class="col">
+                          Birthdate: 
+                        <input class="form form-control" type="date" name="birthdate"  placeholder="0"style="width: 50%;">
+                      </div>
+                      <br>
+                       <div class="col">
+                        Email: 
+                        <input class="form form-control" type="email" name="email" placeholder="Enter your Email..."style="width: 50%;">
+                      </div>
+                      <br>
+                      <div class="col">
+                        Address: 
+                        <div style="padding-left:1%;">
+                        <textarea rows="4" style="width: 100%;" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
+                        </div>
+                      </div>
+                      <br>
+                       <div class="col">
+                            <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Clinic
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Hospital Clinic</a>
+                              <a class="dropdown-item" href="#">Medical Clinic</a>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Create Record</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+
+      <!-- Edit Patient Modal -->
+            <div class="modal fade " id="EditPatient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header colorModal">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Record</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body colorModal">
+                        <div class="col">
+                          <div>
+                         Secretary First Name: 
+                        <input class="form form-control" type="text" name="secretaryFname" placeholder="Enter your Name" style="width: 52%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+                          <div>
+                         Secretary Last Name: 
+                        <input class="form form-control" type="text" name="secretaryLname" placeholder="Enter your Name" style="width: 52%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+                        Contact #: 
+                        <input class="form form-control" type="text" name="contactnumber" placeholder="Enter your Contact #..." style="width: 40%;">
+                      </div>
+                      <br>
+                      <div class="col">
+
+                          Gender: 
+                        <select style="padding-right: ">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
+                          &ensp;&ensp;
+                      </div>
+                      <br>
+                      <div class="col">
+                          Birthdate: 
+                        <input class="form form-control" type="date" name="birthdate"  placeholder="0"style="width: 50%;">
+                      </div>
+                      <br>
+                       <div class="col">
+                        Email: 
+                        <input class="form form-control" type="email" name="email" placeholder="Enter your Email..."style="width: 50%;">
+                      </div>
+                      <br>
+                      <div class="col">
+                        Address: 
+                        <div style="padding-left:1%;">
+                        <textarea rows="4" style="width: 100%;" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
+                        </div>
+                      </div>
+                      <br>
+                       <div class="col">
+                          Clinic: 
+                          <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Clinic
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Hospital Clinic</a>
+                              <a class="dropdown-item" href="#">Medical Clinic</a>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+                          <!-- Modal setting -->
+           <div class="modal fade" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header setting">
+                  <h5 class="modal-title" id="exampleModalLabel" style="padding-left: 350px;">Settings</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body setting">
+                 <center>
+                 <table>
+                  <tr>
+                    <th rowspan="1"><img src="images/Assistant.jpg" class="img logo rounded-circle mb-5" width="250px"; height="250px";></th>
+                    <h4>Ivan Magsino</h4>
+                    <br>
+                  </tr>
+
+                  <tr>
+                    <th>
+                    <input type="password" class="form-control" id="NewPassword" placeholder="Enter a New Password" required="autofocus">
+                    <br>
+                    <input type="password" class="form-control" id="NewPasswordCheck" placeholder="Confirm New Password" required="autofocus"></th>
+                  </tr>
+                 </table></center>
+                 
+                </div>
+
+                <div class="modal-footer setting">
+                    <br><br><br><br>
+                    <div>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Set New Password</button>
+                    </div>
+
+                    <div> 
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" >Save Changes</button>
+                    </div>
+
+                </div>
+              </div>
+            </div> 
+          </div>
+      </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
