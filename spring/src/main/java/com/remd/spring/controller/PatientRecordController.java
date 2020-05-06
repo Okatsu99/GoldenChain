@@ -27,7 +27,7 @@ public class PatientRecordController {
 	}
 	@RequestMapping(path = "/app/patientrecords", method = RequestMethod.GET,
 			params = "order")
-	public String viewPatientRecordsSorted(Model model, @RequestParam("order")int order) {
+	public String viewPatientRecordsSorted(Model model, @RequestParam(name = "order")int order) {
 		if(order == 0) {
 			model.addAttribute("patientRecords", patientRecordRepository.findAllByOrderByLastNameAsc());
 		} else if (order == 1) {
@@ -36,8 +36,13 @@ public class PatientRecordController {
 		return "app/patientRecords";
 	}
 	@RequestMapping(path = "/app/patientrecords/new", method = RequestMethod.POST)
-	public String insertRecord(@Param("patientFirstName")String firstName,@Param("patientLastName")String lastName,@Param("patientGender")String gender,
-			@Param("patientContactNumber")String contactNumber,@Param("patientEmailAddress")String email) {
+	public String insertRecord(
+			@RequestParam(name = "patientFirstName")String firstName,
+			@RequestParam(name = "patientLastName")String lastName,
+			@RequestParam(name = "patientGender")String gender,
+			@RequestParam(name = "patientContactNumber")String contactNumber,
+			@RequestParam(name = "patientEmailAddress")String email
+			) {
 		PatientRecord record = new PatientRecord(firstName,lastName,gender,contactNumber,email);
 		patientRecordRepository.saveAndFlush(record);
 		return "redirect:/app/patientrecords";

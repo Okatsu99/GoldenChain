@@ -29,7 +29,7 @@
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Christian
               Gaspar</a><!--  Accoount name -->
             <ul class="collapse list-unstyled" id="homeSubmenu">
-              <li>
+              <li sec:authorize="hasRole('ROLE_DOCTOR')">
                 <a data-toggle="modal" data-target="#manageModal">Manage Secretary</a>
               </li>
               <li>
@@ -46,10 +46,10 @@
           <li class="active">
             <a th:href="@{patientrecords}">Patient Records</a>
           </li>
-          <li>
+          <li sec:authorize="hasRole('ROLE_DOCTOR')">
             <a href="E-Prescription.html">E-Prescription</a>
           </li>
-          <li>
+          <li sec:authorize="hasRole('ROLE_DOCTOR')">
             <a href="E-Receipt.html">E-Receipt</a>
           </li>
           <li>
@@ -101,7 +101,7 @@
           aria-haspopup="true" aria-expanded="false">
           Filter By <i class="fas fa-caret-down"></i>
         </button>
-        <form th:action="@{/app/patientrecords}" method="get">
+        <form th:action="@{/app/patientrecords}" th:method="get">
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <button class="dropdown-item" name="order" value="0">Last Name A-Z</button>
             <button class="dropdown-item" name="order" value="1">Last Name Z-A</button>
@@ -150,24 +150,24 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form th:action="@{/app/patientrecords/new}" method="post">
+            <form th:action="@{/app/patientrecords/new}" th:method="post">
               <div class="modal-body">
                 <div class="col">
                   <div>
                     Patient First Name:
-                    <input type="text" name="patientFname" placeholder="Enter your Name" style="width: 52%;"></div>
+                    <input type="text" th:name="patientFirstName" placeholder="Enter your Name" style="width: 52%;"></div>
                 </div>
                 <br>
                 <div class="col">
                   <div>
                     Patient Last Name:
-                    <input type="text" name="patientLname" placeholder="Enter your Name" style="width: 52%;"></div>
+                    <input type="text" th:name="patientLastName" placeholder="Enter your Name" style="width: 52%;"></div>
                 </div>
                 <br>
                 <div class="col">
 
                   Gender:
-                  <select name="patientGender" style="padding-right: ">
+                  <select th:name="patientGender">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
@@ -178,23 +178,23 @@
                 <div class="col">
 
                   Contact #:
-                  <input type="text" name="patientContactNumber" placeholder="Enter your Contact #..." style="width: 40%;">
+                  <input type="text" th:name="patientContactNumber" placeholder="Enter your Contact #..." style="width: 40%;">
                 </div>
                 <br>
                 <div class="col">
                   Birthdate:
-                  <input type="date" name="patientBirthDate" placeholder="0" style="width: 50%;">
+                  <input type="date" th:name="patientBirthDate" placeholder="0" style="width: 50%;">
                 </div>
                 <br>
                 <div class="col">
                   Email:
-                  <input type="email" name="patientEmailAddress" placeholder="Enter your Email..." style="width: 50%;">
+                  <input type="email" th:name="patientEmailAddress" placeholder="Enter your Email..." style="width: 50%;">
                 </div>
                 <br>
                 <div class="col">
                   Address:
                   <div style="padding-left:1%;">
-                    <textarea rows="4" cols="50" name="patientAddress" form="Order_Page" id="m_box"
+                    <textarea rows="4" cols="50" th:name="patientAddress" id="m_box"
                       style="resize: none;"></textarea>
                   </div>
                 </div>
@@ -214,8 +214,9 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Create Record</button>
+                <button th:type="submit" class="btn btn-primary">Create Record</button>
               </div>
+              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
           </div>
         </div>
@@ -274,7 +275,7 @@
             <div class="col">
               Address:
               <div style="padding-left:1%;">
-                <textarea rows="4" cols="50" name="message" form="Order_Page" id="m_box"
+                <textarea rows="4" cols="50" name="message" id="m_box"
                   style="resize: none;"></textarea>
               </div>
             </div>
