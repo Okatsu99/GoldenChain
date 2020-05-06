@@ -28,7 +28,7 @@
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Christian
               Gaspar</a><!--  Accoount name -->
             <ul class="collapse list-unstyled" id="homeSubmenu">
-              <li>
+              <li sec:authorize="hasRole('ROLE_DOCTOR')">
                 <a data-toggle="modal" data-target="#manageModal">Manage Secretary</a>
               </li>
               <li>
@@ -45,10 +45,10 @@
           <li>
             <a th:href="@{/app/patientrecords}">Patient Records</a>
           </li>
-          <li>
+          <li sec:authorize="hasRole('ROLE_DOCTOR')">
             <a href="E-Prescription.html">E-Prescription</a>
           </li>
-          <li>
+          <li sec:authorize="hasRole('ROLE_DOCTOR')">
             <a href="E-Receipt.html">E-Receipt</a>
           </li>
           <li>

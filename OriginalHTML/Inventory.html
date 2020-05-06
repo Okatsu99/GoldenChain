@@ -17,7 +17,7 @@
   </head>
   <body>
     
-    <div class="wrapper d-flex align-items-stretch">
+    <div class="wrapper d-flex align-items-stretch backgroundColor">
       <nav id="sidebar">
         <div class="p-4 pt-5">
           <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/Doctor.jpg);"></a>
@@ -85,7 +85,7 @@
             <input style="margin-right:5%;" type="text" placeholder="Search..">
             <button  style=" margin: 2.5%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddItem">Add Item</button>
             <button style=" margin: 2.5%;" type="button" class="btn btn-success" data-toggle="modal" data-target="#EditItem">Edit Item</button>
-            <button style=" margin: 2.5%;" type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteItem">Delete Item</button>
+            <button style=" margin: 2.5%;" type="button" class="btn btn-danger" >Delete Item</button>
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              Filter By <i class="fas fa-caret-down"></i>
             </button>
@@ -101,6 +101,7 @@
             <table class="table table-striped table-dark">
               <thead>
                 <tr>
+                  <th scope="col"></th>
                   <th scope="col">Item ID</th>
                   <th scope="col">Item Qty</th>
                   <th scope="col">Item Name</th>
@@ -110,7 +111,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">1</th>
+                  <th scope="row"><input type="checkbox" name="checkbx"></th>
                   <td>20180056</td>
                   <td>3</td>
                   <td>Biotics</td>
@@ -127,45 +128,45 @@
             <div class="modal fade " id="AddItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
+                  <div class="modal-header colorModal">
                     <h3 class="modal-title w-100 text-center" id="exampleModalLabel">Add Item</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body colorModal">
                         <div class="col">
                           <div>
                          Item Name: 
-                        <input type="text" name="patientname" placeholder="Enter Item Name" style="width: 52%;"></div>
+                        <input class=" form form-control" type="text" name="patientname" placeholder="Enter Item Name" style="width: 52%;"></div>
                       </div>
                       <br>
                       <div class="col">
                           <div>
                          Description: 
-                        <input type="text" name="patientname" placeholder="Enter Description" style="width: 52%;"></div>
+                        <input class=" form form-control" type="text" name="patientname" placeholder="Enter Description" style="width: 52%;"></div>
                       </div>
                       <br>
                       <div class="col">
                           Quantity:
-                          <input type="number" name="quantity"  placeholder="0"style="width: 10%;">
+                          <input class=" form form-control" type="number" name="quantity"  placeholder="0"style="width: 15%;">
                           &ensp;&ensp;
                       </div>
                       <br>
                       <div class="col">
                         Category: 
-                        <input type="text" name="contactnumber" placeholder="Enter Category..." style="width: 50%;">
+                        <input class=" form form-control" type="text" name="contactnumber" placeholder="Enter Category..." style="width: 50%;">
                       </div>
                       <br>
                       <div class="col">
                           Expiration Date: 
-                        <input type="date" name="birthdate"  placeholder="0"style="width: 40%;">
+                        <input class=" form form-control" type="date" name="birthdate"  placeholder="0"style="width: 50%;">
                       </div>
                       <br>
                       <div class="col">
                        Doctor Notes: 
                         <div style="padding-left:1%;">
-                        <textarea rows="4" cols="45" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
+                        <textarea style="width: 100%;" rows="4" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
                         </div>
                       </div>
                       <br>
@@ -173,7 +174,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create Item</button>
+                    <button type="button" class="btn btn-primary">Add Item</button>
                   </div>
                 </div>
               </div>
@@ -185,46 +186,46 @@
             <div class="modal fade " id="EditItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
+                  <div class="modal-header colorModal">
                     <h5 class="modal-title" id="exampleModalLongTitle">Edit Item</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body colorModal">
 
                         <div class="col">
                           <div>
                          Item Name: 
-                        <input type="text" name="patientname" placeholder="Enter Item Name" style="width: 52%;"></div>
+                        <input class="form form-control" type="text" name="patientname" placeholder="Enter Item Name" style="width: 52%;"></div>
                       </div>
                       <br>
                       <div class="col">
                           <div>
                          Description: 
-                        <input type="text" name="patientname" placeholder="Enter Description" style="width: 52%;"></div>
+                        <input class="form form-control" type="text" name="patientname" placeholder="Enter Description" style="width: 52%;"></div>
                       </div>
                       <br>
                       <div class="col">
                           Quantity:
-                          <input type="number" name="quantity"  placeholder="0"style="width: 10%;">
+                          <input class="form form-control" type="number" name="quantity"  placeholder="0"style="width: 15%;">
                           &ensp;&ensp;
                       </div>
                       <br>
                       <div class="col">
                         Category: 
-                        <input type="text" name="contactnumber" placeholder="Enter Category..." style="width: 50%;">
+                        <input  class="form form-control" type="text" name="contactnumber" placeholder="Enter Category..." style="width: 50%;">
                       </div>
                       <br>
                       <div class="col">
                           Expiration Date: 
-                        <input type="date" name="birthdate"  placeholder="0"style="width: 40%;">
+                        <input class="form form-control" type="date" name="birthdate"  placeholder="0"style="width: 50%;">
                       </div>
                       <br>
                       <div class="col">
                        Doctor Notes: 
                         <div style="padding-left:1%;">
-                        <textarea rows="4" cols="45" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
+                        <textarea rows="4" style="width: 100%;" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
                         </div>
                       </div>
                       <br>
@@ -308,7 +309,7 @@
                <center>
                <table>
                 <tr>
-                  <th rowspan="1"><img src="../GoldenChain/images/Doctor.jpg" class="img logo rounded-circle mb-5" width="250"; height="250";></th>
+                  <th rowspan="1"><img src="images/Doctor.jpg" class="img logo rounded-circle mb-5" width="250"; height="250";></th>
                   <h4>Christian Gaspar</h4>
                   <br>
                 </tr>
