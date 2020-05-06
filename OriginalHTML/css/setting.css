@@ -10,3 +10,11 @@
 .colorModal{
 	background-color: #EAD9E3;
 }
+@font-face{
+	font-family: "KeepCalm-Medium";
+	src: url('fonts/KeepCalm-Medium.ttf');
+}
+.font{
+	font-family: "KeepCalm-Medium";
+
+}
