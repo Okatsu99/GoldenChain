@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<nav id="sidebar">
+		<div class="p-4 pt-5">
+			<a href="#" class="img logo rounded-circle mb-5"
+				style="background-image: url(images/Doctor.jpg);"></a>
+			<ul class="list-unstyled components mb-5">
+				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+					class="dropdown-toggle" th:text="${profile.getName()}">Account
+					Name</a>
+				<!--  Accoount name -->
+				<ul class="collapse list-unstyled" id="homeSubmenu">
+					<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
+						data-toggle="modal" data-target="#manageModal">Manage
+							Secretary</a></li>
+					<li><a data-toggle="modal" data-target="#settingModal">Settings</a>
+					</li>
+					<li><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+				</li>
+				<li class="active"><a th:href="@{/app/appointments}">Appointments</a>
+				</li>
+				<li><a th:href="@{/app/patientrecords}">Patient Records</a></li>
+				<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
+					href="E-Prescription.html">E-Prescription</a></li>
+				<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
+					th:href="@{/app/receipt}">E-Receipt</a></li>
+				<li><a th:href="@{/app/inventory}">Inventory</a></li>
+			</ul>
+
+			<div class="footer">
+				<p></p>
+			</div>
+
+		</div>
+	</nav>
+</body>
+</html>

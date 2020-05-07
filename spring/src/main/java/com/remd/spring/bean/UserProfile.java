@@ -5,14 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_profile")
+@Table(name = "users_profile")
 public class UserProfile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
+	@OneToOne(mappedBy = "profile")
+	private User user;
 	@Column(name = "firstname")
 	private String firstName;
 	@Column(name = "lastname")

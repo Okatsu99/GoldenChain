@@ -16,7 +16,7 @@ public class MyUserDetails implements UserDetails {
 	private String passWord;
 	private boolean isActive;
 	private List<GrantedAuthority> authorities;
-	
+	private UserProfile userProfile;
 	//Empty Constructor
 	public MyUserDetails() {
 		
@@ -30,6 +30,7 @@ public class MyUserDetails implements UserDetails {
 		this.authorities = Arrays.stream(user.getRoles().split(","))
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
+		this.userProfile = user.getProfile();
 		System.out.println(this.authorities);
 	}
 
@@ -77,4 +78,11 @@ public class MyUserDetails implements UserDetails {
 		return isActive;
 	}
 
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
 }
