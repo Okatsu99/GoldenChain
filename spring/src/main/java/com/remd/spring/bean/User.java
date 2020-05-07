@@ -1,10 +1,14 @@
 package com.remd.spring.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +24,14 @@ public class User {
 	private boolean isActive;
 	@Column(name = "roles")
 	private String roles;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name = "users_list",
+		joinColumns = 
+			{ @JoinColumn(name = "auth_id", referencedColumnName = "id")},
+		inverseJoinColumns = 
+			{ @JoinColumn(name = "profile_id", referencedColumnName = "id")})	
+	private UserProfile profile;
+	
 	public int getId() {
 		return id;
 	}
@@ -49,6 +61,12 @@ public class User {
 	}
 	public void setRoles(String roles) {
 		this.roles = roles;
+	}
+	public UserProfile getProfile() {
+		return profile;
+	}
+	public void setProfile(UserProfile profile) {
+		this.profile = profile;
 	}
 	
 	
