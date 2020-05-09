@@ -2,6 +2,7 @@ package com.remd.spring.controller.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * The WebSecurityConfig class is annotated with @EnableWebSecurity to enable Spring Security’s web security support and provide the Spring MVC integration. 
  * It also extends WebSecurityConfigurerAdapter and overrides a couple of its methods to set some specifics of the web security configuration.
  */
+@Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
@@ -29,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/app/**").hasAnyRole("DOCTOR","SECRETARY")
+		.antMatchers("/test/**").hasAuthority("ADMIN")
 		.and()
 		.formLogin()
 			.loginPage("/login")
@@ -37,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.logout()
 		.logoutSuccessUrl("/login")
 		.and()
-		.csrf().disable();
+		.httpBasic();
 	}
 	
 	/*TODO: Add ecnryption*/

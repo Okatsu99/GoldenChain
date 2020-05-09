@@ -1,5 +1,6 @@
 package com.remd.spring.bean;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class PatientRecord {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "first_name")
 	private String firstName;
@@ -26,18 +27,32 @@ public class PatientRecord {
 	private String gender;
 	@Column(name = "contact_number")
 	private String contactNumber;
+	@Column(name = "birthdate", columnDefinition = "DATE")
+	private LocalDate birthDate;
 	@Column(name = "email")
 	private String email;
-
+	@Column(name = "home_address")
+	private String homeAddress;
 	public PatientRecord() {
+		this.firstName = "";
+		this.lastName = "";
+		this.gender = "";
+		this.contactNumber = "";
+		this.birthDate = null;
+		this.email = "";
+		this.homeAddress = "";
 	}
 	
-	public PatientRecord(String firstName, String lastName, String gender, String contactNumber, String email) {
+	public PatientRecord(String firstName, String lastName, String gender, String contactNumber,
+			LocalDate birthDate, String email, String homeAddress) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.contactNumber = contactNumber;
+		this.birthDate = birthDate;
 		this.email = email;
+		this.homeAddress = homeAddress;
 	}
 
 	public int getId() {
@@ -80,6 +95,14 @@ public class PatientRecord {
 		this.contactNumber = contactNumber;
 	}
 
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -88,4 +111,13 @@ public class PatientRecord {
 		this.email = email;
 	}
 
+	public String getHomeAddress() {
+		return homeAddress;
+	}
+
+	public void setHomeAddress(String homeAddress) {
+		this.homeAddress = homeAddress;
+	}
+
+	
 }

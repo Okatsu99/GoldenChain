@@ -15,7 +15,8 @@ import javax.persistence.Table;
 @Table(name = "users_auth")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	@Column(name = "username")
 	private String userName;
@@ -24,12 +25,7 @@ public class User {
 	private boolean isActive;
 	@Column(name = "roles")
 	private String roles;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "users_list",
-		joinColumns = 
-			{ @JoinColumn(name = "auth_id", referencedColumnName = "id")},
-		inverseJoinColumns = 
-			{ @JoinColumn(name = "profile_id", referencedColumnName = "id")})	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private UserProfile profile;
 	
 	public int getId() {
