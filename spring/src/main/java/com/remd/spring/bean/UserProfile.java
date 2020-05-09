@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -12,16 +13,22 @@ import javax.persistence.Table;
 @Table(name = "users_profile")
 public class UserProfile {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
-	@OneToOne(mappedBy = "profile")
-	private User user;
 	@Column(name = "firstname")
 	private String firstName;
 	@Column(name = "lastname")
 	private String lastName;
-
+	
+	@OneToOne
+	@MapsId
+	private User user;
+	
+	public UserProfile() {
+		this.firstName = "";
+		this.lastName = "";
+	}
+	
 	public int getId() {
 		return id;
 	}

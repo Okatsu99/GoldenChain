@@ -25,10 +25,10 @@
 	<div class="container">
 		<center>
 			<div class="main">
-				<br>
-				<br>
-				<br>
+				<br> <br> <br>
 				<form th:action="@{/login}" th:method="post">
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
 					<div class="form-group">
 						<center>
 							<img th:src="@{images/ReMD.png}" width="250px" height="250px">
@@ -38,12 +38,12 @@
 						<center>
 							<h4>Golden Chain</h4>
 						</center>
-						<input name="username" type="text" class="form-control" id="exampleInputEmail1"
-							aria-describedby="emailHelp" placeholder="Enter your UserName"
-							required="autofocus"> 
-						<input name="password" type="password"
-							class="form-control" id="exampleInputPassword1"
-							placeholder="Enter your Password" required="autofocus">
+						<input name="username" type="text" class="form-control"
+							id="exampleInputEmail1" aria-describedby="emailHelp"
+							placeholder="Enter your UserName" required="autofocus"> <input
+							name="password" type="password" class="form-control"
+							id="exampleInputPassword1" placeholder="Enter your Password"
+							required="autofocus">
 					</div>
 					<button type="submit" class="btn btn-primary">Log In</button>
 				</form>

@@ -1,6 +1,7 @@
 package com.remd.spring.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,4 +15,6 @@ import com.remd.spring.bean.PatientRecord;
 public interface PatientRecordRepository extends JpaRepository<PatientRecord, Integer>{
 	List<PatientRecord> findAllByOrderByLastNameDesc();
 	List<PatientRecord> findAllByOrderByLastNameAsc();
+	@Override
+	Optional<PatientRecord> findById(Integer id);
 }
