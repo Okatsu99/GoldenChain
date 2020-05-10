@@ -1,20 +1,19 @@
 package com.remd.spring.controller;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.remd.spring.bean.MyUserDetails;
-import com.remd.spring.bean.User;
 
 @Controller
-public class AppointmentsController {
-	@GetMapping("/app/appointments")
-	public String viewAppointments(Model model) {
+public class PrescriptionController {
+	@RequestMapping(path = "/app/prescription", method = RequestMethod.GET)
+	public String viewPage(Model model) {
 		model.addAttribute("profile", getUser().getUserProfile());
-		return "app/appointments";
+		return "app/prescription"; 
 	}
 	
 	private MyUserDetails getUser() {

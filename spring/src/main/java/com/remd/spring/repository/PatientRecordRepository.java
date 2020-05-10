@@ -15,6 +15,4 @@ import com.remd.spring.bean.PatientRecord;
 public interface PatientRecordRepository extends JpaRepository<PatientRecord, Integer>{
 	List<PatientRecord> findAllByOrderByLastNameDesc();
 	List<PatientRecord> findAllByOrderByLastNameAsc();
-	@Override
-	Optional<PatientRecord> findById(Integer id);
 }
