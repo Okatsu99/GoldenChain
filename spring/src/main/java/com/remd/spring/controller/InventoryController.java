@@ -28,9 +28,8 @@ public class InventoryController {
 	ItemCategoryRepository itemCategoryRepository;
 	@RequestMapping(path = "/app/inventory", method = RequestMethod.GET)
 	public String viewInventory(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		MyUserDetails user = (MyUserDetails)auth.getPrincipal();
-		model.addAttribute("profile", user.getUserProfile());
+		model.addAttribute("profile", getUser().getUserProfile());
+		model.addAttribute("itemCategories", itemCategoryRepository.findAll());
 		model.addAttribute("itemList", itemRepository.findAll());
 		return "app/inventory";
 	}
@@ -49,5 +48,8 @@ public class InventoryController {
 		
 		itemRepository.save(item);
 		return "redirect:/app/inventory";
+	}
+	private MyUserDetails getUser() {
+		return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }

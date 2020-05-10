@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Appointment</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	th:href="@{//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/setting.css}">
+<link rel="stylesheet" th:href="@{/css/manage.css}">
+
+</head>
+<body>
+
+	<div class="wrapper d-flex align-items-stretch backgroundColor font">
+		<!-- Nav Bar -->
+		<nav th:replace="fragments/user-nav.html"></nav>
+		<!-- Page Content  -->
+		<div id="content" class="p-4 p-md-5">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+						<i class="fa fa-bars"></i> <span class="sr-only">Toggle
+							Menu</span>
+					</button>
+					<button class="btn btn-dark d-inline-block d-lg-none ml-auto"
+						type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<i class="fa fa-bars"></i>
+					</button>
+
+
+				</div>
+			</nav>
+
+			<h2 class="mb-4">
+				<!-- Title -->
+			</h2>
+			<div class="container">
+				<h2 class="mb-4">GENERATED PRESCRIPTION</h2>
+				<center>
+					<div class="form-group row" style="width: 70%; padding: 1%;">
+						<label for="PatientName" class="col-sm-2 col-form-label">Patient
+							Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="PatientName"
+								placeholder="Enter Patient Name">
+						</div>
+					</div>
+
+					<div class="form-group row" style="width: 70%; padding: 1%;">
+						<label for="GenericMedicineName" class="col-sm-2 col-form-label">Generic
+							Medicine name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="GenericMedicineName"
+								placeholder="Enter generic Medicine Name">
+						</div>
+					</div>
+
+					<div class="form-group row" style="width: 70%; padding: 1%;">
+						<label for="BrandedMedicineName" class="col-sm-2 col-form-label">Branded
+							Medicine name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="BrandedMedicineName"
+								placeholder="Enter Branded Medicine Name">
+						</div>
+					</div>
+
+					<div class="form-group row" style="width: 70%; padding: 1%;">
+						<label for="Dosage" class="col-sm-2 col-form-label">Recommend
+							Dosage</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="DosageMedicine"
+								placeholder="Enter How many intake per use">
+						</div>
+					</div>
+
+					<div class="form-group row" style="width: 70%; padding: 1%;">
+						<label for="Notes" class="col-sm-2 col-form-label">Other
+							Notes</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" id="Notes"
+								aria-label="With textarea" style="height: 150%; resize: none;"></textarea>
+						</div>
+					</div>
+					<br>
+					<button class="btn btn-primary" data-toggle="modal"
+						data-target="#cartModal" style="margin-left: 80%">Generate</button>
+
+				</center>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal setting -->
+	<div th:replace="fragments/modal/user-setting"></div>
+	<!-- Manage Secretary Modal -->
+	<div th:replace="fragments/modal/sect-manage"></div>
+	<!-- ADD Secretary Modal -->
+	<div th:replace="fragments/modal/sect-add"></div>
+	<!-- Edit Secretary Modal -->
+	<div th:replace="fragments/modal/sect-edit"></div>
+	<!-- Delete Secretary Modal -->
+	<div th:replace="fragments/modal/sect-delete"></div>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/popper.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
