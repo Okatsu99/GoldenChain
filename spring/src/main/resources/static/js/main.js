@@ -17,3 +17,15 @@
   });
 
 })(jQuery);
+function openEditPatientModal(modalContainer,modalName,queryUrl,id){
+	modalContainer = '#' + modalContainer;
+	modalName = '#' + modalName;
+	$.ajax({
+			url: queryUrl + id,
+			success: function(data){
+				console.log(data);
+				$(modalContainer).html(data);
+				$(modalName).modal("show");
+			}
+		});
+	}

@@ -1,17 +1,13 @@
 package com.remd.spring.controller;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.remd.spring.bean.MyUserDetails;
 import com.remd.spring.bean.PatientRecord;
 import com.remd.spring.repository.PatientRecordRepository;
-import com.remd.spring.repository.UserRepository;
 
 @Controller
 public class PatientRecordController {
@@ -29,15 +24,19 @@ public class PatientRecordController {
 	@Autowired
 	private PatientRecordRepository patientRecordRepository;
 	@RequestMapping(path = "/app/patientrecords", method = RequestMethod.GET)
+	
 	public String viewPatientRecords(Model model) {
 		model.addAttribute("profile", getUser().getUserProfile());
 		model.addAttribute("patientRecords", patientRecordRepository.findAll());
+		model.addAttribute("record", new PatientRecord());
 		return "app/patientrecords";
 	}
 	@RequestMapping(path = "/app/patientrecords", method = RequestMethod.GET,
 			params = "order")
 	public String viewPatientRecordsSorted(Model model, @RequestParam(name = "order")int order) {
 		model.addAttribute("profile", getUser().getUserProfile());
+		model.addAttribute("record", new PatientRecord());
+		
 		if(order == 0) {
 			model.addAttribute("patientRecords", patientRecordRepository.findAllByOrderByLastNameAsc());
 		} else if (order == 1) {
@@ -47,9 +46,9 @@ public class PatientRecordController {
 	}
 	@RequestMapping(path = "/app/patientrecords/{id}", method = RequestMethod.GET)
 	public String viewRecord(@PathVariable("id") Integer id, Model model) {
-		Optional<PatientRecord> record = patientRecordRepository.findById(id);
+		PatientRecord record = patientRecordRepository.findById(id).get();
 		model.addAttribute("record", record);
-		return "app/patientrecords";
+		return "app/patientrecords :: editPersonModalContent";
 	}
 	@RequestMapping(path = "/app/patientrecords/new", method = RequestMethod.POST)
 	public String insertRecord(

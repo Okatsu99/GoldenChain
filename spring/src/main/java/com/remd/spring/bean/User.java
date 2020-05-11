@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,6 +25,14 @@ public class User {
 	private String roles;
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private UserProfile profile;
+	
+	public User() {
+		this.userName = "";
+		this.passWord = "";
+		this.isActive = false;
+		this.roles = "";
+		this.profile = new UserProfile();
+	}
 	
 	public int getId() {
 		return id;

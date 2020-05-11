@@ -2,8 +2,6 @@ package com.remd.spring.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -19,16 +17,22 @@ public class UserProfile {
 	private String firstName;
 	@Column(name = "lastname")
 	private String lastName;
-	
+
 	@OneToOne
 	@MapsId
 	private User user;
-	
+
 	public UserProfile() {
 		this.firstName = "";
 		this.lastName = "";
 	}
-	
+
+	public UserProfile(String firstName, String lastName, User user) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.user = user;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -56,4 +60,13 @@ public class UserProfile {
 	public String getName() {
 		return firstName + " " + lastName;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }
