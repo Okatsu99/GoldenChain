@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.remd.spring.bean.Item;
 import com.remd.spring.bean.MyUserDetails;
-import com.remd.spring.bean.PatientRecord;
 import com.remd.spring.repository.ItemCategoryRepository;
 import com.remd.spring.repository.ItemRepository;
 
