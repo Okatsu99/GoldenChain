@@ -1,7 +1,6 @@
 package com.remd.spring.bean;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "patient_record")
