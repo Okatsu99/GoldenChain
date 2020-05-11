@@ -94,6 +94,7 @@
                   <th scope="col">Item Name</th>
                   <th scope="col">Item Category</th>
                   <th scope="col">Item Status</th>
+                  <th scope="col">Clinic</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,13 +105,14 @@
                   <td>Biotics</td>
                   <td>medicine</td>
                   <td>expired</td>
+                  <td>Clinic1</td>
                 </tr>
               </tbody>
             </table>
 
           </div>
 
-            <!-- Add Item Modal -->
+                     <!-- Add Item Modal -->
             <div class="modal fade " id="AddItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -123,44 +125,44 @@
                   <div class="modal-body colorModal">
                         <div class="col">
                           <div>
-                         Item Name: 
-                        <input class=" form form-control" type="text" name="patientname" placeholder="Enter Item Name" style="width: 52%;"></div>
+                         <label for="itemName" class="text-dark">Item Name:</label>
+                        <input class=" form form-control" type="text" name="patientname" placeholder="Enter Item Name" style="width: 100%;"></div>
                       </div>
                       <br>
                       <div class="col">
                           <div>
-                         Description: 
-                        <input class=" form form-control" type="text" name="patientname" placeholder="Enter Description" style="width: 52%;"></div>
+                         <label for="description" class="text-dark">Description:</label>
+                        <input class=" form form-control" type="text" name="description" placeholder="Enter Description" style="width: 100%;"></div>
                       </div>
                       <br>
                       <div class="col">
-                          Quantity:
-                          <input class=" form form-control" type="number" name="quantity"  placeholder="0"style="width: 15%;">
-                          &ensp;&ensp;
+                          <label for="quantity" class="text-dark">Quantity:</label>
+                          <input class=" form form-control" type="number" name="quantity"  placeholder="0"style="width: 100%;">
+                          
                       </div>
                       <br>
                       <div class="col">
-                        Category: 
-                        <input class=" form form-control" type="text" name="contactnumber" placeholder="Enter Category..." style="width: 50%;">
+                        <label for="category" class="text-dark">Category:</label>
+                        <input class=" form form-control" type="text" name="category" placeholder="Enter Category..." style="width: 100%;">
                       </div>
                       <br>
                       <div class="col">
-                          Expiration Date: 
-                        <input class=" form form-control" type="date" name="birthdate"  placeholder="0"style="width: 50%;">
+                          <label for="expirationDate" class="text-dark">Expiration Date:</label>
+                        <input class=" form form-control" type="date" name="expirationDate"  placeholder="0" style="width: 100%;">
                       </div>
                       <br>
-                      <div class="col">
-                       Doctor Notes: 
+                      <!-- <div class="col">
+                       <label for="doctorNotes" class="text-dark">Doctor Notes:</label>
                         <div style="padding-left:1%;">
-                        <textarea style="width: 100%;" rows="4" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
+                        <textarea style="width: 100%;" class="sizeText" rows="4" name="doctorNotes" form="Order_Page"id="m_box" style="resize: none;"></textarea>
                         </div>
-                      </div>
-                      <br>
+                      </div> -->
+                      
                        
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create Item</button>
+                    <button type="button" class="btn btn-primary">Add Item</button>
                   </div>
                 </div>
               </div>
@@ -172,49 +174,41 @@
             <div class="modal fade " id="EditItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                 <div class="modal-header colorModal">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Item</h5>
+                  <div class="modal-header colorModal">
+                    <h3 class="modal-title" id="exampleModalLongTitle">Edit Item</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body colorModal">
+                     <div class="col">
+                          <div>
+                         <label for="itemName" class="text-dark">Item Name:</label>
+                        <input class=" form form-control" type="text" name="patientname" placeholder="Enter Item Name" style="width: 100%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+                          <div>
+                         <label for="description" class="text-dark">Description:</label>
+                        <input class=" form form-control" type="text" name="description" placeholder="Enter Description" style="width: 100%;"></div>
+                      </div>
+                      <br>
+                      <div class="col">
+                          <label for="quantity" class="text-dark">Quantity:</label>
+                          <input class=" form form-control" type="number" name="quantity"  placeholder="0"style="width: 100%;">
+                          
+                      </div>
+                      <br>
+                      <div class="col">
+                        <label for="category" class="text-dark">Category:</label>
+                        <input class=" form form-control" type="text" name="category" placeholder="Enter Category..." style="width: 100%;">
+                      </div>
+                      <br>
+                      <div class="col">
+                          <label for="expirationDate" class="text-dark">Expiration Date:</label>
+                        <input class=" form form-control" type="date" name="expirationDate"  placeholder="0" style="width: 100%;">
+                      </div>
 
-                        <div class="col">
-                          <div>
-                         Item Name: 
-                        <input class="form form-control" type="text" name="patientname" placeholder="Enter Item Name" style="width: 52%;"></div>
-                      </div>
-                      <br>
-                      <div class="col">
-                          <div>
-                         Description: 
-                        <input class="form form-control" type="text" name="patientname" placeholder="Enter Description" style="width: 52%;"></div>
-                      </div>
-                      <br>
-                      <div class="col">
-                          Quantity:
-                          <input class="form form-control" type="number" name="quantity"  placeholder="0"style="width: 15%;">
-                          &ensp;&ensp;
-                      </div>
-                      <br>
-                      <div class="col">
-                        Category: 
-                        <input  class="form form-control" type="text" name="contactnumber" placeholder="Enter Category..." style="width: 50%;">
-                      </div>
-                      <br>
-                      <div class="col">
-                          Expiration Date: 
-                        <input class="form form-control" type="date" name="birthdate"  placeholder="0"style="width: 50%;">
-                      </div>
-                      <br>
-                      <div class="col">
-                       Doctor Notes: 
-                        <div style="padding-left:1%;">
-                        <textarea rows="4" style="width: 100%;" name="message" form="Order_Page"id="m_box" style="resize: none;"></textarea>
-                        </div>
-                      </div>
-                      <br>
 
                   </div>
                   <div class="modal-footer">
