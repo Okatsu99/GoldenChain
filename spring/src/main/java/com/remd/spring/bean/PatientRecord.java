@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -31,6 +33,9 @@ public class PatientRecord {
 	private String email;
 	@Column(name = "home_address")
 	private String homeAddress;
+	@ManyToOne
+	@JoinColumn(name = "clinic_id",nullable = false)
+	private Clinic patientClinic;
 	public PatientRecord() {
 		this.firstName = "";
 		this.lastName = "";
@@ -39,10 +44,11 @@ public class PatientRecord {
 		this.birthDate = null;
 		this.email = "";
 		this.homeAddress = "";
+		this.patientClinic = new Clinic();
 	}
 	
 	public PatientRecord(String firstName, String lastName, String gender, String contactNumber,
-			LocalDate birthDate, String email, String homeAddress) {
+			LocalDate birthDate, String email, String homeAddress, Clinic patientClinic) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -51,6 +57,7 @@ public class PatientRecord {
 		this.birthDate = birthDate;
 		this.email = email;
 		this.homeAddress = homeAddress;
+		this.patientClinic = patientClinic;
 	}
 
 	public int getId() {
@@ -115,6 +122,14 @@ public class PatientRecord {
 
 	public void setHomeAddress(String homeAddress) {
 		this.homeAddress = homeAddress;
+	}
+
+	public Clinic getPatientClinic() {
+		return patientClinic;
+	}
+
+	public void setPatientClinic(Clinic patientClinic) {
+		this.patientClinic = patientClinic;
 	}
 
 	

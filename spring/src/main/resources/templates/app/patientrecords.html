@@ -84,7 +84,7 @@
 							<td th:text="${patientRecord.gender}"></td>
 							<td th:text="${patientRecord.contactNumber}"></td>
 							<td th:text="${patientRecord.email}"></td>
-							<td>Clinic1</td>
+							<td th:text="${patientRecord.patientClinic.name}">/td>
 						</tr>
 					</tbody>
 				</table>
@@ -133,22 +133,23 @@
 								</div>
 								<br>
 								<div class="col">
-									<label for="patientContactNumber" class="text-dark">Contact #:</label>
-									<input class="form form-control" type="text"
-										name="patientContactNumber" placeholder="Enter your Contact #..."
+									<label for="patientContactNumber" class="text-dark">Contact
+										#:</label> <input class="form form-control" type="text"
+										name="patientContactNumber"
+										placeholder="Enter your Contact #..." style="width: 100%;">
+								</div>
+								<br>
+								<div class="col">
+									<label for="patientBirthDate" class="text-dark">Birthdate:</label>
+									<input class="form form-control" type="date"
+										name="patientBirthDate" placeholder="0" style="width: 100%;">
+								</div>
+								<br>
+								<div class="col">
+									<label for="patientEmailAddress" class="text-dark">Email:</label>
+									<input class="form form-control" type="email"
+										name="patientEmailAddress" placeholder="Enter your Email..."
 										style="width: 100%;">
-								</div>
-								<br>
-								<div class="col">
-									<label for="patientBirthDate" class="text-dark">Birthdate:</label> <input
-										class="form form-control" type="date" name="patientBirthDate"
-										placeholder="0" style="width: 100%;">
-								</div>
-								<br>
-								<div class="col">
-									<label for="patientEmailAddress" class="text-dark">Email:</label> <input
-										class="form form-control" type="email" name="patientEmailAddress"
-										placeholder="Enter your Email..." style="width: 100%;">
 								</div>
 								<br>
 								<div class="col">
@@ -160,9 +161,9 @@
 								<br>
 								<div class="col">
 									<label for="clinic" class="text-dark">Choose Clinic:</label> <select
-										class="form-control" id="clinic">
-										<option value="clinic1">Clinic1</option>
-										<option value="clinic2">Clinic2</option>
+										class="form-control" id="clinic" th:name="clinicId">
+										<option th:each="clinic : ${clinicList}"
+											th:value="${clinic.id}" th:text="${clinic.name}">Clinic1</option>
 									</select>
 								</div>
 							</div>

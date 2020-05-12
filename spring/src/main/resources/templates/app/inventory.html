@@ -56,7 +56,7 @@
 
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<form th:action="@{/app/inventory}" th:method="get">
-						<button class="dropdown-item" th:text="All" th:href="@{/app/inventory}"></button>
+						<button class="dropdown-item" th:text="All" th:name="category" th:value="-1"></button>
 						<button class="dropdown-item"
 							th:each="Category : ${itemCategories}"
 							th:text="${Category.categoryName}" th:name="category" th:value="${Category.id}">
@@ -77,8 +77,7 @@
 							<th scope="col">Item Qty</th>
 							<th scope="col">Item Name</th>
 							<th scope="col">Item Category</th>
-							<th scope="col">Item Status</th>
-							<th scope="col">Clinic</th>
+							<th scope="col">Item Expiry Date</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -91,7 +90,6 @@
 							<td th:text="${Item.name}"></td>
 							<td th:text="${Item.category.categoryName}"></td>
 							<td th:text="${Item.expiration}"></td>
-							<td>Clinic1</td>
 						</tr>
 					</tbody>
 					</tbody>

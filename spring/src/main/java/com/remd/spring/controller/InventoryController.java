@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.remd.spring.bean.Item;
 import com.remd.spring.bean.MyUserDetails;
+import com.remd.spring.repository.ClinicRepository;
 import com.remd.spring.repository.ItemCategoryRepository;
 import com.remd.spring.repository.ItemRepository;
 
@@ -24,22 +25,27 @@ public class InventoryController {
 	ItemRepository itemRepository;
 	@Autowired
 	ItemCategoryRepository itemCategoryRepository;
+	@Autowired
+	private ClinicRepository clinicRepository;
 	@RequestMapping(path = "/app/inventory", method = RequestMethod.GET)
-	public String viewInventory(Model model) {
+	public String viewInventory(Model model,
+			@RequestParam(name = "category", required = false)Integer categoryId) {
 		model.addAttribute("profile", getUser().getUserProfile());
 		model.addAttribute("itemCategories", itemCategoryRepository.findAll());
 		model.addAttribute("item",new Item());
-		model.addAttribute("itemList", itemRepository.findAll());
+		model.addAttribute("clinicList",clinicRepository.findAll());
+		model.addAttribute("isInventoryActive", true);
+		if(categoryId == null || categoryId == -1) {
+			model.addAttribute("itemList", itemRepository.findAll());
+		}else {
+			model.addAttribute("itemList", itemRepository.findByCategoryId(categoryId));
+		}
+		
 		return "app/inventory";
 	}
-	@RequestMapping(path = "/app/inventory", method = RequestMethod.GET, params = "category")
-	public String viewInventory(Model model,
-			@RequestParam(name = "category")int categoryId) {
-		model.addAttribute("profile", getUser().getUserProfile());
-		model.addAttribute("itemCategories", itemCategoryRepository.findAll());
-		model.addAttribute("item",new Item());
-		model.addAttribute("itemList", itemRepository.findByCategoryId(categoryId));
-		return "app/inventory";
+	@RequestMapping(path = "/app/inventory?", params = {""})
+	public String viewInventory() {
+		return "redirect:app/inventory";
 	}
 	@RequestMapping(path = "/app/inventory/newitem", method = RequestMethod.POST)
 	public String addItem(

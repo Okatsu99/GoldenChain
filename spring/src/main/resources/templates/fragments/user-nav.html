@@ -31,13 +31,13 @@
 					</li>
 				</ul>
 				</li>
-				<li><a th:href="@{/app/appointments}">Appointments</a></li>
-				<li><a th:href="@{/app/patientrecords}">Patient Records</a></li>
-				<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
+				<li th:classappend="${isAppointmentActive} ? active : ''"><a th:href="@{/app/appointments}">Appointments</a></li>
+				<li th:classappend="${isPatientRecordsActive} ? active : ''"><a th:href="@{/app/patientrecords}">Patient Records</a></li>
+				<li sec:authorize="hasRole('ROLE_DOCTOR')" th:classappend="${isPrescriptionActive} ? active : ''"><a
 					th:href="@{/app/prescription}">E-Prescription</a></li>
-				<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
+				<li sec:authorize="hasRole('ROLE_DOCTOR')" th:classappend="${isReceiptActive} ? active : ''"><a
 					th:href="@{/app/receipt}">E-Receipt</a></li>
-				<li><a th:href="@{/app/inventory}" >Inventory</a></li>
+				<li th:classappend="${isInventoryActive} ? active : ''"><a th:href="@{/app/inventory}">Inventory</a></li>
 			</ul>
 
 			<div class="footer">

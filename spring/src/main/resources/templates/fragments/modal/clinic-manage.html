@@ -49,11 +49,11 @@
 								<th>Clinic Name</th>
 								<th>Clinic Location</th>
 							</tr>
-							<tr>
+							<tr th:each="clinic : ${clinicList}">
 								<td><input type="checkbox" name="checkbx"></td>
-								<td>123456tf</td>
-								<td>Basa Dental Clinic</td>
-								<td>Bacoor,Cavite</td>
+								<td th:text="${clinic.id}"></td>
+								<td th:text="${clinic.name}"></td>
+								<td th:text="${clinic.location}"></td>
 							</tr>
 
 						</table>
