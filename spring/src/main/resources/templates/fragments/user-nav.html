@@ -10,7 +10,7 @@
 	<nav id="sidebar">
 		<div class="p-4 pt-5">
 			<a href="#" class="img logo rounded-circle mb-5"
-				style="background-image: url(images/Doctor.jpg);"></a>
+				style="background-image: url(/images/dp-generic.png)"></a>
 			<ul class="list-unstyled components mb-5">
 				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
 					class="dropdown-toggle" th:text="${profile.getName()}">Account
@@ -20,6 +20,8 @@
 					<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
 						data-toggle="modal" data-target="#manageModal">Manage
 							Secretary</a></li>
+					<li><a data-toggle="modal" data-target="#manageClinicModal">Manage
+							Clinic</a></li>
 					<li><a data-toggle="modal" data-target="#settingModal">Settings</a>
 					</li>
 					<li>
@@ -29,14 +31,13 @@
 					</li>
 				</ul>
 				</li>
-				<li class="active"><a th:href="@{/app/appointments}">Appointments</a>
-				</li>
+				<li><a th:href="@{/app/appointments}">Appointments</a></li>
 				<li><a th:href="@{/app/patientrecords}">Patient Records</a></li>
 				<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
 					th:href="@{/app/prescription}">E-Prescription</a></li>
 				<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
 					th:href="@{/app/receipt}">E-Receipt</a></li>
-				<li><a th:href="@{/app/inventory}">Inventory</a></li>
+				<li><a th:href="@{/app/inventory}" >Inventory</a></li>
 			</ul>
 
 			<div class="footer">

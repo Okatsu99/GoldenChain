@@ -17,7 +17,7 @@
   });
 
 })(jQuery);
-function openEditPatientModal(modalContainer,modalName,queryUrl,id){
+function openEditModal(modalContainer,modalName,queryUrl,id){
 	modalContainer = '#' + modalContainer;
 	modalName = '#' + modalName;
 	$.ajax({

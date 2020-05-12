@@ -26,25 +26,8 @@
 		<nav th:replace="fragments/user-nav.html"></nav>
 		<!-- Page Content  -->
 		<div id="content" class="p-4 p-md-5">
-
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
-
-					<button type="button" id="sidebarCollapse" class="btn btn-primary">
-						<i class="fa fa-bars"></i> <span class="sr-only">Toggle
-							Menu</span>
-					</button>
-					<button class="btn btn-dark d-inline-block d-lg-none ml-auto"
-						type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<i class="fa fa-bars"></i>
-					</button>
-
-
-				</div>
-			</nav>
+			<!-- Top Navbar -->
+			<nav th:replace="fragments/top-navbar"></nav>
 
 			<h2 class="mb-4">
 				<!-- Title -->
@@ -52,50 +35,61 @@
 			<div class="container">
 				<h2 class="mb-4">GENERATED PRESCRIPTION</h2>
 				<center>
-					<div class="form-group row" style="width: 70%; padding: 1%;">
-						<label for="PatientName" class="col-sm-2 col-form-label">Patient
-							Name</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="PatientName"
-								placeholder="Enter Patient Name">
-						</div>
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="PatientName" class="text-dark" style="float: left;">Patient
+							Name</label> <input type="text" class="form-control" id="inputPassword"
+							placeholder="Patient Name" style="float: right; width: 80%;">
+					</div>
+					<br> <br>
+
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="GenericMedicineName" class="text-dark"
+							style="float: left;">Generic Medicine name</label> <input
+							type="text" class="form-control" id="GenericMedicineName"
+							placeholder="Enter Generic Medicine Name"
+							style="float: right; width: 80%;">
+					</div>
+					<br> <br>
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="BrandedMedicineName" class="text-dark"
+							style="float: left;">Branded Medicine name</label> <input
+							type="text" class="form-control" id="BrandedMedicineName"
+							placeholder="Enter Branded Medicine name"
+							style="float: right; width: 80%;">
+					</div>
+					<br> <br>
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="DosageMedicine" class="text-dark" style="float: left;">Recommend
+							Dosage</label> <input type="text" class="form-control"
+							id="DosageMedicine" placeholder="Enter How many intake per usee"
+							style="float: right; width: 80%;">
+					</div>
+					<br> <br>
+					<div class="col" id="addMedicine"></div>
+					<br>
+					<div class="col" style="width: 70%; padding: 1%;">
+						<input class="btn btn-outline-success"
+							style="width: 80%; float: right;" type="button"
+							value="Add another Medicine" onClick="addMedicine()">
 					</div>
 
-					<div class="form-group row" style="width: 70%; padding: 1%;">
-						<label for="GenericMedicineName" class="col-sm-2 col-form-label">Generic
-							Medicine name</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="GenericMedicineName"
-								placeholder="Enter generic Medicine Name">
-						</div>
-					</div>
+					<br> <br>
+					<div class="col" id="testing"></div>
 
-					<div class="form-group row" style="width: 70%; padding: 1%;">
-						<label for="BrandedMedicineName" class="col-sm-2 col-form-label">Branded
-							Medicine name</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="BrandedMedicineName"
-								placeholder="Enter Branded Medicine Name">
-						</div>
-					</div>
 
-					<div class="form-group row" style="width: 70%; padding: 1%;">
-						<label for="Dosage" class="col-sm-2 col-form-label">Recommend
-							Dosage</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="DosageMedicine"
-								placeholder="Enter How many intake per use">
-						</div>
-					</div>
+					<br> <br>
 
-					<div class="form-group row" style="width: 70%; padding: 1%;">
-						<label for="Notes" class="col-sm-2 col-form-label">Other
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="Notes" class="text-dark" style="float: left;">Other
 							Notes</label>
-						<div class="col-sm-10">
-							<textarea class="form-control" id="Notes"
-								aria-label="With textarea" style="height: 150%; resize: none;"></textarea>
-						</div>
+						<textarea class="form-control" id="Notes"
+							aria-label="With textarea" rows="4"
+							style="width: 80%; resize: none; float: right;"></textarea>
+
 					</div>
+
+
+
 					<br>
 					<button class="btn btn-primary" data-toggle="modal"
 						data-target="#cartModal" style="margin-left: 80%">Generate</button>
@@ -110,12 +104,18 @@
 	<div th:replace="fragments/modal/user-setting"></div>
 	<!-- Manage Secretary Modal -->
 	<div th:replace="fragments/modal/sect-manage"></div>
+	<!-- Manage Clinic Modal -->
+	<div th:replace="fragments/modal/clinic-manage"></div>
+	<!-- Add Clinic Modal -->
+	<div th:replace="fragments/modal/clinic-add"></div>
 	<!-- ADD Secretary Modal -->
 	<div th:replace="fragments/modal/sect-add"></div>
 	<!-- Edit Secretary Modal -->
 	<div th:replace="fragments/modal/sect-edit"></div>
 	<!-- Delete Secretary Modal -->
 	<div th:replace="fragments/modal/sect-delete"></div>
+	<!-- JS -->
+	<script th:src="@{/js/procedureAdd.js}"></script>
 	<script th:src="@{/js/jquery.min.js}"></script>
 	<script th:src="@{/js/popper.js}"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>

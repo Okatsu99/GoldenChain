@@ -5,85 +5,88 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="modal fade " id="AddSecretaryModal" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Create
-						Record</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="col">
-						<div>
-							Secretary First Name: <input type="text" name="secretaryFname"
-								placeholder="Enter your Name" style="width: 52%;">
+	<form th:action="@{/app/user}" th:method="get">
+		<input hidden="" th:name="currentUrl" th:value="${#httpServletRequest.requestURI}">
+		<div class="modal fade " id="AddSecretaryModal" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header colorModal">
+						<h5 class="modal-title" id="exampleModalLongTitle">Create
+							Secretary</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body colorModal">
+						<div class="col">
+							<label for="firstNamePatient" class="text-dark">Secretary
+								First Name:</label> <input class="form form-control" type="text"
+								name="secretaryFname" placeholder="Enter First Name"
+								style="width: 100%;">
 						</div>
-					</div>
-					<br>
-					<div class="col">
-						<div>
-							Secretary Last Name: <input type="text" name="secretaryLname"
-								placeholder="Enter your Name" style="width: 52%;">
-						</div>
-					</div>
-					<br>
-					<div class="col">
-						Contact #: <input type="text" name="contactnumber"
-							placeholder="Enter your Contact #..." style="width: 40%;">
-					</div>
-					<br>
-					<div class="col">
 
-						Gender: <select style="padding-right:">
-							<option value="male">Male</option>
-							<option value="female">Female</option>
-						</select> &ensp;&ensp;
-					</div>
-					<br>
-					<div class="col">
-						Birthdate: <input type="date" name="birthdate" placeholder="0"
-							style="width: 50%;">
-					</div>
-					<br>
-					<div class="col">
-						Email: <input type="email" name="email"
-							placeholder="Enter your Email..." style="width: 50%;">
-					</div>
-					<br>
-					<div class="col">
-						Address:
-						<div style="padding-left: 1%;">
-							<textarea rows="4" cols="50" name="message" form="Order_Page"
-								id="m_box" style="resize: none;"></textarea>
+						<br>
+						<div class="col">
+
+							<label for="lastNamePatient" class="text-dark">Secretary
+								Last Name:</label> <input class="form form-control" type="text"
+								name="secretaryLname" placeholder="Enter Last Name"
+								style="width: 100%;">
+						</div>
+
+						<br>
+						<div class="col">
+							<label for="gender" class="text-dark">Gender:</label> <select
+								class="form-control" id="gender">
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+						</div>
+						<br>
+						<div class="col">
+							<label for="contactnumber" class="text-dark">Contact #:</label> <input
+								class="form form-control" type="text" name="contactnumber"
+								placeholder="Enter your Contact #..." style="width: 100%;">
+						</div>
+						<br>
+						<div class="col">
+							<label for="birthdate" class="text-dark">Birthdate:</label> <input
+								class="form form-control" type="date" name="birthdate"
+								placeholder="0" style="width: 100%;">
+						</div>
+						<br>
+						<div class="col">
+							<label for="emai" class="text-dark">Email:</label> <input
+								class="form form-control" type="email" name="email"
+								placeholder="Enter your Email..." style="width: 100%;">
+						</div>
+						<br>
+						<div class="col">
+							<label for="Address" class="text-dark">Address:</label>
+							<textarea class="form form-control sizeText" rows="4"
+								style="width: 100%;" name="message" form="Order_Page" id="m_box"></textarea>
+						</div>
+						<br>
+						<div class="col">
+							<label for="clinic" class="text-dark">Choose Clinic:</label> <select
+								class="form-control" id="clinic">
+								<option value="clinic1">Clinic1</option>
+								<option value="clinic2">Clinic2</option>
+							</select>
 						</div>
 					</div>
-					<br>
-					<div class="col">
-						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">Clinic</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">Hospital Clinic</a> <a
-									class="dropdown-item" href="#">Medical Clinic</a>
-							</div>
-						</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Create
+							Record</button>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Create
-						Record</button>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 </body>
 </html>

@@ -27,30 +27,14 @@
 </head>
 <body>
 
-	<div class="wrapper d-flex align-items-stretch backgroundColor">
+	<div class="wrapper d-flex align-items-stretch backgroundColor font">
 		<!-- Include navbar -->
 		<nav th:replace="fragments/user-nav.html"></nav>
 		<!-- Page Content  -->
 		<div id="content" class="p-4 p-md-5">
+			<!-- Top Navbar -->
+			<nav th:replace="fragments/top-navbar"></nav>
 
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
-
-					<button type="button" id="sidebarCollapse" class="btn btn-primary">
-						<i class="fa fa-bars"></i> <span class="sr-only">Toggle
-							Menu</span>
-					</button>
-					<button class="btn btn-dark d-inline-block d-lg-none ml-auto"
-						type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<i class="fa fa-bars"></i>
-					</button>
-
-
-				</div>
-			</nav>
 
 			<h2 class="mb-4">
 				<!-- Title -->
@@ -69,10 +53,18 @@
 					aria-expanded="false">
 					Filter By <i class="fas fa-caret-down"></i>
 				</button>
+
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Medicine</a> <a
-						class="dropdown-item" href="#">Equipment</a> <a
-						class="dropdown-item" href="#">Supplies</a>
+					<form th:action="@{/app/inventory}" th:method="get">
+						<button class="dropdown-item" th:text="All" th:href="@{/app/inventory}"></button>
+						<button class="dropdown-item"
+							th:each="Category : ${itemCategories}"
+							th:text="${Category.categoryName}" th:name="category" th:value="${Category.id}">
+						</button>
+					</form>
+					<!-- 					<a class="dropdown-item" href="#">Medicine</a> <a -->
+					<!-- 						class="dropdown-item" href="#">Equipment</a> <a -->
+					<!-- 						class="dropdown-item" href="#">Supplies</a> -->
 				</div>
 
 
@@ -85,11 +77,13 @@
 							<th scope="col">Item Qty</th>
 							<th scope="col">Item Name</th>
 							<th scope="col">Item Category</th>
-							<th scope="col">Item Expiry Date</th>
+							<th scope="col">Item Status</th>
+							<th scope="col">Clinic</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="Item : ${itemList}" th:onclick="'javascript:openEditPatientModal(\'' + 'editItemModalContainer' + '\', \'' + 'editItemModalContent' + '\' , 
+						<tr th:each="Item : ${itemList}"
+							th:onclick="'javascript:openEditModal(\'' + 'editItemModalContainer' + '\', \'' + 'editItemModalContent' + '\' , 
 							\'' + '/app/inventory/' + '\', \'' + ${Item.id} + '\');'">
 							<th scope="row"><input type="checkbox" name="checkbx"></th>
 							<td th:text="${Item.id}"></td>
@@ -97,7 +91,9 @@
 							<td th:text="${Item.name}"></td>
 							<td th:text="${Item.category.categoryName}"></td>
 							<td th:text="${Item.expiration}"></td>
+							<td>Clinic1</td>
 						</tr>
+					</tbody>
 					</tbody>
 				</table>
 
@@ -117,45 +113,52 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form th:action="@{/app/newitem}" th:method="post">
+					<form th:action="@{/app/inventory/newitem}" th:method="post">
 						<div class="modal-body colorModal">
 							<div class="col">
 								<div>
-									Item Name: <input class=" form form-control" type="text"
-										name="itemName" placeholder="Enter Item Name"
-										style="width: 52%;">
+									<label for="itemName" class="text-dark">Item Name:</label> <input
+										class=" form form-control" type="text" name="itemName"
+										placeholder="Enter Item Name" style="width: 100%;">
 								</div>
 							</div>
 							<br>
 							<div class="col">
 								<div>
-									Description: <input class=" form form-control" type="text"
-										name="itemDesc" placeholder="Enter Description"
-										style="width: 52%;">
+									<label for="itemDesc" class="text-dark">Description:</label> <input
+										class=" form form-control" type="text" name="itemDesc"
+										placeholder="Enter Description" style="width: 100%;">
 								</div>
 							</div>
 							<br>
 							<div class="col">
-								Quantity: <input class=" form form-control" type="number"
-									name="itemQty" placeholder="0" style="width: 15%;">
-								&ensp;&ensp;
-							</div>
-							<br> <select th:name="itemCategory">
-								<option th:each="Category : ${itemCategories}"
-									th:value="${Category.id}" th:text="${Category.categoryName}"></option>
-							</select> <br>
-							<div class="col">
-								Expiration Date: <input class=" form form-control" type="date"
-									name="itemExpiryDate" placeholder="0" style="width: 50%;">
-							</div>
-							<div class="col">
-								Doctor Notes:
-								<div style="padding-left: 1%;">
-									<textarea style="width: 100%; resize: none;" rows="4"
-										name="itemDoctorNotes" id="m_box"></textarea>
-								</div>
+								<label for="itemQty" class="text-dark">Quantity:</label> <input
+									class=" form form-control" type="number" name="itemQty"
+									placeholder="0" style="width: 100%;">
+
 							</div>
 							<br>
+							<div class="col">
+								<label for="itemCategory" class="text-dark">Category:</label> <select
+									class="form form-control" name="itemCategory">
+									<option th:each="Category : ${itemCategories}"
+										th:value="${Category.id}" th:text="${Category.categoryName}">
+								</select>
+							</div>
+							<br>
+							<div class="col">
+								<label for="itemExpiryDate" class="text-dark">Expiration
+									Date:</label> <input class=" form form-control" type="date"
+									name="itemExpiryDate" placeholder="0" style="width: 100%;">
+							</div>
+							<br>
+							<!-- <div class="col">
+                       <label for="doctorNotes" class="text-dark">Doctor Notes:</label>
+                        <div style="padding-left:1%;">
+                        <textarea style="width: 100%;" class="sizeText" rows="4" name="doctorNotes" form="Order_Page"id="m_box" style="resize: none;"></textarea>
+                        </div>
+                      </div> -->
+
 
 						</div>
 						<div class="modal-footer">
@@ -170,63 +173,68 @@
 
 		<!-- Edit Item Modal -->
 		<div id="editItemModalContainer">
-			<div class="modal fade " id="editItemModalContent" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true" th:fragment="editItemModalContent">
+			<div class="modal fade " id="editItemModalContent" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true" th:fragment="editItemModalContent">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header colorModal">
-							<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Edit
-								Item</h3>
+							<h3 class="modal-title" id="exampleModalLongTitle">Edit Item</h3>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form th:action="@{/app/newitem}" th:method="post">
+						<form th:action="@{/app/inventory/newitem}" th:method="get">
 							<div class="modal-body colorModal">
 								<div class="col">
 									<div>
-										Item Name: <input class=" form form-control" type="text"
-											name="itemName" placeholder="Enter Item Name"
-											style="width: 52%;" th:value="${item.name}">
+										<label for="itemName" class="text-dark">Item Name:</label> <input
+											class=" form form-control" type="text" name="itemName"
+											placeholder="Enter Item Name" style="width: 100%;"
+											th:value="${item.name}">
 									</div>
 								</div>
 								<br>
 								<div class="col">
 									<div>
-										Description: <input class=" form form-control" type="text"
-											name="itemDesc" placeholder="Enter Description"
-											style="width: 52%;" th:value="${item.description}">
+										<label for="itemDesc" class="text-dark">Description:</label> <input
+											class=" form form-control" type="text" name="itemDesc"
+											placeholder="Enter Description" style="width: 100%;"
+											th:value="${item.description}">
 									</div>
 								</div>
 								<br>
 								<div class="col">
-									Quantity: <input class=" form form-control" type="number"
-										name="itemQty" placeholder="0" style="width: 15%;">
-									&ensp;&ensp;
-								</div>
-								<br> <select th:name="itemCategory">
-									<option th:each="Category : ${itemCategories}"
-										th:value="${Category.id}" th:text="${Category.categoryName}"></option>
-								</select> <br>
-								<div class="col">
-									Expiration Date: <input class=" form form-control" type="date"
-										name="itemExpiryDate" placeholder="0" style="width: 50%;">
-								</div>
-								<div class="col">
-									Doctor Notes:
-									<div style="padding-left: 1%;">
-										<textarea style="width: 100%; resize: none;" rows="4"
-											name="itemDoctorNotes" id="m_box"></textarea>
-									</div>
+									<label for="itemQty" class="text-dark">Quantity:</label> <input
+										class=" form form-control" type="number" name="itemQty"
+										placeholder="0" style="width: 100%;"
+										th:value="${item.quantity}">
+
 								</div>
 								<br>
+								<div class="col">
+									<label for="itemCategory" class="text-dark">Category:</label> <select
+										class="form form-control" name="itemCategory">
+										<option th:each="Category : ${itemCategories}"
+											th:value="${Category.id}" th:text="${Category.categoryName}">
+									</select>
+								</div>
+								<br>
+								<div class="col">
+									<label for="itemExpiryDate" class="text-dark">Expiration
+										Date:</label> <input class=" form form-control" type="date"
+										name="itemExpiryDate" placeholder="0" style="width: 100%;"
+										th:value="${item.expiration}">
+								</div>
+
 
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary">Add Item</button>
+								<button type="submit" class="btn btn-primary">Save
+									Changes</button>
 							</div>
 						</form>
 					</div>
@@ -234,6 +242,8 @@
 			</div>
 		</div>
 
+
+		<!-- Delete Item Modal -->
 		<!-- Delete Item Modal -->
 		<div id="DeleteItem" class="modal fade bs-example-modal-lg"
 			tabindex="-1" role="dialog" aria-labelledby="classInfo"
@@ -300,6 +310,10 @@
 	<div th:replace="fragments/modal/user-setting"></div>
 	<!-- Manage Secretary Modal -->
 	<div th:replace="fragments/modal/sect-manage"></div>
+	<!-- Manage Clinic Modal -->
+	<div th:replace="fragments/modal/clinic-manage"></div>
+	<!-- Add Clinic Modal -->
+	<div th:replace="fragments/modal/clinic-add"></div>
 	<!-- ADD Secretary Modal -->
 	<div th:replace="fragments/modal/sect-add"></div>
 	<!-- Edit Secretary Modal -->

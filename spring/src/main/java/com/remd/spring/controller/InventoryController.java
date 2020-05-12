@@ -32,18 +32,26 @@ public class InventoryController {
 		model.addAttribute("itemList", itemRepository.findAll());
 		return "app/inventory";
 	}
-	@RequestMapping(path = "/app/newitem", method = RequestMethod.POST)
+	@RequestMapping(path = "/app/inventory", method = RequestMethod.GET, params = "category")
+	public String viewInventory(Model model,
+			@RequestParam(name = "category")int categoryId) {
+		model.addAttribute("profile", getUser().getUserProfile());
+		model.addAttribute("itemCategories", itemCategoryRepository.findAll());
+		model.addAttribute("item",new Item());
+		model.addAttribute("itemList", itemRepository.findByCategoryId(categoryId));
+		return "app/inventory";
+	}
+	@RequestMapping(path = "/app/inventory/newitem", method = RequestMethod.POST)
 	public String addItem(
 			@RequestParam(name = "itemName")String itemName,
 			@RequestParam(name = "itemDesc")String itemDescription,
 			@RequestParam(name = "itemQty")int itemQuantity,
 			@RequestParam(name = "itemCategory")Integer itemCategory,
 			@RequestParam(name = "itemExpiryDate")
-				@DateTimeFormat(iso = ISO.DATE)LocalDate itemExpiryDate,
-			@RequestParam(name = "itemDoctorNotes")String itemNotes) {
+				@DateTimeFormat(iso = ISO.DATE)LocalDate itemExpiryDate){
 		//Do Add
 		Item item = new Item(itemName, itemDescription, itemQuantity, 
-				itemCategoryRepository.findById(itemCategory).get(), itemExpiryDate, itemNotes);
+				itemCategoryRepository.findById(itemCategory).get(), itemExpiryDate);
 		
 		itemRepository.save(item);
 		return "redirect:/app/inventory";

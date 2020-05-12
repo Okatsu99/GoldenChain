@@ -27,8 +27,6 @@ public class Item {
 	private ItemCategory category;
 	@Column(name = "expiration_date")
 	private LocalDate expiration;
-	@Column(name = "doctor_notes")
-	private String notes;
 	
 	public Item() {
 		this.name = "";
@@ -36,17 +34,13 @@ public class Item {
 		this.quantity = 0;
 		this.expiration = null;
 		this.category = new ItemCategory();
-		this.notes = "";
 	}
-	public Item(String name, String description, Integer quantity, ItemCategory category, LocalDate expiration,
-			String notes) {
-		super();
+	public Item(String name, String description, Integer quantity, ItemCategory category, LocalDate expiration) {
 		this.name = name;
 		this.description = description;
 		this.quantity = quantity;
 		this.category = category;
 		this.expiration = expiration;
-		this.notes = notes;
 	}
 	public int getId() {
 		return id;
@@ -84,11 +78,4 @@ public class Item {
 	public void setExpiration(LocalDate expiration) {
 		this.expiration = expiration;
 	}
-	public String getNotes() {
-		return notes;
-	}
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-	
 }

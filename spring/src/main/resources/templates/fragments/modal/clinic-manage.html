@@ -5,13 +5,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="modal fade" id="manageModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<!-- Manage Clinic Modal -->
+	<div class="modal fade" id="manageClinicModal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg ">
 			<div class="modal-content">
 				<div>
 					<div class="modal-header bgcolor">
-						<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Secretaries</h3>
+						<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Clinic</h3>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -30,13 +31,7 @@
 							</div>
 							<div style="width: 85px";>
 								<button type="button" class="btn btn-primary"
-									data-toggle="modal" data-target="#AddSecretaryModal">Add</button>
-							</div>
-							<div style="width: 85px";>
-								<button type="button" class="btn btn-secondary">
-									<a data-toggle="modal" data-target="#EditSecretaryModal">Edit
-								</button>
-								</a>
+									data-toggle="modal" data-target="#AddClinicModal">Add</button>
 							</div>
 							<div style="width: 85px";>
 								<button type="button" class="btn btn-danger">
@@ -46,21 +41,19 @@
 							</div>
 						</div>
 						<br>
-						<br>
-						<br>
 
-						<table class="Manager bgcolor">
+						<table class="table table-striped table-dark">
 							<tr>
 								<th></th>
-								<th>Secretary ID</th>
-								<th>Secretary Name</th>
-								<th>Clinic</th>
+								<th>Clinic ID</th>
+								<th>Clinic Name</th>
+								<th>Clinic Location</th>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="checkbx"></td>
 								<td>123456tf</td>
-								<td>Christian Gaspar</td>
-								<td>Clinic 1</td>
+								<td>Basa Dental Clinic</td>
+								<td>Bacoor,Cavite</td>
 							</tr>
 
 						</table>
@@ -71,5 +64,7 @@
 			</div>
 		</div>
 	</div>
+
+
 </body>
 </html>

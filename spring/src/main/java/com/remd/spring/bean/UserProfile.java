@@ -17,11 +17,10 @@ public class UserProfile {
 	private String firstName;
 	@Column(name = "lastname")
 	private String lastName;
-
 	@OneToOne
 	@MapsId
 	private User user;
-
+	
 	public UserProfile() {
 		this.firstName = "";
 		this.lastName = "";
