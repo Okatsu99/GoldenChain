@@ -48,6 +48,7 @@ public class PatientRecordController {
 	public String viewRecord(@PathVariable("id") Integer id, Model model) {
 		PatientRecord record = patientRecordRepository.findById(id).get();
 		model.addAttribute("record", record);
+		model.addAttribute("clinicList",clinicRepository.findAll());
 		return "app/patientrecords :: editPersonModalContent";
 	}
 	@RequestMapping(path = "/app/patientrecords/new", method = RequestMethod.POST)
@@ -67,7 +68,10 @@ public class PatientRecordController {
 		patientRecordRepository.saveAndFlush(record);
 		return "redirect:/app/patientrecords";
 	}
-	
+	@RequestMapping(path = "/app/patientrecords/edit", method = RequestMethod.POST)
+	public String editRecord() {
+		return "app/patientrecords :: editPersonModalContent";
+	}
 	private MyUserDetails getUser() {
 		return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}

@@ -56,11 +56,12 @@
 
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<form th:action="@{/app/inventory}" th:method="get">
-						<button class="dropdown-item" th:text="All" th:name="category" th:value="-1"></button>
+						<button class="dropdown-item" th:text="All" th:name="category"
+							th:value="-1"></button>
 						<button class="dropdown-item"
 							th:each="Category : ${itemCategories}"
-							th:text="${Category.categoryName}" th:name="category" th:value="${Category.id}">
-						</button>
+							th:text="${Category.categoryName}" th:name="category"
+							th:value="${Category.id}"></button>
 					</form>
 					<!-- 					<a class="dropdown-item" href="#">Medicine</a> <a -->
 					<!-- 						class="dropdown-item" href="#">Equipment</a> <a -->
@@ -183,7 +184,8 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form th:action="@{/app/inventory/newitem}" th:method="get">
+						<form th:action="@{/app/inventory/item/edit}" th:method="post">
+							<input th:value="${item.id}" th:type="hidden" th:name="itemId">
 							<div class="modal-body colorModal">
 								<div class="col">
 									<div>
@@ -215,7 +217,7 @@
 									<label for="itemCategory" class="text-dark">Category:</label> <select
 										class="form form-control" name="itemCategory">
 										<option th:each="Category : ${itemCategories}"
-											th:value="${Category.id}" th:text="${Category.categoryName}">
+											th:value="${Category.id}" th:text="${Category.categoryName}" th:selected="${Category.categoryName==item.category.categoryName}">
 									</select>
 								</div>
 								<br>
@@ -240,8 +242,6 @@
 			</div>
 		</div>
 
-
-		<!-- Delete Item Modal -->
 		<!-- Delete Item Modal -->
 		<div id="DeleteItem" class="modal fade bs-example-modal-lg"
 			tabindex="-1" role="dialog" aria-labelledby="classInfo"

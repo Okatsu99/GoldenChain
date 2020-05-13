@@ -180,81 +180,87 @@
 		</div>
 
 		<!-- Edit Patient Modal -->
-		<div class="modal fade " id="EditPatient" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header colorModal">
-						<h5 class="modal-title" id="exampleModalLongTitle">Create
-							Record</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body colorModal">
-						<div class="col">
-							<label for="firstNamePatient" class="text-dark">Patient
-								First Name:</label> <input class="form form-control" type="text"
-								name="patientFname" placeholder="Enter your Name"
-								style="width: 100%;">
+		<div id="editPatientModalContainer">
+			<div class="modal fade " id="editPatientModal" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true" th:fragment="editPersonModalContent">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header colorModal">
+							<h5 class="modal-title" id="exampleModalLongTitle">Create
+								Record</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
+						<div class="modal-body colorModal">
+							<div class="col">
+								<label for="patientFirstName" class="text-dark">Patient
+									First Name:</label> <input class="form form-control" type="text"
+									name="patientFirstName" placeholder="Enter your Name"
+									style="width: 100%;" th:value="${record.firstName}">
+							</div>
 
-						<br>
-						<div class="col">
+							<br>
+							<div class="col">
 
-							<label for="lastNamePatient" class="text-dark">Patient
-								Last Name:</label> <input class="form form-control" type="text"
-								name="patientLname" placeholder="Enter your Name"
-								style="width: 100%;">
-						</div>
+								<label for="patientLastName" class="text-dark">Patient
+									Last Name:</label> <input class="form form-control" type="text"
+									name="patientLastName" placeholder="Enter your Name"
+									style="width: 100%;" th:value="${record.lastName}">
+							</div>
 
-						<br>
-						<div class="col">
-							<label for="gender" class="text-dark">Gender:</label> <select
-								class="form-control" id="gender">
-								<option value="male">Male</option>
-								<option value="female">Female</option>
-							</select>
+							<br>
+							<div class="col">
+								<label for="patientGender" class="text-dark">Gender:</label> <select
+									class="form-control" id="patientGender" name="patientGender">
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+								</select>
+							</div>
+							<br>
+							<div class="col">
+								<label for="patientContactNumber" class="text-dark">Contact
+									#:</label> <input class="form form-control" type="text"
+									name="patientContactNumber"
+									placeholder="Enter your Contact #..." style="width: 100%;" th:value="${record.contactNumber}">
+							</div>
+							<br>
+							<div class="col">
+								<label for="patientBirthDate" class="text-dark">Birthdate:</label>
+								<input class="form form-control" type="date"
+									name="patientBirthDate" placeholder="0" style="width: 100%;" th:value="${record.birthDate}">
+							</div>
+							<br>
+							<div class="col">
+								<label for="patientEmailAddress" class="text-dark">Email:</label>
+								<input class="form form-control" type="email"
+									name="patientEmailAddress" placeholder="Enter your Email..."
+									style="width: 100%;" th:value="${record.email}">
+							</div>
+							<br>
+							<div class="col">
+								<label for="patientHomeAddress" class="text-dark">Address:</label>
+								<textarea class="form form-control sizeText" rows="4"
+									style="width: 100%;" name="patientHomeAddress"
+									id="patientEmailAddress" th:text="${record.homeAddress}"></textarea>
+							</div>
+							<br>
+							<div class="col">
+								<label for="clinic" class="text-dark">Choose Clinic:</label> <select
+									class="form-control" id="clinic" th:name="clinicId">
+									<option th:each="clinic : ${clinicList}"
+										th:value="${clinic.id}" th:text="${clinic.name}" th:selected="${clinic.id==record.patientClinic.id}">Clinic1</option>
+								</select>
+							</div>
 						</div>
-						<br>
-						<div class="col">
-							<label for="contactnumber" class="text-dark">Contact #:</label> <input
-								class="form form-control" type="text" name="contactnumber"
-								placeholder="Enter your Contact #..." style="width: 100%;">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Create
+								Record</button>
 						</div>
-						<br>
-						<div class="col">
-							<label for="birthdate" class="text-dark">Birthdate:</label> <input
-								class="form form-control" type="date" name="birthdate"
-								placeholder="0" style="width: 100%;">
-						</div>
-						<br>
-						<div class="col">
-							<label for="emai" class="text-dark">Email:</label> <input
-								class="form form-control" type="email" name="email"
-								placeholder="Enter your Email..." style="width: 100%;">
-						</div>
-						<br>
-						<div class="col">
-							<label for="Address" class="text-dark">Address:</label>
-							<textarea class="form form-control sizeText" rows="4"
-								style="width: 100%;" name="message" form="Order_Page" id="m_box"></textarea>
-						</div>
-						<br>
-						<div class="col">
-							<label for="clinic" class="text-dark">Choose Clinic:</label> <select
-								class="form-control" id="clinic">
-								<option value="clinic1">Clinic1</option>
-								<option value="clinic2">Clinic2</option>
-							</select>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Create
-							Record</button>
 					</div>
 				</div>
 			</div>
