@@ -50,3 +50,194 @@ function addMedicine(){
 
 
 }
+function patient_record_edit() {
+
+    var parent = document.getElementById('main-div');
+    var data = parent.getElementsByClassName('data');
+
+    for(var i = 0; i < data.length; i++) {
+
+        var current = data[i];
+        var newdiv = document.createElement('div');
+        newdiv.classList.add('data');
+
+
+        if(i == 0) {
+            newdiv.innerHTML = `<input type="text" name="first-name" class="input-data form form-control" >`;
+        }
+
+        else if(i == 1) {
+            newdiv.innerHTML = `<input type="text" name="last-name" class="input-data form form-control">`;
+        }
+
+        else if(i == 2) {
+            newdiv.innerHTML = `<select id="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>`;
+        }
+
+        else if(i == 3) {
+            newdiv.innerHTML = `<input type="text" name="contact" class="input-data form form-control">`;
+        }
+
+        else if(i == 4) {
+            newdiv.innerHTML = `<input type="date" name="birthdate" class="input-data form form-control">`;
+        }  
+
+        else if(i == 5) {
+            newdiv.innerHTML = `<input type="email" name="email" class="input-data form form-control">`;
+        }
+
+        else if(i == 6) {
+            newdiv.innerHTML = `<textarea name="address" class="input-data form form-control"></textarea>`;
+        }  
+
+        else if(i == 7) {
+            newdiv.innerHTML = `<select id="clinic">
+                            <option value="clinic1">Clinic 1</option>
+                            <option value="clinic2">Clinic 2</option>
+                        </select>`;
+        }  
+
+        current.replaceWith(newdiv);          
+
+    }
+
+    document.getElementsByClassName('modal-btn')[0].innerHTML = `<button onclick="patient_record_save()" class="btn btn-primary">Save Changes</button>`;
+}
+
+
+function patient_record_save() {
+
+    var parent = document.getElementById('main-div');
+    var data = parent.getElementsByClassName('data');
+
+
+    for(var i = 0; i < data.length; i++) {
+
+        var current = data[i];
+        var newdiv = document.createElement('div');
+        newdiv.classList.add('data');
+
+        if(i == 0) {
+            newdiv.innerHTML = `<p name="first-name" class="info"> </p>`;
+        }
+
+        else if(i == 1) {
+            newdiv.innerHTML = `<p name="last-name" class="info"> </p>`;
+        }
+
+        else if(i == 2) {
+            newdiv.innerHTML = `<p name="gender" class="info"> </p>`;
+        }
+
+        else if(i == 3) {
+            newdiv.innerHTML = `<p name="contact" class="info"> </p>`;
+        }
+
+        else if(i == 4) {
+            newdiv.innerHTML = `<p name="birthdate" class="info"> </p>`;
+        }  
+
+        else if(i == 5) {
+            newdiv.innerHTML = `<p name="email" class="info"> </p>`;
+        }
+
+        else if(i == 6) {
+            newdiv.innerHTML = `<p name="address" class="info"> </p>`;
+        }  
+
+        else if(i == 7) {
+            newdiv.innerHTML = `<p name="clinic" class="info"> </p>`;
+        }  
+
+        parent.replaceChild(newdiv, current);
+    }
+
+    document.getElementsByClassName('modal-btn')[0].innerHTML = `<button onclick="patient_record_edit()" class="btn btn-primary"> Edit Data </button>`;
+} 
+
+function patient_sec_edit() {
+
+    var parent = document.getElementById('main-div');
+    var data = parent.getElementsByClassName('data');
+
+    for(var i = 0; i < data.length; i++) {
+
+        var current = data[i];
+        var newdiv = document.createElement('div');
+        newdiv.classList.add('data');
+
+
+        if(i == 0) {
+            newdiv.innerHTML = `<input type="text" name="first-name" class="input-data form form-control" >`;
+        }
+
+        else if(i == 1) {
+            newdiv.innerHTML = `<input type="text" name="last-name" class="input-data form form-control">`;
+        }
+
+        else if(i == 2) {
+            newdiv.innerHTML = `<select id="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>`;
+        }
+
+        else if(i == 3) {
+            newdiv.innerHTML = `<input type="email" name="email" class="input-data form form-control">`;
+        }  
+
+        else if(i == 4) {
+            newdiv.innerHTML = `<select id="clinic">
+                            <option value="clinic1">Clinic 1</option>
+                            <option value="clinic2">Clinic 2</option>
+                        </select>`;
+        }  
+
+        current.replaceWith(newdiv);          
+
+    }
+
+    document.getElementsByClassName('modal-btn')[0].innerHTML = `<button onclick="patient_sec_save()" class="btn btn-primary">Save Changes</button>`;
+}
+
+
+function patient_sec_save() {
+
+    var parent = document.getElementById('main-div');
+    var data = parent.getElementsByClassName('data');
+
+
+    for(var i = 0; i < data.length; i++) {
+
+        var current = data[i];
+        var newdiv = document.createElement('div');
+        newdiv.classList.add('data');
+
+        if(i == 0) {
+            newdiv.innerHTML = `<p name="first-name" class="info"> </p>`;
+        }
+
+        else if(i == 1) {
+            newdiv.innerHTML = `<p name="last-name" class="info"> </p>`;
+        }
+
+        else if(i == 2) {
+            newdiv.innerHTML = `<p name="gender" class="info"> </p>`;
+        }
+
+        else if(i == 3) {
+            newdiv.innerHTML = `<p name="email" class="info"> </p>`;
+        }
+
+        else if(i == 4) {
+            newdiv.innerHTML = `<p name="clinic" class="info"> </p>`;
+        }  
+
+        parent.replaceChild(newdiv, current);
+    }
+
+    document.getElementsByClassName('modal-btn')[0].innerHTML = `<button onclick="patient_sec_edit()" class="btn btn-primary"> Edit Data </button>`;
+} 

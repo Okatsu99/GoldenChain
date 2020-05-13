@@ -21,3 +21,6 @@
 .sizeText{
 	resize: none;
 }
+.info{
+	border: solid; border-color: black; padding-left: 2%; background-color: white; border-width: thin;"
+}

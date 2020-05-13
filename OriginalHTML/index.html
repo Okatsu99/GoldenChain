@@ -269,7 +269,7 @@
                             <div style="width: 450px; padding-left: 30px; padding-right: 70px;">
                               <input type="text" class="form-control" id="searchinput" aria-describedby="emailHelp"required="autofocus" width="20px";></div>
                               <div style="width: 85px";><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSecretaryModal">Add</button></div>
-                              <div style="width: 85px";><button type="button" class="btn btn-secondary"><a data-toggle="modal" data-target="#EditSecretaryModal">Edit</button></a></div>
+                              <div style="width: 85px";><button type="button" class="btn btn-secondary"><a data-toggle="modal" data-target="#EditSecretaryModal">View</button></a></div>
                               <div style="width: 85px";><button type="button" class="btn btn-danger"><a data-toggle="modal" data-target="#">Delete</button></a></div>       
                         </div>  
                           <br><br><br>
@@ -278,13 +278,19 @@
                             <tr>
                               <th></th>
                               <th>Secretary ID</th>
-                              <th>Secretary Name</th>
+                              <th>Secretary First Name</th>
+                              <th>Secretary Last Name</th>
+                              <th>Gender</th>
+                              <th>Email</th>
                               <th>Clinic</th>
                             </tr>
                             <tr>
                               <td><input type="checkbox" name="checkbx"></td>
                               <td>123456tf</td>
-                              <td>Christian Gaspar</td>
+                              <td>Ivan</td>
+                              <td>Magsino</td>
+                              <td>Male</td>
+                              <td>ivan@gmail.com</td>
                               <td>Clinic 1</td>
                             </tr>
              
@@ -331,25 +337,12 @@
                           </select>
                       </div>
                       <br>
-                      <div class="col">                       
-                          <label for="contactnumber" class="text-dark">Contact #:</label> 
-                        <input class="form form-control" type="text" name="contactnumber" placeholder="Enter your Contact #..." style="width: 100%;">
-                      </div>
-                      <br>
-                      <div class="col">
-                          <label for="birthdate" class="text-dark">Birthdate:</label> 
-                        <input class="form form-control" type="date" name="birthdate"  placeholder="0"style="width: 100%;">
-                      </div>
                       <br>
                        <div class="col">
                         <label for="emai" class="text-dark">Email:</label>
                         <input class="form form-control" type="email" name="email" placeholder="Enter your Email..."style="width: 100%;">
                       </div>
                       <br>
-                      <div class="col">
-                        <label for="Address"class="text-dark">Address:</label> 
-                        <textarea class="form form-control sizeText"rows="4" style="width: 100%;" name="message" form="Order_Page"id="m_box" ></textarea>
-                      </div>
                       <br>
                        <div class="col">
                           <label for="clinic" class="text-dark">Choose Clinic:</label>
@@ -379,52 +372,39 @@
                     </button>
                   </div>
                   <div class="modal-body colorModal">
-                        <div class="col">
-                         <label for="firstNamePatient" class="text-dark">Secretary First Name:</label> 
-                        <input class="form form-control" type="text" name="secretaryFname" placeholder="Enter First Name" style="width: 100%;"></div>
-                      
-                      <br>
-                      <div class="col">
-                      
-                        <label for="lastNamePatient" class="text-dark">Secretary Last Name:</label> 
-                        <input  class="form form-control" type="text" name="secretaryLname" placeholder="Enter Last Name" style="width: 100%;"></div>
- 
-                      <br>
-                      <div class="col">
-                         <label for="gender" class="text-dark">Gender:</label>
-                          <select class="form-control" id="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                          </select>
-                      </div>
-                      <br>
-                      <div class="col">                       
-                          <label for="contactnumber" class="text-dark">Contact #:</label> 
-                        <input class="form form-control" type="text" name="contactnumber" placeholder="Enter your Contact #..." style="width: 100%;">
-                      </div>
-                      <br>
-                      <div class="col">
-                          <label for="birthdate" class="text-dark">Birthdate:</label> 
-                        <input class="form form-control" type="date" name="birthdate"  placeholder="0"style="width: 100%;">
-                      </div>
-                      <br>
-                       <div class="col">
-                        <label for="emai" class="text-dark">Email:</label>
-                        <input class="form form-control" type="email" name="email" placeholder="Enter your Email..."style="width: 100%;">
-                      </div>
-                      <br>
-                      <div class="col">
-                        <label for="Address"class="text-dark">Address:</label> 
-                        <textarea class="form form-control sizeText"rows="4" style="width: 100%;" name="message" form="Order_Page"id="m_box" ></textarea>
-                      </div>
-                      <br>
-                       <div class="col">
-                          <label for="clinic" class="text-dark">Choose Clinic:</label>
-                          <select class="form-control" id="clinic">
-                            <option value="clinic1">Clinic1</option>
-                            <option value="clinic2">Clinic2</option>
-                          </select>
-                      </div>
+                         <div id ="main-div">
+
+                  <label for="secirst-name" class="text-dark label">Secretary First Name:</label>
+                  <div class = "data">
+                    <p name="secfirst-name" class="info">Seungcheol</p>
+                  </div>
+
+                  <label for="seclast-name" class="label text-dark">Secretary Last Name:</label>
+                  <div class = "data">
+                    <p name="seclast-name" class="info">Choi</p>
+                  </div>
+                  
+                  <label for="gender" class="label text-dark">Gender:</label>
+                  <div class = "data">
+                    <p name="gender" class="info">male</p>
+                  </div>
+
+                  <label for="email" class="label text-dark">Email:</label>
+                  <div class = "data">
+                    <p name="email" class="info">choi_seungcheol@gmail.com</p>
+                  </div>
+
+                  <label for="clinic" class="label text-dark">Clinic:</label>
+                  <div class = "data">
+                    <p name="clinic" class="info">clinic1</p>
+                  </div>
+
+                  <br>
+                  <div class ="modal-btn">
+                    <button onclick="patient_sec_edit()" class="btn btn-primary"> Edit Data </button>
+                  </div>
+
+                </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -484,7 +464,7 @@
       </div>
     </div>
 
-
+    <script src="js/procedureAdd.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>

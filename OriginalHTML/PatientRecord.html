@@ -88,7 +88,7 @@
 
             <input style="margin-right:5%;" type="text" placeholder="Search..">
             <button  style=" margin: 2.5%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPatient">Add Record</button>
-            <button style=" margin: 2.5%;" type="button" class="btn btn-success" data-toggle="modal" data-target="#EditPatient">Edit Record</button>
+            <button style=" margin: 2.5%;" type="button" class="btn btn-success" data-toggle="modal" data-target="#EditPatient">View Record</button>
             
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Filter By <i class="fas fa-caret-down"></i>
@@ -277,67 +277,70 @@
             </div>
       </div>
 
-      <!-- Edit Patient Modal -->
+      <!-- View Patient Modal -->
            <div class="modal fade " id="EditPatient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header colorModal">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Create Record</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">View Record</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body colorModal">
-                        <div class="col">
-                         <label for="firstNamePatient" class="text-dark">Patient First Name:</label> 
-                        <input class="form form-control" type="text" name="patientFname" placeholder="Enter your Name" style="width: 100%;"></div>
-                      
-                      <br>
-                      <div class="col">
-                      
-                        <label for="lastNamePatient" class="text-dark">Patient Last Name:</label> 
-                        <input  class="form form-control" type="text" name="patientLname" placeholder="Enter your Name" style="width: 100%;"></div>
- 
-                      <br>
-                      <div class="col">
-                         <label for="gender" class="text-dark">Gender:</label>
-                          <select class="form-control" id="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                          </select>
-                      </div>
-                      <br>
-                      <div class="col">                       
-                          <label for="contactnumber" class="text-dark">Contact #:</label> 
-                        <input class="form form-control" type="text" name="contactnumber" placeholder="Enter your Contact #..." style="width: 100%;">
-                      </div>
-                      <br>
-                      <div class="col">
-                          <label for="birthdate" class="text-dark">Birthdate:</label> 
-                        <input class="form form-control" type="date" name="birthdate"  placeholder="0"style="width: 100%;">
-                      </div>
-                      <br>
-                       <div class="col">
-                        <label for="emai" class="text-dark">Email:</label>
-                        <input class="form form-control" type="email" name="email" placeholder="Enter your Email..."style="width: 100%;">
-                      </div>
-                      <br>
-                      <div class="col">
-                        <label for="Address"class="text-dark">Address:</label> 
-                        <textarea class="form form-control sizeText"rows="4" style="width: 100%;" name="message" form="Order_Page"id="m_box" ></textarea>
-                      </div>
-                      <br>
-                       <div class="col">
-                          <label for="clinic" class="text-dark">Choose Clinic:</label>
-                          <select class="form-control" id="clinic">
-                            <option value="clinic1">Clinic1</option>
-                            <option value="clinic2">Clinic2</option>
-                          </select>
-                      </div>
+                  <div class="modal-body colorModal ">
+                  <div id ="main-div">
+
+                  <label for="first-name" class="text-dark label">First Name:</label>
+                  <div class = "data">
+                    <p style="border: solid; border-color: black; padding-left: 2%; background-color: white; border-width: thin;" name="first-name" class="info">Seungcheol</p>
                   </div>
-                  <div class="modal-footer">
+
+                  <label for="last-name" class="label text-dark">Last Name:</label>
+                  <div class = "data">
+                    <p name="last-name" class="info">Choi</p>
+                  </div>
+                  
+                  <label for="gender" class="label text-dark">Gender:</label>
+                  <div class = "data">
+                    <p name="gender" class="info">male</p>
+                  </div>
+                  
+                  <label for="contact" class="label text-dark">Contact #:</label>
+                  <div class = "data">
+                    <p name="contact" class="info">09123456789</p>
+                  </div>
+
+                  <label for="gender" class="label text-dark">Birthdate:</label>
+                  <div class = "data">
+                    <p name="gender" class="info">08/08/1995</p>
+                  </div>
+
+                  <label for="email" class="label text-dark">Email:</label>
+                  <div class = "data">
+                    <p name="email" class="info">choi_seungcheol@gmail.com</p>
+                  </div>
+
+                  <label for="address" class="label text-dark">Address:</label>
+                  <div class = "data">
+                    <p name="address" class="info">Daegu, South Korea</p>
+                  </div>
+
+                  <label for="clinic" class="label text-dark">Clinic:</label>
+                  <div class = "data">
+                    <p name="clinic" class="info">clinic1</p>
+                  </div>
+
+                  <br>
+                  <div class ="modal-btn">
+                    <button onclick="patient_record_edit()" class="btn btn-primary"> Edit Data </button>
+                  </div>
+
+                </div>
+
+                  </div>
+                  <div class="modal-footer modal-btn">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create Record</button>
+                    <button type="button" class="btn btn-primary" onclick="edit()">Edit Record</button>
                   </div>
                 </div>
               </div>
@@ -621,6 +624,7 @@
       </div>
     </div>
     
+    <script src="js/procedureAdd.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
