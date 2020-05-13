@@ -15,7 +15,7 @@ public class AppointmentsController {
 	private ClinicRepository clinicRepository;
 	@GetMapping("/app/appointments")
 	public String viewAppointments(Model model) {
-		model.addAttribute("profile", getUser().getUserProfile());
+		model.addAttribute("profile", getUser());
 		model.addAttribute("isAppointmentActive", true);
 		model.addAttribute("clinicList",clinicRepository.findAll());
 		return "app/appointments";

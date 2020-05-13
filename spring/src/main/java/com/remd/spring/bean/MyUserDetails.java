@@ -1,5 +1,6 @@
 package com.remd.spring.bean;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -11,78 +12,65 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class MyUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1001167367088737464L;
-	private int id;
-	private String userName;
-	private String passWord;
-	private boolean isActive;
-	private List<GrantedAuthority> authorities;
-	private UserProfile userProfile;
+	private User user;
 	//Empty Constructor
 	public MyUserDetails() {
-		
+		this.user = null;
 	}
 	
 	public MyUserDetails(User user) {
-		this.id = user.getId();
-		this.userName = user.getUserName();
-		this.passWord = user.getPassWord();
-		this.isActive = user.isActive();
-		this.authorities = Arrays.stream(user.getRoles().split(","))
-				.map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toList());
-		this.userProfile = user.getProfile();
-		System.out.println(this.authorities);
+		this.user = user;
 	}
-
-	/* Returns a list of Granted Authorities */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.authorities;
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		for(Role role : user.getRoles()) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+			authorities.addAll(role.getPrivileges()
+					.stream()
+					.map(p -> new SimpleGrantedAuthority(p.getName()))
+					.collect(Collectors.toList()));
+
+		}
+		return authorities;
 	}
 
 	@Override
 	public String getPassword() {
-		return this.passWord;
+		return user.getPassWord();
 	}
 
 	@Override
 	public String getUsername() {
-		return this.userName;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		return user.getUserName();
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return true;
+		return user.isAccountNonExpired();
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return user.isAccountNonLocked();
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return true;
+		return user.isCredentialsNonExpired();
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return isActive;
+		return user.isAccountEnabled();
 	}
 
-	public UserProfile getUserProfile() {
-		return userProfile;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserProfile(UserProfile userProfile) {
-		this.userProfile = userProfile;
+	public void setUser(User user) {
+		this.user = user;
 	}
+	
 }

@@ -20,6 +20,8 @@ public class Clinic {
 	private String location;
 	@OneToMany(mappedBy = "patientClinic")
 	private Set<PatientRecord> record;
+	@OneToMany(mappedBy = "")
+	private Set<User> secretaries;
 	public Clinic() {
 		this.name = "";
 		this.location = "";

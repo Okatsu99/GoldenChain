@@ -16,7 +16,7 @@ public class PrescriptionController {
 	private ClinicRepository clinicRepository;
 	@RequestMapping(path = "/app/prescription", method = RequestMethod.GET)
 	public String viewPage(Model model) {
-		model.addAttribute("profile", getUser().getUserProfile());
+		model.addAttribute("profile", getUser());
 		model.addAttribute("isPrescriptionActive", true);
 		model.addAttribute("clinicList",clinicRepository.findAll());
 		return "app/prescription"; 

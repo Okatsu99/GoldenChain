@@ -13,7 +13,7 @@
 				style="background-image: url(/images/dp-generic.png)"></a>
 			<ul class="list-unstyled components mb-5">
 				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-					class="dropdown-toggle" th:text="${profile.getName()}">Account
+					class="dropdown-toggle" th:text="${profile.user.getFullNameFormatted()}">Account
 					Name</a>
 				<!--  Accoount name -->
 				<ul class="collapse list-unstyled" id="homeSubmenu">

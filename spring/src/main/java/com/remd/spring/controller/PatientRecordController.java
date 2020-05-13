@@ -29,7 +29,7 @@ public class PatientRecordController {
 	@RequestMapping(path = "/app/patientrecords", method = RequestMethod.GET)
 	public String viewPatientRecords(Model model,
 			@RequestParam(name = "order", required = false)Integer order) {
-		model.addAttribute("profile", getUser().getUserProfile());
+		model.addAttribute("profile", getUser());
 		model.addAttribute("record", new PatientRecord());
 		model.addAttribute("clinicList",clinicRepository.findAll());
 		model.addAttribute("isPatientRecordsActive", true);

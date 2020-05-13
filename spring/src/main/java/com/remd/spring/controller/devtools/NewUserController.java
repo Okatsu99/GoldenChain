@@ -1,5 +1,8 @@
 package com.remd.spring.controller.devtools;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -8,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.remd.spring.bean.User;
-import com.remd.spring.bean.UserProfile;
+import com.remd.spring.repository.RoleRepository;
 import com.remd.spring.repository.UserRepository;
 
 @Controller
@@ -17,6 +20,8 @@ public class NewUserController {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 	@RequestMapping(path = "/dev/newuser", method = RequestMethod.GET)
 	public String viewPage() {
 		return "dev/newuser";
@@ -27,14 +32,18 @@ public class NewUserController {
 			@RequestParam(name = "firstName")String firstName,
 			@RequestParam(name = "lastName")String lastName,
 			@RequestParam(name = "password")String password,
-			@RequestParam(name = "role")String role
+			@RequestParam(name = "role")Integer roleId
 			) {
 		User user = new User();
-		user.setActive(true);
+		user.setAccountEnabled(true);
+		user.setAccountNonExpired(true);
+		user.setAccountNonLocked(true);
+		user.setCredentialsNonExpired(true);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
 		user.setUserName(capitalizeFirstLetter(firstName).strip()+"."+capitalizeFirstLetter(lastName).strip());
 		user.setPassWord(passwordEncoder.encode(password));
-		user.setProfile(new UserProfile(firstName, lastName, user));
-		user.setRoles("ROLE_"+role.toUpperCase());
+		user.setRoles(Arrays.asList(roleRepository.findById(roleId).get()));
 		userRepository.save(user);
 		return "redirect:/login";
 	}

@@ -30,7 +30,7 @@ public class InventoryController {
 
 	@RequestMapping(path = "/app/inventory", method = RequestMethod.GET)
 	public String viewInventory(Model model, @RequestParam(name = "category", required = false) Integer categoryId) {
-		model.addAttribute("profile", getUser().getUserProfile());
+		model.addAttribute("profile", getUser());
 		model.addAttribute("itemCategories", itemCategoryRepository.findAll());
 		model.addAttribute("item", new Item());
 		model.addAttribute("clinicList", clinicRepository.findAll());

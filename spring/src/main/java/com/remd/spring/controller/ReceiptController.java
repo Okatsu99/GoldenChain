@@ -17,7 +17,7 @@ public class ReceiptController {
 	private ClinicRepository clinicRepository;
 	@RequestMapping(path = "/app/receipt", method = RequestMethod.GET)
 	public String viewPage(Model model){
-		model.addAttribute("profile", getUser().getUserProfile());
+		model.addAttribute("profile", getUser());
 		model.addAttribute("isReceiptActive", true);
 		model.addAttribute("clinicList",clinicRepository.findAll());
 		return "app/receipt";
