@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>E-Prescription</title>
+    <title>ViewRecord</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/e4cf9541ab.js" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/setting.css">
     <link rel="stylesheet" href="css/manage.css">
-
   </head>
   <body>
     
@@ -39,14 +36,14 @@
                 </li>
               </ul>
             </li>
-            <li>
-                <a href="index.html">Appointments</a>
+            <li class="active">
+                <a href="#">Appointments</a>
             </li>
-             <li >
+             <li>
                 <a href="PatientRecord.html">Patient Records</a>
             </li>
-             <li class="active">
-                <a href="#">E-Prescription</a>
+             <li>
+                <a href="E-Prescription.html">E-Prescription</a>
             </li>
              <li>
                 <a href="E-Receipt.html">E-Receipt</a>
@@ -82,68 +79,47 @@
           </div>
         </nav>
 
-        <h2 class="mb-4"><!-- Title --></h2>
-          <div class="container">
-            <h2 class="mb-4">GENERATED PRESCRIPTION</h2>
-              <center>
-                  <div class="col"  style=" width: 70%;padding: 1%;">
-                  <label for="PatientName" class="text-dark" style="float: left;">Patient Name</label>
-                  <input type="text" class="form-control" id="inputPassword" placeholder="Patient Name" style="float: right; width: 80%;">
-                  </div>
-                <br>
-                <br>
+       
+          <div class="container"> <h2 class="mb-4"><b>PATIENT RECORD</b></h2>
 
-                <div class="col"  style=" width: 70%;padding: 1%;">
-                  <label for="GenericMedicineName" class="text-dark" style="float: left;">Generic Medicine name</label>
-                  <input type="text" class="form-control" id="GenericMedicineName" placeholder="Enter Generic Medicine Name" style="float: right; width: 80%;">
-                </div>
-                <br>
-                <br>
-                <div class="col"  style=" width: 70%;padding: 1%;">
-                  <label for="BrandedMedicineName" class="text-dark" style="float: left;">Branded Medicine name</label>
-                  <input type="text" class="form-control" id="BrandedMedicineName" placeholder="Enter Branded Medicine name" style="float: right; width: 80%;">
-                </div>
-                <br>
-                <br>
-                <div class="col"  style=" width: 70%;padding: 1%;">
-                  <label for="DosageMedicine" class="text-dark" style="float: left;">Recommend Dosage</label>
-                  <input type="text" class="form-control" id="DosageMedicine" placeholder="Enter How many intake per usee" style="float: right; width: 80%;">
-                </div>
-                <br>
-                <br>
-                <div class="col" id="addMedicine">
-                  
-                </div>
-                <br>
-                <div class="col"  style=" width: 70%;padding: 1%;">
-                <input class="btn btn-outline-success" style="width: 80%; float: right;" type="button" value="Add another Medicine" onClick="addMedicine()">
-                </div>
-
-                <div  id="testing">
-                  
-                </div>
-                
+            <center>
+            <p style="font-size:150%;">
+           First Name: <strong>Allain Vincent</strong>&emsp;Last Name: <strong>Gaspar</strong>&emsp; Gender: <strong>Male</strong> 
+           <br>
+           Contact #: <strong>09168947539</strong> &emsp; Birthday: <strong>May 7 1999</strong> &emsp; Email: <strong>AllainPogi@gmail.com</strong>
+         </p>
+       </center>
+           <br>
+               <table class="table table-striped table-dark">
+                <tr>
+                  <th>Date</th>
+                  <th>Tretment/Procedure</th>
+                  <th>Amount</th>
+                  <th>Payment</th>
+                  <th>Balance</th>
+                </tr>
+                <tr>
+                  <td><input type="date" class="form-control"></td>
+                  <td><select id="procedureList" class="form-control">
+                        <optgroup label="Procedures...">
+                          <option value="#">Procedures...</option>
+                          <option value="bunot">bunot</option>
+                          <option value="pasta">pasta</option>
+                          <option value="cleaning">Cleaning</option>
+                        </optgroup>
+                      </select></td>
+                  <td><input class="form-control" type="number" name="amount" id="amount" style="width: 70%" min="1"></td>
+                  <td><input class="form-control" type="number" name="payment" id="payment" style="width: 70%" min="1"></td>
+                  <td><input class="form-control" type="number" name="balance" id="balance" style="width: 70%" min="1"></td>
+                </tr>
+ 
+              </table>
               
-                 <br>
-                <br>
 
-                <div class="col"  style=" width: 70%;padding: 1%;">
-                  <label for="Notes" class="text-dark" style="float: left;">Other Notes</label>
-                  <textarea class="form-control" id="Notes" aria-label="With textarea" rows="4" style="width: 80%; resize: none; float: right;"></textarea>
-                  
-                  </div>
+          </div>
 
-
-
-                    <br>
-            <button class= "btn btn-primary"data-toggle="modal" data-target="#cartModal"  style="margin-left: 80%">Generate</button>
-            
-            </center>
-
-            
       </div>
-    </div>
-            <!-- Manage Clinic Modal -->
+              <!-- Manage Clinic Modal -->
       <div class="modal fade" id="manageClinicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg ">
               <div class="modal-content">
@@ -222,8 +198,8 @@
               </div>
             </div>
       </div>
-    
-    <!-- Modal setting -->
+
+      <!-- Modal setting -->
       <div class="modal fade" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -233,7 +209,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              
+
               <div class="modal-body setting">
                <center>
                <table>
@@ -268,7 +244,7 @@
           </div> 
       </div>
 
-<!-- Manage Secretary Modal -->
+     <!-- Manage Secretary Modal -->
       <div class="modal fade" id="manageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg ">
               <div class="modal-content">
@@ -316,7 +292,6 @@
           </div>
       </div>
     </div>
-
 
  <!-- Add Secretary Modal-->
             <div class="modal fade " id="AddSecretaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -452,6 +427,7 @@
             </div>
       </div>
 
+
  <!-- Delete Secretary Modal -->
      <div id="DeleteSecretaryModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="classInfo" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -471,6 +447,7 @@
                 </div>
             </div>
             <br>
+
                           <table class="Manager">
                             <tr>
                               <th>&nbsp;</th>
@@ -500,7 +477,7 @@
       </div>
     </div>
 
-    <script src="js/procedureAdd.js"></script>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
