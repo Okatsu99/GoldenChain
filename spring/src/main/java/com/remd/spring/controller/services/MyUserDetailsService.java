@@ -22,11 +22,11 @@ public class MyUserDetailsService implements UserDetailsService {
 	
 	/* Return user details */
 	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		Optional<User> user = userRepository.findByUserName(userName); //Return a new a instance of UserDetails
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Optional<User> user = userRepository.findByEmail(email); //Return a new a instance of UserDetails
 		
 		//Return UsernameNotFoundException if Null or empty
-		user.orElseThrow(() -> new UsernameNotFoundException("Invalid username: " + userName));
+		user.orElseThrow(() -> new UsernameNotFoundException("Invalid username: " + email));
 		
 		return user.map(MyUserDetails::new).get();
 	}

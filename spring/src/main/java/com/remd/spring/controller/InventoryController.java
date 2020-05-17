@@ -25,15 +25,11 @@ public class InventoryController {
 	ItemRepository itemRepository;
 	@Autowired
 	ItemCategoryRepository itemCategoryRepository;
-	@Autowired
-	private ClinicRepository clinicRepository;
 
 	@RequestMapping(path = "/app/inventory", method = RequestMethod.GET)
 	public String viewInventory(Model model, @RequestParam(name = "category", required = false) Integer categoryId) {
-		model.addAttribute("profile", getUser());
 		model.addAttribute("itemCategories", itemCategoryRepository.findAll());
 		model.addAttribute("item", new Item());
-		model.addAttribute("clinicList", clinicRepository.findAll());
 		model.addAttribute("isInventoryActive", true);
 		if (categoryId == null || categoryId == -1) {
 			model.addAttribute("itemList", itemRepository.findAll());
@@ -79,9 +75,5 @@ public class InventoryController {
 			@RequestParam(name = "itemExpiryDate") @DateTimeFormat(iso = ISO.DATE) LocalDate itemExpiryDate) {
 		itemRepository.editItemById(itemName, itemDescription, itemQuantity, itemCategoryRepository.findById(itemCategory).get(), itemExpiryDate, itemId);
 		return "redirect:/app/inventory";
-	}
-
-	private MyUserDetails getUser() {
-		return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }

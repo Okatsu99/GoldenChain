@@ -25,7 +25,11 @@
 <link rel="stylesheet" th:href="@{/css/manage.css}">
 </head>
 <body>
-
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+		var priceList = [[${procedures}]];
+		/*]]>*/
+	</script>
 	<div class="wrapper d-flex align-items-stretch backgroundColor font">
 
 		<!-- Nav -->
@@ -37,45 +41,45 @@
 			<div class="container">
 				<h2 class="mb-4">E-RECEIPT</h2>
 				<center>
-					<div class="col" style="width: 70%; padding: 1%;">
-						<label for="PatientName" class="text-dark" style="float: left;">Patient
-							Name</label> <input type="text" class="form-control" id="inputPassword"
-							placeholder="Patient Name" style="float: right; width: 85%;">
-					</div>
-					<br> <br>
+					<div>
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="PatientName" class="text-dark" style="float: left;">Patient
+								Name</label> <input type="text" class="form-control" id="inputPassword"
+								placeholder="Patient Name" style="float: right; width: 85%;">
+						</div>
+						<br> <br>
 
-					<div class="col" style="width: 70%; padding: 1%;">
-						<label for="Contact Number" class="text-dark" style="float: left;">Contact
-							Number</label> <input type="text" class="form-control"
-							id="Contact Number" placeholder="Contact Number"
-							style="float: right; width: 85%;">
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="Contact Number" class="text-dark"
+								style="float: left;">Contact Number</label> <input type="text"
+								class="form-control" id="Contact Number"
+								placeholder="Contact Number" style="float: right; width: 85%;">
+						</div>
+						<br> <br> <br>
 					</div>
-					<br> <br> <br>
-					<div class="col" style="width: 70%; padding: 1%;">
-						<label for="PatientName" class="text-dark" style="float: left;">Procedure/s
-							Done</label> <select class="form-control procedureList"
-							style="float: right; width: 85%;">
-							<optgroup label="Procedures...">
-								<option value="#">Procedures...</option>
-								<option value="bunot">Bunot</option>
-								<option value="pasta">Pasta</option>
-								<option value="cleaning">Cleaning</option>
-								<option value="cleaning">Surgery</option>
-								<option value="cleaning">Ortho</option>
-							</optgroup>
-						</select> <br> <br> <input class="form form-control" type="text"
-							name="amount" id="amount1" placeholder="Enter amount cost..."
-							style="float: right; width: 85%;">
-
+					<div>
+						<div class="col" style="width: 70%; padding: 1%;"
+							th:fragment="procedureInput">
+							<label for="PatientName" class="text-dark" style="float: left;">Procedure/s
+								Done</label> <select class="form-control procedureList"
+								style="float: right; width: 85%;" name="prodcedureItem" onchange="updateProcedureInputPriceField(event)">
+								<option hidden disabled="disabled" selected>Procedure</option>
+								<option th:each="procedure : ${procedures}"
+								th:text="${procedure.name}" th:value=${procedure.id}></option>
+								</optgroup>
+							</select> <br> <br> <input class="form form-control" type="text"
+								name="amount" id="amount1" placeholder="Enter amount cost..."
+								style="float: right; width: 85%;" disabled="disabled"> <br>
+							<br>
+						</div>
 					</div>
-					<br> <br>
-					<div class="col" id="testing"></div>
-
+					<!-- Parent  -->
+					<div id="additionalProcedures"></div>
 					<br>
 					<div class="col" style="width: 70%; padding: 1%;">
 						<input class="btn btn-outline-success"
 							style="width: 85%; float: right;" type="button"
-							value="Add another Procedure" onClick="addInput()">
+							value="Add another Procedure" onClick="addProcedureInput()">
 					</div>
 					<br> <br>
 					<div class="col" style="width: 70%; padding: 1%;">

@@ -49,6 +49,8 @@ public class User {
 	private String firstName;
 	@Column(name = "lastname")
 	private String lastName;
+	@Column(name = "email")
+	private String email;
 	@ManyToOne
 	@JoinColumn(name = "clinic_id")
 	private Clinic clinic;
@@ -57,7 +59,7 @@ public class User {
 	private User doctor;
 	@OneToMany(mappedBy = "doctor")
 	private Set<User> secretaries;
-
+	//Default
 	public User() {
 		this.userName = "";
 		this.passWord = "";
@@ -72,107 +74,123 @@ public class User {
 		this.doctor = null;
 		this.secretaries = null;
 	}
-
+	//For Doctor Creation
+	public User(String userName, String passWord, Collection<Role> roles, boolean isAccountEnabled,
+			boolean isCredentialsNonExpired, boolean isAccountNonLocked, boolean isAccountNonExpired, String firstName,
+			String lastName, String email) {
+		this.userName = userName;
+		this.passWord = passWord;
+		this.roles = roles;
+		this.isAccountEnabled = isAccountEnabled;
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+		this.isAccountNonLocked = isAccountNonLocked;
+		this.isAccountNonExpired = isAccountNonExpired;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		//defaults
+		this.clinic = null;
+		this.doctor = null;
+		this.secretaries = null;
+	}
+	
+	public User(String userName, String passWord, Collection<Role> roles, boolean isAccountEnabled,
+			boolean isCredentialsNonExpired, boolean isAccountNonLocked, boolean isAccountNonExpired, String firstName,
+			String lastName, String email, Clinic clinic, User doctor) {
+		this.userName = userName;
+		this.passWord = passWord;
+		this.roles = roles;
+		this.isAccountEnabled = isAccountEnabled;
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+		this.isAccountNonLocked = isAccountNonLocked;
+		this.isAccountNonExpired = isAccountNonExpired;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.clinic = clinic;
+		this.doctor = doctor;
+	}
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getUserName() {
 		return userName;
 	}
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 	public String getPassWord() {
 		return passWord;
 	}
-
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-
-	public boolean isAccountEnabled() {
-		return isAccountEnabled;
-	}
-
-	public void setAccountEnabled(boolean isAccountEnabled) {
-		this.isAccountEnabled = isAccountEnabled;
-	}
-
-	public boolean isCredentialsNonExpired() {
-		return isCredentialsNonExpired;
-	}
-
-	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
-		this.isCredentialsNonExpired = isCredentialsNonExpired;
-	}
-
-	public boolean isAccountNonLocked() {
-		return isAccountNonLocked;
-	}
-
-	public void setAccountNonLocked(boolean isAccountNonLocked) {
-		this.isAccountNonLocked = isAccountNonLocked;
-	}
-
-	public boolean isAccountNonExpired() {
-		return isAccountNonExpired;
-	}
-
-	public void setAccountNonExpired(boolean isAccountNonExpired) {
-		this.isAccountNonExpired = isAccountNonExpired;
-	}
-
 	public Collection<Role> getRoles() {
 		return roles;
 	}
-
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
-
+	public boolean isAccountEnabled() {
+		return isAccountEnabled;
+	}
+	public void setAccountEnabled(boolean isAccountEnabled) {
+		this.isAccountEnabled = isAccountEnabled;
+	}
+	public boolean isCredentialsNonExpired() {
+		return isCredentialsNonExpired;
+	}
+	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+	}
+	public boolean isAccountNonLocked() {
+		return isAccountNonLocked;
+	}
+	public void setAccountNonLocked(boolean isAccountNonLocked) {
+		this.isAccountNonLocked = isAccountNonLocked;
+	}
+	public boolean isAccountNonExpired() {
+		return isAccountNonExpired;
+	}
+	public void setAccountNonExpired(boolean isAccountNonExpired) {
+		this.isAccountNonExpired = isAccountNonExpired;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 	public String getLastName() {
 		return lastName;
 	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public Clinic getClinic() {
 		return clinic;
 	}
-
 	public void setClinic(Clinic clinic) {
 		this.clinic = clinic;
 	}
-
 	public User getDoctor() {
 		return doctor;
 	}
-
 	public void setDoctor(User doctor) {
 		this.doctor = doctor;
 	}
-
 	public Set<User> getSecretaries() {
 		return secretaries;
 	}
-
 	public void setSecretaries(Set<User> secretaries) {
 		this.secretaries = secretaries;
 	}

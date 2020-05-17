@@ -5,8 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form th:action="@{/app/user}" th:method="get">
-		<input hidden="" th:name="currentUrl" th:value="${#httpServletRequest.requestURI}">
+	<form th:action="@{/app/secretary/add}" th:method="post">
 		<div class="modal fade " id="AddSecretaryModal" tabindex="-1"
 			role="dialog" aria-labelledby="exampleModalCenterTitle"
 			aria-hidden="true">
@@ -24,7 +23,7 @@
 						<div class="col">
 							<label for="firstNamePatient" class="text-dark">Secretary
 								First Name:</label> <input class="form form-control" type="text"
-								name="secretaryFname" placeholder="Enter First Name"
+								name="sectFirstName" placeholder="Enter First Name"
 								style="width: 100%;">
 						</div>
 
@@ -33,50 +32,26 @@
 
 							<label for="lastNamePatient" class="text-dark">Secretary
 								Last Name:</label> <input class="form form-control" type="text"
-								name="secretaryLname" placeholder="Enter Last Name"
+								name="sectLastName" placeholder="Enter Last Name"
 								style="width: 100%;">
-						</div>
-
-						<br>
-						<div class="col">
-							<label for="gender" class="text-dark">Gender:</label> <select
-								class="form-control" id="gender">
-								<option value="male">Male</option>
-								<option value="female">Female</option>
-							</select>
-						</div>
-						<br>
-						<div class="col">
-							<label for="contactnumber" class="text-dark">Contact #:</label> <input
-								class="form form-control" type="text" name="contactnumber"
-								placeholder="Enter your Contact #..." style="width: 100%;">
-						</div>
-						<br>
-						<div class="col">
-							<label for="birthdate" class="text-dark">Birthdate:</label> <input
-								class="form form-control" type="date" name="birthdate"
-								placeholder="0" style="width: 100%;">
 						</div>
 						<br>
 						<div class="col">
 							<label for="emai" class="text-dark">Email:</label> <input
-								class="form form-control" type="email" name="email"
+								class="form form-control" type="email" name="sectEmail"
 								placeholder="Enter your Email..." style="width: 100%;">
 						</div>
 						<br>
 						<div class="col">
-							<label for="Address" class="text-dark">Address:</label>
-							<textarea class="form form-control sizeText" rows="4"
-								style="width: 100%;" name="message" form="Order_Page" id="m_box"></textarea>
-						</div>
-						<br>
-						<div class="col">
 							<label for="clinic" class="text-dark">Choose Clinic:</label> <select
-								class="form-control" id="clinic">
-								<option value="clinic1">Clinic1</option>
-								<option value="clinic2">Clinic2</option>
+								class="form-control" id="clinic" name="clinicId">
+								<option th:each="clinic : ${clinicList}" th:value="${clinic.id}"
+									th:text="${clinic.name}">Clinic1</option>
 							</select>
 						</div>
+						<input type="hidden" name="doctorId" th:value="${profile.user.id}"> <input
+							th:name="currentUrl" th:value="${#httpServletRequest.requestURI}"
+							type="hidden">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"

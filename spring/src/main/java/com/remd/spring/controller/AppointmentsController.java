@@ -11,17 +11,9 @@ import com.remd.spring.repository.ClinicRepository;
 
 @Controller
 public class AppointmentsController {
-	@Autowired
-	private ClinicRepository clinicRepository;
 	@GetMapping("/app/appointments")
 	public String viewAppointments(Model model) {
-		model.addAttribute("profile", getUser());
 		model.addAttribute("isAppointmentActive", true);
-		model.addAttribute("clinicList",clinicRepository.findAll());
 		return "app/appointments";
-	}
-	
-	private MyUserDetails getUser() {
-		return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }

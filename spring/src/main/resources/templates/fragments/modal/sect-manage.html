@@ -54,13 +54,15 @@
 								<th></th>
 								<th>Secretary ID</th>
 								<th>Secretary Name</th>
+								<th>Secretary Email</th>
 								<th>Clinic</th>
 							</tr>
-							<tr>
+							<tr th:each="secretary : ${secretaryList}">
 								<td><input type="checkbox" name="checkbx"></td>
-								<td>123456tf</td>
-								<td>Christian Gaspar</td>
-								<td>Clinic 1</td>
+								<td th:text="${secretary.id}">123456tf</td>
+								<td th:text="${secretary.getFullNameFormatted()}">Christian Gaspar</td>
+								<td th:text="${secretary.email}"></td>
+								<td th:text="${secretary.clinic.name}">Clinic 1</td>
 							</tr>
 
 						</table>
