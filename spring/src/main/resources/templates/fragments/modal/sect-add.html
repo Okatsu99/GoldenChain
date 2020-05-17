@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/app/secretary/add}" th:method="post">
+		<div class="modal fade " id="AddSecretaryModal" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header colorModal">
+						<h5 class="modal-title" id="exampleModalLongTitle">Create
+							Secretary</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body colorModal">
+						<div class="col">
+							<label for="firstNamePatient" class="text-dark">Secretary
+								First Name:</label> <input class="form form-control" type="text"
+								name="sectFirstName" placeholder="Enter First Name"
+								style="width: 100%;">
+						</div>
+
+						<br>
+						<div class="col">
+
+							<label for="lastNamePatient" class="text-dark">Secretary
+								Last Name:</label> <input class="form form-control" type="text"
+								name="sectLastName" placeholder="Enter Last Name"
+								style="width: 100%;">
+						</div>
+						<br>
+						<div class="col">
+							<label for="emai" class="text-dark">Email:</label> <input
+								class="form form-control" type="email" name="sectEmail"
+								placeholder="Enter your Email..." style="width: 100%;">
+						</div>
+						<br>
+						<div class="col">
+							<label for="clinic" class="text-dark">Choose Clinic:</label> <select
+								class="form-control" id="clinic" name="clinicId">
+								<option th:each="clinic : ${clinicList}" th:value="${clinic.id}"
+									th:text="${clinic.name}">Clinic1</option>
+							</select>
+						</div>
+						<input type="hidden" name="doctorId" th:value="${profile.user.id}"> <input
+							th:name="currentUrl" th:value="${#httpServletRequest.requestURI}"
+							type="hidden">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Create
+							Record</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

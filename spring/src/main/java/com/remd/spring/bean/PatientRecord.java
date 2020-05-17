@@ -1,22 +1,23 @@
 package com.remd.spring.bean;
 
-import java.util.UUID;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "patient_record")
 public class PatientRecord {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "first_name")
 	private String firstName;
@@ -26,18 +27,37 @@ public class PatientRecord {
 	private String gender;
 	@Column(name = "contact_number")
 	private String contactNumber;
+	@Column(name = "birthdate", columnDefinition = "DATE")
+	private LocalDate birthDate;
 	@Column(name = "email")
 	private String email;
-
+	@Column(name = "home_address")
+	private String homeAddress;
+	@ManyToOne
+	@JoinColumn(name = "clinic_id",nullable = false)
+	private Clinic patientClinic;
 	public PatientRecord() {
+		this.firstName = "";
+		this.lastName = "";
+		this.gender = "";
+		this.contactNumber = "";
+		this.birthDate = null;
+		this.email = "";
+		this.homeAddress = "";
+		this.patientClinic = new Clinic();
 	}
 	
-	public PatientRecord(String firstName, String lastName, String gender, String contactNumber, String email) {
+	public PatientRecord(String firstName, String lastName, String gender, String contactNumber,
+			LocalDate birthDate, String email, String homeAddress, Clinic patientClinic) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.contactNumber = contactNumber;
+		this.birthDate = birthDate;
 		this.email = email;
+		this.homeAddress = homeAddress;
+		this.patientClinic = patientClinic;
 	}
 
 	public int getId() {
@@ -80,6 +100,14 @@ public class PatientRecord {
 		this.contactNumber = contactNumber;
 	}
 
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -88,4 +116,21 @@ public class PatientRecord {
 		this.email = email;
 	}
 
+	public String getHomeAddress() {
+		return homeAddress;
+	}
+
+	public void setHomeAddress(String homeAddress) {
+		this.homeAddress = homeAddress;
+	}
+
+	public Clinic getPatientClinic() {
+		return patientClinic;
+	}
+
+	public void setPatientClinic(Clinic patientClinic) {
+		this.patientClinic = patientClinic;
+	}
+
+	
 }

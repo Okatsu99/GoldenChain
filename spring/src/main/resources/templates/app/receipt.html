@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>E-Receipt</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	th:href="@{https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900}"
+	rel="stylesheet">
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<script th:src="@{https://kit.fontawesome.com/e4cf9541ab.js}"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/setting.css}">
+<link rel="stylesheet" th:href="@{/css/manage.css}">
+</head>
+<body>
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+		var priceList = [[${procedures}]];
+		/*]]>*/
+	</script>
+	<div class="wrapper d-flex align-items-stretch backgroundColor font">
+
+		<!-- Nav -->
+		<nav th:replace="fragments/user-nav.html"></nav>
+		<!-- Page Content  -->
+		<div id="content" class="p-4 p-md-5">
+			<!-- Top Navbar -->
+			<nav th:replace="fragments/top-navbar"></nav>
+			<div class="container">
+				<h2 class="mb-4">E-RECEIPT</h2>
+				<center>
+					<div>
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="PatientName" class="text-dark" style="float: left;">Patient
+								Name</label> <input type="text" class="form-control" id="inputPassword"
+								placeholder="Patient Name" style="float: right; width: 85%;">
+						</div>
+						<br> <br>
+
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="Contact Number" class="text-dark"
+								style="float: left;">Contact Number</label> <input type="text"
+								class="form-control" id="Contact Number"
+								placeholder="Contact Number" style="float: right; width: 85%;">
+						</div>
+						<br> <br> <br>
+					</div>
+					<div>
+						<div class="col" style="width: 70%; padding: 1%;"
+							th:fragment="procedureInput">
+							<label for="PatientName" class="text-dark" style="float: left;">Procedure/s
+								Done</label> <select class="form-control procedureList"
+								style="float: right; width: 85%;" name="prodcedureItem" onchange="updateProcedureInputPriceField(event)">
+								<option hidden disabled="disabled" selected>Procedure</option>
+								<option th:each="procedure : ${procedures}"
+								th:text="${procedure.name}" th:value=${procedure.id}></option>
+								</optgroup>
+							</select> <br> <br> <input class="form form-control" type="text"
+								name="amount" id="amount1" placeholder="Enter amount cost..."
+								style="float: right; width: 85%;" disabled="disabled"> <br>
+							<br>
+						</div>
+					</div>
+					<!-- Parent  -->
+					<div id="additionalProcedures"></div>
+					<br>
+					<div class="col" style="width: 70%; padding: 1%;">
+						<input class="btn btn-outline-success"
+							style="width: 85%; float: right;" type="button"
+							value="Add another Procedure" onClick="addProcedureInput()">
+					</div>
+					<br> <br>
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="payment" class="text-dark" style="float: left;">Payment</label>
+						<input type="text" class="form-control" id="payment"
+							placeholder="Payment..." style="float: right; width: 85%;">
+					</div>
+					<br> <br>
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="balance" class="text-dark" style="float: left;">Balance</label>
+						<input type="text" class="form-control" id="balance"
+							placeholder="Balance..." style="float: right; width: 85%;">
+					</div>
+					<br> <br>
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="discount" class="text-dark" style="float: left;">Discount</label>
+						<input type="text" class="form-control" id="discount"
+							placeholder="Discount..." style="float: right; width: 85%;">
+					</div>
+					<br> <br>
+
+					<div class="col" style="width: 70%; padding: 1%;">
+						<label for="totalCost" class="text-dark" style="float: left;">Total
+							Cost</label> <input type="text" class="form-control" id="totalCost"
+							placeholder="Total Cost..." style="float: right; width: 85%;">
+					</div>
+
+					<br> <br> <br>
+					<button class="btn btn-primary" data-toggle="modal"
+						data-target="#cartModal" style="margin-left: 80%">Generate</button>
+				</center>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal setting -->
+	<div th:replace="fragments/modal/user-setting"></div>
+	<!-- Manage Secretary Modal -->
+	<div th:replace="fragments/modal/sect-manage"></div>
+	<!-- Manage Clinic Modal -->
+	<div th:replace="fragments/modal/clinic-manage"></div>
+	<!-- Add Clinic Modal -->
+	<div th:replace="fragments/modal/clinic-add"></div>
+	<!-- ADD Secretary Modal -->
+	<div th:replace="fragments/modal/sect-add"></div>
+	<!-- Edit Secretary Modal -->
+	<div th:replace="fragments/modal/sect-edit"></div>
+	<!-- Delete Secretary Modal -->
+	<div th:replace="fragments/modal/sect-delete"></div>
+	<script th:src="@{/js/procedureAdd.js}"></script>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/popper.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
