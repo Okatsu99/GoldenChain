@@ -1,6 +1,7 @@
 package com.remd.spring.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,6 +76,12 @@ public class InventoryController {
 			@RequestParam(name = "itemCategory") Integer itemCategory,
 			@RequestParam(name = "itemExpiryDate") @DateTimeFormat(iso = ISO.DATE) LocalDate itemExpiryDate) {
 		itemRepository.editItemById(itemName, itemDescription, itemQuantity, itemCategoryRepository.findById(itemCategory).get(), itemExpiryDate, itemId);
+		return "redirect:/app/inventory";
+	}
+	@PostMapping(path = "/app/inventory/delete")
+	public String deleteItem(
+			@RequestParam(name = "itemId")List<Integer>itemIdList) {
+		System.out.println(itemIdList.size());
 		return "redirect:/app/inventory";
 	}
 }

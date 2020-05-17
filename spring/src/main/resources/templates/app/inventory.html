@@ -44,10 +44,8 @@
 				<input style="margin-right: 5%;" type="text" placeholder="Search..">
 				<button style="margin: 2.5%;" type="button" class="btn btn-primary"
 					data-toggle="modal" data-target="#AddItem">Add Item</button>
-				<!-- 				<button style="margin: 2.5%;" type="button" class="btn btn-success" -->
-				<!-- 					data-toggle="modal" data-target="#EditItem">Edit Item</button> -->
-				<button style="margin: 2.5%;" type="button" class="btn btn-danger">Delete
-					Item</button>
+				<button style="margin: 2.5%;" type="button" class="btn btn-danger"
+					id="deleteItemsBtn">Delete Item</button>
 				<button class="btn btn-secondary dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
@@ -70,32 +68,37 @@
 
 
 				<br> <br>
-				<table class="table table-striped table-dark">
-					<thead>
-						<tr>
-							<th scope="col"></th>
-							<th scope="col">Item ID</th>
-							<th scope="col">Item Qty</th>
-							<th scope="col">Item Name</th>
-							<th scope="col">Item Category</th>
-							<th scope="col">Item Expiry Date</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="Item : ${itemList}"
-							th:onclick="'javascript:openEditModal(\'' + 'editItemModalContainer' + '\', \'' + 'editItemModalContent' + '\' , 
-							\'' + '/app/inventory/' + '\', \'' + ${Item.id} + '\');'">
-							<th scope="row"><input type="checkbox" name="checkbx"></th>
-							<td th:text="${Item.id}"></td>
-							<td th:text="${Item.quantity}"></td>
-							<td th:text="${Item.name}"></td>
-							<td th:text="${Item.category.categoryName}"></td>
-							<td th:text="${Item.expiration}"></td>
-						</tr>
-					</tbody>
-					</tbody>
-				</table>
-
+				<form id="deleteItemForm" th:action="@{/app/inventory/delete}"
+					th:method="post">
+					<table class="table table-striped table-dark">
+						<thead>
+							<tr>
+								<th scope="col" colspan="2"></th>
+								<th scope="col">Item ID</th>
+								<th scope="col">Item Qty</th>
+								<th scope="col">Item Name</th>
+								<th scope="col">Item Category</th>
+								<th scope="col">Item Expiry Date</th>
+							</tr>
+						</thead>
+						<tbody id="tableBody">
+							<tr th:each="Item : ${itemList}">
+								<th scope="row"><input type="checkbox"
+									th:value="${item.id}" name="itemId"></th>
+								<td><button type="button" class="btn btn-success"
+										th:onclick="'javascript:openEditModal(\'' + 'editItemModalContainer' + '\', \'' + 'editItemModalContent' + '\' , 
+							\'' + '/app/inventory/' + '\', \'' + ${Item.id} + '\');'">Edit
+										Item</button></td>
+								<td th:text="${Item.id}"></td>
+								<td th:text="${Item.quantity}"></td>
+								<td th:text="${Item.name}"></td>
+								<td th:text="${Item.category.categoryName}"></td>
+								<td th:text="${Item.expiration}"></td>
+							</tr>
+						</tbody>
+						</tbody>
+					</table>
+				</form>
 			</div>
 		</div>
 
@@ -118,7 +121,7 @@
 								<div>
 									<label for="itemName" class="text-dark">Item Name:</label> <input
 										class=" form form-control" type="text" name="itemName"
-										placeholder="Enter Item Name" style="width: 100%;">
+										placeholder="Enter Item Name" style="width: 100%;" required>
 								</div>
 							</div>
 							<br>
@@ -126,20 +129,20 @@
 								<div>
 									<label for="itemDesc" class="text-dark">Description:</label> <input
 										class=" form form-control" type="text" name="itemDesc"
-										placeholder="Enter Description" style="width: 100%;">
+										placeholder="Enter Description" style="width: 100%;" required>
 								</div>
 							</div>
 							<br>
 							<div class="col">
 								<label for="itemQty" class="text-dark">Quantity:</label> <input
 									class=" form form-control" type="number" name="itemQty"
-									placeholder="0" style="width: 100%;">
+									placeholder="0" style="width: 100%;" required>
 
 							</div>
 							<br>
 							<div class="col">
 								<label for="itemCategory" class="text-dark">Category:</label> <select
-									class="form form-control" name="itemCategory">
+									class="form form-control" name="itemCategory" required>
 									<option th:each="Category : ${itemCategories}"
 										th:value="${Category.id}" th:text="${Category.categoryName}">
 								</select>
@@ -148,7 +151,7 @@
 							<div class="col">
 								<label for="itemExpiryDate" class="text-dark">Expiration
 									Date:</label> <input class=" form form-control" type="date"
-									name="itemExpiryDate" placeholder="0" style="width: 100%;">
+									name="itemExpiryDate" placeholder="0" style="width: 100%;" >
 							</div>
 							<br>
 							<!-- <div class="col">
@@ -235,7 +238,8 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Close</button>
-								<button id="saveEditBtn" type="button" onclick="enableEditItem(event)" class="btn btn-warning">Edit</button>
+								<button id="saveEditBtn" type="button"
+									onclick="enableEditItem(event,'editItemModalContainer')" class="btn btn-warning">Edit</button>
 							</div>
 						</form>
 					</div>
@@ -256,46 +260,30 @@
 	<!-- Edit Secretary Modal -->
 	<div th:replace="fragments/modal/sect-edit"></div>
 	<!-- Delete Secretary Modal -->
-	<script type="text/javascript">
-	function enableEditItem(event) {
-		//Titles and texts
-		var modalTitle = document.getElementById("editItemModalTitle");
-		var submitBtn = document.getElementById("saveEditBtn");
-		//List of inputs and select
-		var inputList = document.getElementById("editItemModalContent").querySelectorAll("input");
-		var selectList = document.getElementById("editItemModalContent").querySelectorAll("select");
-		//Allow edit on all inputs
-		for (var i = 0; i < inputList.length; i++) {
-			if(inputList[i].hasAttribute("disabled")){
-				inputList[i].removeAttribute("disabled");
-			}
-		}
-		//Allow edit on select tags
-		for (var i = 0; i < selectList.length; i++) {
-			if(selectList[i].hasAttribute("disabled")){
-				selectList[i].removeAttribute("disabled");
-			}
-		}
-		//Change texts
-		modalTitle.innerText = "Edit Item";
-		submitBtn.innerText = "Save Changes";
-		//Change submit button color
-		submitBtn.classList.remove("btn-warning");
-		submitBtn.classList.add("btn-success");
-		//Change button to submit
-		if(submitBtn.type=="button"){
-			submitBtn.type="submit";
-			event.preventDefault();	
-		}
-		console.log(inputList.length);
-		console.log(selectList.length);
-		
-	}
-	</script>
 	<div th:replace="fragments/modal/sect-delete"></div>
 	<script th:src="@{/js/jquery.min.js}"></script>
 	<script th:src="@{/js/popper.js}"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 	<script th:src="@{/js/main.js}"></script>
+	<!-- My jQuery-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#deleteItemsBtn").click(function() {
+				//validate check boxes
+				var selectedRows = document.getElementById("tableBody").querySelectorAll("input");
+				for (var i = 0; i < selectedRows.length; i++) {
+					if(selectedRows[i].checked == true){
+						$("#deleteItemForm").submit();
+						break;
+					}else{
+						console.log(i);
+						console.log("Not true");
+					}
+				}
+				console.log(selectedRows);
+			});
+		});
+	</script>
+
 </body>
 </html>

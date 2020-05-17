@@ -75,7 +75,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="patientRecord : ${patientRecords}"
-							th:onclick="'javascript:openEditModal(\'' + 'editPatientModalContainer' + '\', \'' + 'editPatientModal' + '\' , 
+							th:onclick="'javascript:openEditModal(\'' + 'editPatientModalContainer' + '\', \'' + 'editItemModalContent' + '\' , 
 							\'' + '/app/patientrecords/' + '\', \'' + ${patientRecord.id} + '\');'">
 							<th scope="row"><input type="checkbox" name="checkbx"></th>
 							<td th:text="${patientRecord.id}"></td>
@@ -99,7 +99,7 @@
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header colorModal">
-								<h5 class="modal-title" id="exampleModalLongTitle">Create
+								<h5 class="modal-title" id="exampleModalLongTitle">View
 									Record</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
@@ -170,8 +170,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary">Create
-									Record</button>
+								<button type="button" class="btn btn-primary">Edit Record</button>
 							</div>
 						</div>
 					</div>
@@ -179,15 +178,15 @@
 			</form>
 		</div>
 
-		<!-- Edit Patient Modal -->
+		<!-- View/Edit Patient Modal -->
 		<div id="editPatientModalContainer">
-			<div class="modal fade " id="editPatientModal" tabindex="-1"
+			<div class="modal fade " id="editItemModalContent" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalCenterTitle"
 				aria-hidden="true" th:fragment="editPersonModalContent">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header colorModal">
-							<h5 class="modal-title" id="exampleModalLongTitle">Create
+							<h5 class="modal-title" id="editItemModalTitle">Create
 								Record</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -199,7 +198,7 @@
 								<label for="patientFirstName" class="text-dark">Patient
 									First Name:</label> <input class="form form-control" type="text"
 									name="patientFirstName" placeholder="Enter your Name"
-									style="width: 100%;" th:value="${record.firstName}">
+									style="width: 100%;" th:value="${record.firstName}" disabled="disabled">
 							</div>
 
 							<br>
@@ -208,13 +207,13 @@
 								<label for="patientLastName" class="text-dark">Patient
 									Last Name:</label> <input class="form form-control" type="text"
 									name="patientLastName" placeholder="Enter your Name"
-									style="width: 100%;" th:value="${record.lastName}">
+									style="width: 100%;" th:value="${record.lastName}" disabled="disabled">
 							</div>
 
 							<br>
 							<div class="col">
 								<label for="patientGender" class="text-dark">Gender:</label> <select
-									class="form-control" id="patientGender" name="patientGender">
+									class="form-control" id="patientGender" name="patientGender" disabled="disabled">
 									<option value="male">Male</option>
 									<option value="female">Female</option>
 								</select>
@@ -224,32 +223,32 @@
 								<label for="patientContactNumber" class="text-dark">Contact
 									#:</label> <input class="form form-control" type="text"
 									name="patientContactNumber"
-									placeholder="Enter your Contact #..." style="width: 100%;" th:value="${record.contactNumber}">
+									placeholder="Enter your Contact #..." style="width: 100%;" th:value="${record.contactNumber}" disabled="disabled">
 							</div>
 							<br>
 							<div class="col">
 								<label for="patientBirthDate" class="text-dark">Birthdate:</label>
 								<input class="form form-control" type="date"
-									name="patientBirthDate" placeholder="0" style="width: 100%;" th:value="${record.birthDate}">
+									name="patientBirthDate" placeholder="0" style="width: 100%;" th:value="${record.birthDate}" disabled="disabled">
 							</div>
 							<br>
 							<div class="col">
 								<label for="patientEmailAddress" class="text-dark">Email:</label>
 								<input class="form form-control" type="email"
 									name="patientEmailAddress" placeholder="Enter your Email..."
-									style="width: 100%;" th:value="${record.email}">
+									style="width: 100%;" th:value="${record.email}" disabled="disabled">
 							</div>
 							<br>
 							<div class="col">
 								<label for="patientHomeAddress" class="text-dark">Address:</label>
 								<textarea class="form form-control sizeText" rows="4"
 									style="width: 100%;" name="patientHomeAddress"
-									id="patientEmailAddress" th:text="${record.homeAddress}"></textarea>
+									id="patientEmailAddress" th:text="${record.homeAddress}" disabled="disabled"></textarea>
 							</div>
 							<br>
 							<div class="col">
 								<label for="clinic" class="text-dark">Choose Clinic:</label> <select
-									class="form-control" id="clinic" th:name="clinicId">
+									class="form-control" id="clinic" th:name="clinicId" disabled="disabled">
 									<option th:each="clinic : ${clinicList}"
 										th:value="${clinic.id}" th:text="${clinic.name}" th:selected="${clinic.id==record.patientClinic.id}">Clinic1</option>
 								</select>
@@ -258,8 +257,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Create
-								Record</button>
+							<button type="button" class="btn btn-primary" id="saveEditBtn" onClick="enableEditItem(event,`editPatientModalContainer`)">Edit Record</button>
 						</div>
 					</div>
 				</div>
