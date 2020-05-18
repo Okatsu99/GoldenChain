@@ -2,6 +2,8 @@ package com.remd.spring.controller;
 
 import java.time.LocalDate;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.remd.spring.bean.MyUserDetails;
 import com.remd.spring.bean.PatientRecord;
+import com.remd.spring.bean.Role;
+import com.remd.spring.bean.User;
 import com.remd.spring.repository.ClinicRepository;
 import com.remd.spring.repository.PatientRecordRepository;
+import com.remd.spring.repository.RoleRepository;
 
 @Controller
 public class PatientRecordController {
@@ -26,20 +31,32 @@ public class PatientRecordController {
 	private ClinicRepository clinicRepository;
 	@Autowired
 	private PatientRecordRepository patientRecordRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 	@RequestMapping(path = "/app/patientrecords", method = RequestMethod.GET)
 	public String viewPatientRecords(Model model,
-			@RequestParam(name = "order", required = false)Integer order) {
+			@RequestParam(name = "order", required = false)Integer order,
+			HttpServletRequest request) {
+		MyUserDetails currentUser = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("record", new PatientRecord());
 		model.addAttribute("isPatientRecordsActive", true);
-		if(order != null) {
-			if(order == 0) {
-				model.addAttribute("patientRecords", patientRecordRepository.findAllByOrderByLastNameAsc());
-			} else if (order == 1) {
-				model.addAttribute("patientRecords", patientRecordRepository.findAllByOrderByLastNameDesc());
+		/*
+		 * Current DB has only 1 = Doctor and 2 = Secretary
+		 */
+		if (request.isUserInRole(roleRepository.findById(1).get().getName())) {
+			if(order != null) {
+				if(order == 0) {
+					model.addAttribute("patientRecords", patientRecordRepository.findAllByOrderByLastNameAsc());
+				} else if (order == 1) {
+					model.addAttribute("patientRecords", patientRecordRepository.findAllByOrderByLastNameDesc());
+				}
+			} else {
+				model.addAttribute("patientRecords", patientRecordRepository.findAll());
 			}
 		} else {
-			model.addAttribute("patientRecords", patientRecordRepository.findAll());
+			model.addAttribute("patientRecords", patientRecordRepository.findByPatientClinicId(currentUser.getUser().getClinic().getId()));
 		}
+		
 		return "app/patientrecords";
 	}
 	@RequestMapping(path = "/app/patientrecords/{id}", method = RequestMethod.GET)

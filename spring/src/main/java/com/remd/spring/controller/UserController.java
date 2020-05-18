@@ -6,6 +6,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +26,7 @@ public class UserController {
 	private ClinicRepository clinicRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	@RequestMapping(path = "/app/secretary/add", method = RequestMethod.POST)
+	@PostMapping(path = "/app/secretary/add")
 	public String addSecretary(
 			@RequestParam(name = "currentUrl")String currentUrl,
 			@RequestParam(name = "sectFirstName")String firstName,
@@ -39,7 +40,10 @@ public class UserController {
 		userRepository.saveAndFlush(secretary);
 		return "redirect:"+currentUrl;
 	}
-	
+	public String updateUserPassword(
+			@RequestParam(name = "currentUrl")String currentUrl) {
+		return "redirect:"+currentUrl;
+	}
 	private static String createString() {
 		int leftLimit = 48; // numeral '0'
 		int rightLimit = 122; // letter 'z'

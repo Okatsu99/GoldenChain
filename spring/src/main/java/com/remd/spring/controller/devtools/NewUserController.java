@@ -32,6 +32,7 @@ public class NewUserController {
 			@RequestParam(name = "firstName")String firstName,
 			@RequestParam(name = "lastName")String lastName,
 			@RequestParam(name = "password")String password,
+			@RequestParam(name = "email")String email,
 			@RequestParam(name = "role")Integer roleId
 			) {
 		User user = new User();
@@ -39,10 +40,13 @@ public class NewUserController {
 		user.setAccountNonExpired(true);
 		user.setAccountNonLocked(true);
 		user.setCredentialsNonExpired(true);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setUserName(capitalizeFirstLetter(firstName).strip()+"."+capitalizeFirstLetter(lastName).strip());
+		user.setFirstName(capitalizeFirstLetter(firstName));
+		user.setLastName(capitalizeFirstLetter(lastName));
+		user.setUserName(email);
 		user.setPassWord(passwordEncoder.encode(password));
+		user.setEmail(email);
+		user.setDoctor(null);
+		user.setSecretaries(null);
 		user.setRoles(Arrays.asList(roleRepository.findById(roleId).get()));
 		userRepository.save(user);
 		return "redirect:/login";

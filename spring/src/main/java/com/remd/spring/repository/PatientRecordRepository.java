@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.remd.spring.bean.Clinic;
 import com.remd.spring.bean.PatientRecord;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
@@ -11,4 +12,5 @@ import com.remd.spring.bean.PatientRecord;
 public interface PatientRecordRepository extends JpaRepository<PatientRecord, Integer>{
 	List<PatientRecord> findAllByOrderByLastNameDesc();
 	List<PatientRecord> findAllByOrderByLastNameAsc();
+	List<PatientRecord> findByPatientClinicId(Integer clinicId);
 }
