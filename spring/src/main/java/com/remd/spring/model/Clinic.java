@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-@Entity(name = "clinics")
+import javax.persistence.Table;
+@Entity
+@Table(name = "clinics")
 public class Clinic {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

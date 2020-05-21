@@ -13,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.remd.spring.model.MyUserDetails;
@@ -77,8 +75,20 @@ public class PatientRecordController {
 		patientRecordRepository.saveAndFlush(record);
 		return "redirect:/app/patientrecords";
 	}
-	@RequestMapping(path = "/app/patientrecords/edit", method = RequestMethod.POST)
-	public String editRecord() {
-		return "app/patientrecords :: editPersonModalContent";
+	@PostMapping(path = "/app/patientrecords/edit")
+	public String editRecord(
+			@RequestParam(name = "patientId")Integer patientId,
+			@RequestParam(name = "patientFirstName")String firstName,
+			@RequestParam(name = "patientLastName")String lastName,
+			@RequestParam(name = "patientGender")String gender,
+			@RequestParam(name = "patientContactNumber")String contactNumber,
+			@RequestParam(name = "patientBirthDate")
+				@DateTimeFormat(iso = ISO.DATE)LocalDate birthDate,
+			@RequestParam(name = "patientEmailAddress")String email,
+			@RequestParam(name = "patientHomeAddress")String homeAddress,
+			@RequestParam(name = "clinicId")Integer clinicId
+			) {
+		patientRecordRepository.editRecordById(firstName, lastName, gender, contactNumber, birthDate, email, homeAddress, clinicRepository.findById(clinicId).get(), patientId);
+		return "redirect:/app/patientrecords";
 	}
 }

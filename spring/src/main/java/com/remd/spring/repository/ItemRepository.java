@@ -19,6 +19,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	Set<Item>findAllByItemLocationAndCategory(Clinic userClinic, ItemCategory category);
 	@Modifying(flushAutomatically = true, clearAutomatically = true)
 	@Transactional
-	@Query(value = "UPDATE item_list item SET item.name=?1, item.description=?2, item.quantity=?3, category=?4, item.expiration=?5 WHERE item.id=?6")
+	@Query(value = "UPDATE Item item SET item.name=?1, item.description=?2, item.quantity=?3, item.category=?4, item.expiration=?5 WHERE item.id=?6")
 	int editItemById(String name, String description, int quantity, ItemCategory category, LocalDate expiryDate, Integer id);
 }
