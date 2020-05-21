@@ -1,4 +1,4 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.time.LocalDate;
 

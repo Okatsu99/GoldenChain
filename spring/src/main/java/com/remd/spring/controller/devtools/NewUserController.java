@@ -1,6 +1,5 @@
 package com.remd.spring.controller.devtools;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.remd.spring.bean.User;
+import com.remd.spring.model.User;
 import com.remd.spring.repository.RoleRepository;
 import com.remd.spring.repository.UserRepository;
 

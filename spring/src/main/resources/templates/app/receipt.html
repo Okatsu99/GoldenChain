@@ -62,10 +62,11 @@
 							th:fragment="procedureInput">
 							<label for="PatientName" class="text-dark" style="float: left;">Procedure/s
 								Done</label> <select class="form-control procedureList"
-								style="float: right; width: 85%;" name="prodcedureItem" onchange="updateProcedureInputPriceField(event)">
+								style="float: right; width: 85%;" name="prodcedureItem"
+								onchange="updateProcedureInputPriceField(event)">
 								<option hidden disabled="disabled" selected>Procedure</option>
 								<option th:each="procedure : ${procedures}"
-								th:text="${procedure.name}" th:value=${procedure.id}></option>
+									th:text="${procedure.name}" th:value=${procedure.id}></option>
 								</optgroup>
 							</select> <br> <br> <input class="form form-control" type="text"
 								name="amount" id="amount1" placeholder="Enter amount cost..."

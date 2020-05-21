@@ -1,4 +1,4 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.util.Set;
 
@@ -20,8 +20,10 @@ public class Clinic {
 	private String location;
 	@OneToMany(mappedBy = "patientClinic")
 	private Set<PatientRecord> record;
-	@OneToMany(mappedBy = "")
+	@OneToMany(mappedBy = "clinic")
 	private Set<User> secretaries;
+	@OneToMany(mappedBy = "itemLocation")
+	private Set<Item> items;
 	public Clinic() {
 		this.name = "";
 		this.location = "";

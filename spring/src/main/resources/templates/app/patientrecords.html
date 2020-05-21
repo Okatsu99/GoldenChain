@@ -75,7 +75,7 @@
 							<th scope="row"><input type="checkbox" name="checkbx"></th>
 							<td><button type="button" class="btn btn-success"
 									th:onclick="'javascript:openEditModal(\'' + 'editPatientModalContainer' + '\', \'' + 'editItemModalContent' + '\' , 
-							\'' + '/app/patientrecords/' + '\', \'' + ${patientRecord.id} + '\');'">Edit
+							\'' + '/app/patientrecords/record/view/' + '\', \'' + ${patientRecord.id} + '\');'">View
 									Record</button></td>
 							<td th:text="${patientRecord.id}"></td>
 							<td th:text="${patientRecord.firstName}"></td>
@@ -98,7 +98,8 @@
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header colorModal">
-								<h5 class="modal-title" id="exampleModalLongTitle">Add Record</h5>
+								<h5 class="modal-title" id="exampleModalLongTitle">Add
+									Record</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
 									<span aria-hidden="true">&times;</span>
@@ -157,18 +158,25 @@
 										id="patientEmailAddress"></textarea>
 								</div>
 								<br>
-								<div class="col">
+								<div class="col"
+									th:if="${#authorization.expression('hasRole(''ROLE_DOCTOR'')')}">
 									<label for="clinic" class="text-dark">Choose Clinic:</label> <select
 										class="form-control" id="clinic" th:name="clinicId">
 										<option th:each="clinic : ${clinicList}"
 											th:value="${clinic.id}" th:text="${clinic.name}">Clinic1</option>
 									</select>
 								</div>
+								<div
+									th:unless="${#authorization.expression('hasRole(''ROLE_DOCTOR'')')}">
+									<input name="itemLocation" th:value="${profile.user.clinic.id}"
+										type="hidden">
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary">Add Record</button>
+								<button type="submit" class="btn btn-primary">Add
+									Record</button>
 							</div>
 						</div>
 					</div>
@@ -251,14 +259,20 @@
 									disabled="disabled"></textarea>
 							</div>
 							<br>
-							<div class="col">
+							<div class="col"
+								th:if="${#authorization.expression('hasRole(''ROLE_DOCTOR'')')}">
 								<label for="clinic" class="text-dark">Choose Clinic:</label> <select
 									class="form-control" id="clinic" th:name="clinicId"
 									disabled="disabled">
 									<option th:each="clinic : ${clinicList}"
 										th:value="${clinic.id}" th:text="${clinic.name}"
-										th:selected="${clinic.id==record.patientClinic.id}">Clinic1</option>
+										th:selected="${clinic.name == record.patientClinic.name}">Clinic1</option>
 								</select>
+							</div>
+							<div
+								th:unless="${#authorization.expression('hasRole(''ROLE_DOCTOR'')')}">
+								<input name="itemLocation" th:value="${profile.user.clinic.id}"
+									type="hidden">
 							</div>
 						</div>
 						<div class="modal-footer">

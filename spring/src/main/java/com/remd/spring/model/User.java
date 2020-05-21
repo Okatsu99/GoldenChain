@@ -1,7 +1,6 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,10 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "users")

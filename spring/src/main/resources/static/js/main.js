@@ -27,7 +27,7 @@ function openEditModal(modalContainer,modalName,queryUrl,id){
 	modalContainer = '#' + modalContainer;
 	modalName = '#' + modalName;
 	$.ajax({
-			url: queryUrl + id,
+			url: queryUrl+id,
 			success: function(data){
 				console.log(data);
 				$(modalContainer).html(data);
@@ -35,6 +35,29 @@ function openEditModal(modalContainer,modalName,queryUrl,id){
 			}
 		});
 	}
+
+/*
+ * Query server for table body that is filtered (i.e. Asc Desc by lastname OR All items with Category.id = x)
+ */
+
+function filterTableView(tableId,tableBodyId,queryUrl,sortId){
+	var tableElement = document.getElementById(tableId);
+	var tableBody = document.getElementById(tableBodyId);
+	console.log(queryUrl);
+	$.ajax({
+		url: queryUrl,
+		data: {
+			"filter": sortId
+		},
+		type: "GET",
+		success: function(data){
+			var newTable = document.createElement('template');
+			newTable.innerHTML = data;
+			tableElement.replaceChild(newTable.content,tableBody);
+			console.log(newTable.content);
+		}
+	});
+}
 /*
  * Adds a new input for procedures in RECEIPT.HTML
  */

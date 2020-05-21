@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.remd.spring.bean.Clinic;
+import com.remd.spring.model.Clinic;
 import com.remd.spring.repository.ClinicRepository;
 
 @Controller

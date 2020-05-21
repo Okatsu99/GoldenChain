@@ -3,8 +3,6 @@
 	xmlns:th="https://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
 </head>
 <body>
 	<nav id="sidebar">
@@ -13,14 +11,15 @@
 				style="background-image: url(/images/dp-generic.png)"></a>
 			<ul class="list-unstyled components mb-5">
 				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-					class="dropdown-toggle" th:text="${profile.user.getFullNameFormatted()}">Account
-					Name</a>
+					class="dropdown-toggle"
+					th:text="${profile.user.getFullNameFormatted()}">Account Name</a>
 				<!--  Accoount name -->
 				<ul class="collapse list-unstyled" id="homeSubmenu">
 					<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
 						data-toggle="modal" data-target="#manageModal">Manage
 							Secretary</a></li>
-					<li sec:authorize="hasRole('ROLE_DOCTOR')"><a data-toggle="modal" data-target="#manageClinicModal">Manage
+					<li sec:authorize="hasRole('ROLE_DOCTOR')"><a
+						data-toggle="modal" data-target="#manageClinicModal">Manage
 							Clinic</a></li>
 					<li><a data-toggle="modal" data-target="#settingModal">Settings</a>
 					</li>
@@ -30,14 +29,18 @@
 						</form>
 					</li>
 				</ul>
-				</li>
-				<li th:classappend="${isAppointmentActive} ? active : ''"><a th:href="@{/app/appointments}">Appointments</a></li>
-				<li th:classappend="${isPatientRecordsActive} ? active : ''"><a th:href="@{/app/patientrecords}">Patient Records</a></li>
-				<li sec:authorize="hasRole('ROLE_DOCTOR')" th:classappend="${isPrescriptionActive} ? active : ''"><a
+				<li th:classappend="${isAppointmentActive} ? active : ''"><a
+					th:href="@{/app/appointments}">Appointments</a></li>
+				<li th:classappend="${isPatientRecordsActive} ? active : ''"><a
+					th:href="@{/app/patientrecords}">Patient Records</a></li>
+				<li sec:authorize="hasRole('ROLE_DOCTOR')"
+					th:classappend="${isPrescriptionActive} ? active : ''"><a
 					th:href="@{/app/prescription}">E-Prescription</a></li>
-				<li sec:authorize="hasRole('ROLE_DOCTOR')" th:classappend="${isReceiptActive} ? active : ''"><a
+				<li sec:authorize="hasRole('ROLE_DOCTOR')"
+					th:classappend="${isReceiptActive} ? active : ''"><a
 					th:href="@{/app/receipt}">E-Receipt</a></li>
-				<li th:classappend="${isInventoryActive} ? active : ''"><a th:href="@{/app/inventory}">Inventory</a></li>
+				<li th:classappend="${isInventoryActive} ? active : ''"><a
+					th:href="@{/app/inventory}">Inventory</a></li>
 			</ul>
 
 			<div class="footer">

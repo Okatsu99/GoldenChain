@@ -10,15 +10,15 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.remd.spring.bean.MyUserDetails;
-import com.remd.spring.bean.PatientRecord;
-import com.remd.spring.bean.Role;
-import com.remd.spring.bean.User;
+import com.remd.spring.model.MyUserDetails;
+import com.remd.spring.model.PatientRecord;
 import com.remd.spring.repository.ClinicRepository;
 import com.remd.spring.repository.PatientRecordRepository;
 import com.remd.spring.repository.RoleRepository;
@@ -33,9 +33,9 @@ public class PatientRecordController {
 	private PatientRecordRepository patientRecordRepository;
 	@Autowired
 	private RoleRepository roleRepository;
-	@RequestMapping(path = "/app/patientrecords", method = RequestMethod.GET)
-	public String viewPatientRecords(Model model,
-			@RequestParam(name = "order", required = false)Integer order,
+	@GetMapping(path = "/app/patientrecords")
+	public String viewPatientRecords(
+			Model model,
 			HttpServletRequest request) {
 		MyUserDetails currentUser = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("record", new PatientRecord());
@@ -44,28 +44,20 @@ public class PatientRecordController {
 		 * Current DB has only 1 = Doctor and 2 = Secretary
 		 */
 		if (request.isUserInRole(roleRepository.findById(1).get().getName())) {
-			if(order != null) {
-				if(order == 0) {
-					model.addAttribute("patientRecords", patientRecordRepository.findAllByOrderByLastNameAsc());
-				} else if (order == 1) {
-					model.addAttribute("patientRecords", patientRecordRepository.findAllByOrderByLastNameDesc());
-				}
-			} else {
-				model.addAttribute("patientRecords", patientRecordRepository.findAll());
-			}
+			model.addAttribute("patientRecords", patientRecordRepository.findAll());
 		} else {
-			model.addAttribute("patientRecords", patientRecordRepository.findByPatientClinicId(currentUser.getUser().getClinic().getId()));
+			model.addAttribute("patientRecords", patientRecordRepository.findByPatientClinic(((currentUser.getUser().getClinic()))));
 		}
-		
 		return "app/patientrecords";
 	}
-	@RequestMapping(path = "/app/patientrecords/{id}", method = RequestMethod.GET)
+	
+	@GetMapping(path = "/app/patientrecords/record/view/{id}")
 	public String viewRecord(@PathVariable("id") Integer id, Model model) {
 		PatientRecord record = patientRecordRepository.findById(id).get();
 		model.addAttribute("record", record);
 		return "app/patientrecords :: editPersonModalContent";
 	}
-	@RequestMapping(path = "/app/patientrecords/new", method = RequestMethod.POST)
+	@PostMapping(path = "/app/patientrecords/new")
 	public String insertRecord(
 			@RequestParam(name = "patientFirstName")String firstName,
 			@RequestParam(name = "patientLastName")String lastName,

@@ -1,24 +1,25 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
-import java.util.Collection;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-@Entity(name = "privileges")
-public class Privilege {
+import javax.persistence.Table;
+@Entity
+@Table(name = "procedures")
+public class Procedure {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	@Column(name = "name")
 	private String name;
-	@ManyToMany(mappedBy = "privileges")
-	private Collection<Role> roles;
+	@Column(name = "price")
+	private BigDecimal price;
+	
 	public int getId() {
 		return id;
 	}
@@ -31,11 +32,12 @@ public class Privilege {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Collection<Role> getRoles() {
-		return roles;
+	public BigDecimal getPrice() {
+		return price;
 	}
-	public void setRoles(Collection<Role> roles) {
-		this.roles = roles;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
+	
 	
 }

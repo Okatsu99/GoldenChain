@@ -8,23 +8,14 @@
 </head>
 <body>
 	<form th:action="@{/dev/newuser/add}" th:method="post">
-		<label>First Name</label>
-		<input type="text" name="firstName">
-		<br>
-		<label>Last Name</label>
-		<input type="text" name="lastName">
-		<br>
-		<label>Password</label>
-		<input type="password" name="password">
-		<br>
-		<label>Email</label>
-		<input type="email" name="email">
-		<br>
-		<select name="role">
+		<label>First Name</label> <input type="text" name="firstName">
+		<br> <label>Last Name</label> <input type="text" name="lastName">
+		<br> <label>Password</label> <input type="password"
+			name="password"> <br> <label>Email</label> <input
+			type="email" name="email"> <br> <select name="role">
 			<option th:value="1">Doctor</option>
 			<option th:value="2">Secretary</option>
-		</select>
-		<br>
+		</select> <br>
 		<button type="submit">Create User</button>
 	</form>
 </body>

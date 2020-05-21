@@ -1,21 +1,23 @@
-.form-group{
-  width: 50%;
+.form-group {
+	width: 50%;
+}
 
+.btn-primary {
+	text-align: right;
 }
-.btn-primary{
-text-align: right;
+
+.form-group .form-control {
+	border-radius: 7px;
+	width: 325px;
+	height: 55px;
 }
-.form-group .form-control{
-  border-radius: 7px;
-  width: 325px;
-  height: 55px;
+
+body {
+	background-color: #fff;
 }
-body
-{
-  background-color: #fff; 
-}
-.btn{
-  width: 250px;
-  text-align: center;
-  border-radius: 3;
+
+.btn {
+	width: 250px;
+	text-align: center;
+	border-radius: 3;
 }

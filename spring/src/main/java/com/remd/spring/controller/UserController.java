@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.remd.spring.bean.User;
+import com.remd.spring.controller.services.EMailService;
+import com.remd.spring.model.User;
 import com.remd.spring.repository.ClinicRepository;
 import com.remd.spring.repository.RoleRepository;
 import com.remd.spring.repository.UserRepository;
@@ -26,6 +25,8 @@ public class UserController {
 	private ClinicRepository clinicRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private EMailService emailService;
 	@PostMapping(path = "/app/secretary/add")
 	public String addSecretary(
 			@RequestParam(name = "currentUrl")String currentUrl,
@@ -35,9 +36,13 @@ public class UserController {
 			@RequestParam(name = "doctorId")Integer doctorId,
 			@RequestParam(name = "clinicId")Integer clinicId
 			){
-		User secretary = new User(email, passwordEncoder.encode(createString()), Arrays.asList(roleRepository.findById(2).get()), true, true, true, true, 
+		String emailBody;
+		String userPass = createString();
+		User secretary = new User(email, passwordEncoder.encode(userPass), Arrays.asList(roleRepository.findById(2).get()), true, true, true, true, 
 				firstName, lastName, email, clinicRepository.findById(clinicId).get(), userRepository.findById(doctorId).get());
 		userRepository.saveAndFlush(secretary);
+		emailBody = "Username: " + email + "\nPassword: " + userPass;
+		emailService.sendSimpleMessage("201801313@iacademy.edu.ph", "New Secretary", emailBody);
 		return "redirect:"+currentUrl;
 	}
 	public String updateUserPassword(

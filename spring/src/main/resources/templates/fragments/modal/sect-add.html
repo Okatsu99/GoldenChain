@@ -49,9 +49,9 @@
 									th:text="${clinic.name}">Clinic1</option>
 							</select>
 						</div>
-						<input type="hidden" name="doctorId" th:value="${profile.user.id}"> <input
-							th:name="currentUrl" th:value="${#httpServletRequest.requestURI}"
-							type="hidden">
+						<input type="hidden" name="doctorId" th:value="${profile.user.id}">
+						<input th:name="currentUrl"
+							th:value="${#httpServletRequest.requestURI}" type="hidden">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
