@@ -50,7 +50,10 @@ public class PatientRecordController {
 		}
 		return "app/patientrecords";
 	}
-	
+	@GetMapping(path = "/app/patientrecords", params = {"filter"})
+	public String viewRecordsSorted(@RequestParam("filter")Integer Sort) {
+		return "app/patientrecords :: recordsTableBody";
+	}
 	@GetMapping(path = "/app/patientrecords/record/view/{id}")
 	public String viewRecord(@PathVariable("id") Integer id, Model model) {
 		PatientRecord record = patientRecordRepository.findById(id).get();

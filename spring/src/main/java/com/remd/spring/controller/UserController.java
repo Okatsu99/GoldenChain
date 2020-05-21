@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.remd.spring.controller.services.EMailService;
+import com.remd.spring.controller.services.MyEmailService;
 import com.remd.spring.model.User;
 import com.remd.spring.repository.ClinicRepository;
 import com.remd.spring.repository.RoleRepository;
@@ -26,7 +26,7 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
-	private EMailService emailService;
+	private MyEmailService emailService;
 	@PostMapping(path = "/app/secretary/add")
 	public String addSecretary(
 			@RequestParam(name = "currentUrl")String currentUrl,
@@ -42,7 +42,7 @@ public class UserController {
 				firstName, lastName, email, clinicRepository.findById(clinicId).get(), userRepository.findById(doctorId).get());
 		userRepository.saveAndFlush(secretary);
 		emailBody = "Username: " + email + "\nPassword: " + userPass;
-		emailService.sendSimpleMessage("201801313@iacademy.edu.ph", "New Secretary", emailBody);
+		emailService.sendSimpleMessage("someeobscuremailaddress@gmail.com", "New Secretary", emailBody);
 		return "redirect:"+currentUrl;
 	}
 	public String updateUserPassword(
