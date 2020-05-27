@@ -13,12 +13,17 @@ import com.remd.spring.model.Item;
 import com.remd.spring.model.ItemCategory;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
-	Set<Item>findByCategoryId(int categoryId);
-	Set<Item>findAllByItemLocation(Clinic userClinic);
-	Set<Item>findAllByCategory(ItemCategory category);
-	Set<Item>findAllByItemLocationAndCategory(Clinic userClinic, ItemCategory category);
+	Set<Item>findByCategoryIdAndIsActiveTrue(int categoryId);
+	Set<Item>findByIsActiveTrue();
+	Set<Item>findAllByItemLocationAndIsActiveTrue(Clinic userClinic);
+	Set<Item>findAllByCategoryAndIsActiveTrue(ItemCategory category);
+	Set<Item>findAllByItemLocationAndCategoryAndIsActiveTrue(Clinic userClinic, ItemCategory category);
 	@Modifying(flushAutomatically = true, clearAutomatically = true)
 	@Transactional
 	@Query(value = "UPDATE Item item SET item.name=?1, item.description=?2, item.quantity=?3, item.category=?4, item.expiration=?5 WHERE item.id=?6")
 	int editItemById(String name, String description, int quantity, ItemCategory category, LocalDate expiryDate, Integer id);
+	@Modifying(flushAutomatically = true, clearAutomatically = true)
+	@Transactional
+	@Query(value = "UPDATE Item item SET item.isActive = ?1 WHERE item.id = ?2")
+	int logicalDeleteItem(boolean isActive, Integer id);
 }

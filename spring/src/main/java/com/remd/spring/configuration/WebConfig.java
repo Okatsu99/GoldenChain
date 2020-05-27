@@ -1,4 +1,4 @@
-package com.remd.spring.controller.configuration;
+package com.remd.spring.configuration;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

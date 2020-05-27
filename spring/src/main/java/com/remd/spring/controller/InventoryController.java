@@ -47,9 +47,9 @@ public class InventoryController {
 		model.addAttribute("isInventoryActive", true);
 		//User is Doctor else via Items in Clinic of Secretary
 		if (request.isUserInRole(roleRepository.findById(1).get().getName())) {
-			model.addAttribute("itemList", itemRepository.findAll());
+			model.addAttribute("itemList", itemRepository.findByIsActiveTrue());
 		} else {
-			model.addAttribute("itemList", itemRepository.findAllByItemLocation((currentUser.getUser().getClinic())));
+			model.addAttribute("itemList", itemRepository.findAllByItemLocationAndIsActiveTrue((currentUser.getUser().getClinic())));
 		}
 
 		return "app/inventory";
@@ -66,17 +66,17 @@ public class InventoryController {
 		if(request.isUserInRole(roleRepository.findById(1).get().getName())) {
 			//Show All of doctors Inventory things
 			if(filter < 1) {
-				model.addAttribute("itemList", itemRepository.findAll());
+				model.addAttribute("itemList", itemRepository.findByIsActiveTrue());
 			} else {
 				//Show All by Items
-				model.addAttribute("itemList", itemRepository.findByCategoryId(filter));
+				model.addAttribute("itemList", itemRepository.findByCategoryIdAndIsActiveTrue(filter));
 			}
 		}else { //User is a secretary
 			//Show All Items in Secretary's Clinic
 			if(filter < 1) {
-				model.addAttribute("itemList", itemRepository.findAllByItemLocation(clinicRepository.findById(currentUser.getUser().getClinic().getId()).get()));
+				model.addAttribute("itemList", itemRepository.findAllByItemLocationAndIsActiveTrue(clinicRepository.findById(currentUser.getUser().getClinic().getId()).get()));
 			} else {
-				model.addAttribute("itemList", itemRepository.findAllByItemLocationAndCategory(clinicRepository.findById(currentUser.getUser().getClinic().getId()).get(),
+				model.addAttribute("itemList", itemRepository.findAllByItemLocationAndCategoryAndIsActiveTrue(clinicRepository.findById(currentUser.getUser().getClinic().getId()).get(),
 						itemCategoryRepository.findById(filter).get()));
 			}
 		}
@@ -119,7 +119,9 @@ public class InventoryController {
 
 	@PostMapping(path = "/app/inventory/delete")
 	public String deleteItem(@RequestParam(name = "itemId") List<Integer> itemIdList) {
-		System.out.println(itemIdList.size());
+		for (Integer itemId : itemIdList) {
+			itemRepository.logicalDeleteItem(false, itemId);
+		}
 		return "redirect:/app/inventory";
 	}
 }

@@ -50,6 +50,7 @@ public class PatientRecordController {
 	}
 	@GetMapping(path = "/app/patientrecords", params = {"filter"})
 	public String viewRecordsSorted(@RequestParam("filter")Integer Sort) {
+		
 		return "app/patientrecords :: recordsTableBody";
 	}
 	@GetMapping(path = "/app/patientrecords/record/view/{id}")

@@ -32,6 +32,8 @@ public class Item {
 	@ManyToOne
 	@JoinColumn(name = "clinic_id", nullable = false)
 	private Clinic itemLocation;
+	@Column(name = "is_active")
+	private boolean isActive;
 	
 	public Item() {
 		this.name = "";
@@ -39,17 +41,21 @@ public class Item {
 		this.quantity = 0;
 		this.expiration = null;
 		this.category = new ItemCategory();
+		this.isActive = false;
 	}
 	
+	/*
+	 * Constructor for new Item
+	 */
 	public Item(String name, String description, Integer quantity, ItemCategory category, LocalDate expiration,
 			Clinic itemLocation) {
-		super();
 		this.name = name;
 		this.description = description;
 		this.quantity = quantity;
 		this.category = category;
 		this.expiration = expiration;
 		this.itemLocation = itemLocation;
+		this.isActive = true;
 	}
 
 	public int getId() {
@@ -106,6 +112,14 @@ public class Item {
 
 	public void setItemLocation(Clinic itemLocation) {
 		this.itemLocation = itemLocation;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 }
