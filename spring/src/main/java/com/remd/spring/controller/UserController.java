@@ -1,15 +1,19 @@
 package com.remd.spring.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
-import com.remd.spring.controller.services.MyEmailService;
 import com.remd.spring.model.User;
 import com.remd.spring.repository.ClinicRepository;
 import com.remd.spring.repository.RoleRepository;
@@ -25,8 +29,6 @@ public class UserController {
 	private ClinicRepository clinicRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	@Autowired
-	private MyEmailService emailService;
 	@PostMapping(path = "/app/secretary/add")
 	public String addSecretary(
 			@RequestParam(name = "currentUrl")String currentUrl,
@@ -36,13 +38,14 @@ public class UserController {
 			@RequestParam(name = "doctorId")Integer doctorId,
 			@RequestParam(name = "clinicId")Integer clinicId
 			){
-		String emailBody;
+		Map<String, Object> myObject = new HashMap<>();
 		String userPass = createString();
 		User secretary = new User(email, passwordEncoder.encode(userPass), Arrays.asList(roleRepository.findById(2).get()), true, true, true, true, 
 				firstName, lastName, email, clinicRepository.findById(clinicId).get(), userRepository.findById(doctorId).get());
 		userRepository.saveAndFlush(secretary);
-		emailBody = "Username: " + email + "\nPassword: " + userPass;
-		emailService.sendSimpleMessage("someeobscuremailaddress@gmail.com", "New Secretary", emailBody);
+		myObject.put("sectName", firstName + " " + lastName);
+		myObject.put("sectPass", userPass);
+		
 		return "redirect:"+currentUrl;
 	}
 	public String updateUserPassword(

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prescription Format</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="container my-5" style="background-color: #E8FBFB; width: 50%;">
+		<center>
+		<br>
+
+		<b><span style="font-size: 25px;" th:text="${sectName}"></span> <br>
+		<span style="font-size: 17px;" th:text="${sectPass}"> Insert Name of Association Here (ex. Philippine Dental Association) </span> <br>
+		<span style="padding-bottom: 10px; font-size: 15px;"> Contact Number: 09123456789 </span></b>
+		
+		<br>
+
+		<div class="row" style="margin-top: 15px; text-align: left; margin-left: 25px;">
+			<div class="col" style="width: 70%;">
+				<br>
+				<b style="font-size: 18px;"> Clinic 1 </b>
+				<p style="font-size: 15px;"> Address of Clinic 1 <br>
+				Contact Number of Clinic 1 <br>
+				Schedule of Doctor For Clinic 1 </p>
+			</div>
+			<div class="col" style="width: 70%;">
+				<br>
+				<b style="font-size: 18px;"> Clinic 2 </b>
+				<p style="font-size: 15px;"> Address of Clinic 2 <br>
+				Contact Number of Clinic 2 <br>
+				Schedule of Doctor For Clinic 2 </p>
+			</div>
+		</div>
+
+		<hr style="color: black; border-color: black; border-style: solid;">
+		</center>
+
+		<div class="row" style="padding-left: 20px;">
+			<div class="col" style="width: 70%;">
+				<b><span style="font-size: 16px;"> Name: </b> *Insert Name of Patient Here* </span> 
+				<br>
+				<b><span style="font-size: 16px;"> Date: </b> *Insert Date Here* </span>
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<div class="row" style="width: 100%">
+			<div class="col">
+				<img src="images/rx-logo.png" style="width: 100px; height: 100px; align-self: left; margin-left: 80px;">
+			</div>
+			<div class="col">
+				<br>
+				<b> Medicine 1 </b> <br>
+				<span style="font-size: 16px;">Generic Name: *Generic Name Here* <br> </span>
+				<span style="font-size: 16px;">Branded Name: *Branded Name Here* <br> </span>
+				<span style="font-size: 16px;">Recommended Dosage: *Dosage Here* <br> </span>
+				<span style="font-size: 16px;">Instructions: *Instructions Here* <br> </span>
+				<br>
+				<b> Medicine 2 </b> <br>
+				<span style="font-size: 16px;">Generic Name: *Generic Name Here* <br> </span>
+				<span style="font-size: 16px;">Branded Name: *Branded Name Here* <br> </span>
+				<span style="font-size: 16px;">Recommended Dosage: *Dosage Here* <br> </span>
+				<span style="font-size: 16px;">Instructions: *Instructions Here* <br> </span>
+				<br>
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<div class="row" style="text-align: right;">
+			<div class="col">
+				<span style="font-size: 18px;"><b> Name of Doctor Here, MD </b> &emsp;&nbsp; <br>
+				<span style="font-size: 16px;"><b> License No: </b> *Insert Here* &emsp;&nbsp; <br>
+				<span style="font-size: 16px;"><b> PTR No: </b> *Insert Here* &emsp;&nbsp; <br>
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<center> 
+			<span style="font-size: 16px;"><i>This prescription is powered by</i><img src="images/logo.png" style="width: 230px; height: 100px;">
+		</center>
+
+		<br>
+		<br>
+
+	</div>
+</body>
+</html>
