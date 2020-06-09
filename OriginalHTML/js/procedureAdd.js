@@ -44,7 +44,14 @@ function addMedicine(){
                   <input type="text" class="form-control" id="DosageMedicine" placeholder="Enter How many intake per usee" style="float: right; width: 80%;">
                 </div>
                 <br>
-                <br>`
+                <br>
+                 <div class="col"  style=" width: 73%;padding: 1%;">
+                  <label for="Notes" class="text-dark" style="float: left;">Notes</label>
+                  <textarea class="form-control" id="Notes" aria-label="With textarea" rows="4" style="width: 80%; resize: none; float: right;"></textarea>
+                  
+                  </div>
+                  <br>
+                  <br>`
       newdiv.innerHTML = content;
       document.getElementById('addMedicine').append(newdiv);
 
