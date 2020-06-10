@@ -327,7 +327,6 @@
                             <div style="width: 450px; padding-left: 30px; padding-right: 70px;">
                               <input type="text" class="form-control" id="searchinput" aria-describedby="emailHelp"required="autofocus" width="20px";></div>
                               <div style="width: 85px";><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSecretaryModal">Add</button></div>
-                              <div style="width: 85px";><button type="button" class="btn btn-secondary"><a data-toggle="modal" data-target="#EditSecretaryModal">View</button></a></div>
                               <div style="width: 85px";><button type="button" class="btn btn-danger"><a data-toggle="modal" data-target="#">Delete</button></a></div>       
                         </div>  
                           <br><br><br>
@@ -336,18 +335,22 @@
                             <tr>
                               <th></th>
                               <th>Secretary ID</th>
-                              <th>Secretary First Name</th>
-                              <th>Secretary Last Name</th>
+                              <th>&nbsp</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
                               <th>Gender</th>
+                              <th>Contact #</th>
                               <th>Email</th>
                               <th>Clinic</th>
                             </tr>
                             <tr>
                               <td><input type="checkbox" name="checkbx"></td>
                               <td>123456tf</td>
+                              <td><button type="button" class="btn btn-success"><a data-toggle="modal" data-target="#EditSecretaryModal">View</button></a></td>
                               <td>Ivan</td>
                               <td>Magsino</td>
                               <td>Male</td>
+                              <td>091843475412</td>
                               <td>ivan@gmail.com</td>
                               <td>Clinic 1</td>
                             </tr>
@@ -395,12 +398,15 @@
                           </select>
                       </div>
                       <br>
-                      <br>
                        <div class="col">
                         <label for="emai" class="text-dark">Email:</label>
                         <input class="form form-control" type="email" name="email" placeholder="Enter your Email..."style="width: 100%;">
                       </div>
                       <br>
+                       <div class="col">
+                        <label for="contact" class="text-dark">Contact #:</label>
+                        <input class="form form-control" type="number" name="contact" placeholder="Contact #"style="width: 100%;">
+                      </div>
                       <br>
                        <div class="col">
                           <label for="clinic" class="text-dark">Choose Clinic:</label>
@@ -424,7 +430,7 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header colorModal">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Secretary</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Secretary</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -452,21 +458,24 @@
                     <p name="email" class="info">choi_seungcheol@gmail.com</p>
                   </div>
 
+                  <label for="contact" class="label text-dark">Contact #:</label>
+                  <div class = "data">
+                    <p name="contact" class="info">Contact #</p>
+                  </div>
+
                   <label for="clinic" class="label text-dark">Clinic:</label>
                   <div class = "data">
                     <p name="clinic" class="info">clinic1</p>
                   </div>
 
                   <br>
-                  <div class ="modal-btn">
-                    <button onclick="patient_sec_edit()" class="btn btn-primary"> Edit Data </button>
-                  </div>
 
                 </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create Record</button>
+                    <span class="modal-btn"><button type="button" class="btn btn-warning" onclick="patient_sec_edit()">Edit</button></span>
+                   
                   </div>
                 </div>
               </div>

@@ -111,7 +111,7 @@ function patient_record_edit() {
 
     }
 
-    document.getElementsByClassName('modal-btn')[0].innerHTML = `<button onclick="patient_record_save()" class="btn btn-primary">Save Changes</button>`;
+    document.getElementsByClassName('modal-btn')[0].innerHTML = `<button onclick="patient_record_save()" class="btn btn-success">Save Changes</button>`;
 }
 
 
@@ -197,6 +197,10 @@ function patient_sec_edit() {
         }  
 
         else if(i == 4) {
+            newdiv.innerHTML = `<input type="text" name="contact" class="input-data form form-control">`;
+        }  
+
+        else if(i == 5) {
             newdiv.innerHTML = `<select id="clinic">
                             <option value="clinic1">Clinic 1</option>
                             <option value="clinic2">Clinic 2</option>
