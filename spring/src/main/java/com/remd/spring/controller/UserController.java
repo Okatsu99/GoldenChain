@@ -2,6 +2,7 @@ package com.remd.spring.controller;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -35,16 +36,25 @@ public class UserController {
 			@RequestParam(name = "sectFirstName")String firstName,
 			@RequestParam(name = "sectLastName")String lastName,
 			@RequestParam(name = "sectEmail")String email,
+			@RequestParam(name = "sectCellPhoneNumber") String cellPhoneNumber,
 			@RequestParam(name = "doctorId")Integer doctorId,
 			@RequestParam(name = "clinicId")Integer clinicId
 			){
 		Map<String, Object> myObject = new HashMap<>();
 		String userPass = createString();
 		User secretary = new User(email, passwordEncoder.encode(userPass), Arrays.asList(roleRepository.findById(2).get()), true, true, true, true, 
-				firstName, lastName, email, clinicRepository.findById(clinicId).get(), userRepository.findById(doctorId).get());
+				firstName, lastName, email, cellPhoneNumber,clinicRepository.findById(clinicId).get(), userRepository.findById(doctorId).get());
 		userRepository.saveAndFlush(secretary);
 		myObject.put("sectName", firstName + " " + lastName);
 		myObject.put("sectPass", userPass);
+		
+		return "redirect:"+currentUrl;
+	}
+	@PostMapping(path = "/app/secretary/delete")
+	public String deleteSecretary(
+			@RequestParam(name = "currentUrl")String currentUrl,
+			@RequestParam(name = "secretaryList")List<Integer> secretaryIdList
+			) {
 		
 		return "redirect:"+currentUrl;
 	}

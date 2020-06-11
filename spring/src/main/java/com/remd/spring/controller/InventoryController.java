@@ -1,7 +1,9 @@
 package com.remd.spring.controller;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,6 +42,7 @@ public class InventoryController {
 	public String viewInventory(Model model, HttpServletRequest request,
 			@RequestParam(name = "category", required = false) Integer categoryId,
 			@RequestParam(name = "order", defaultValue = "-1") Integer order) {
+		List<Item> itemList = null;
 		MyUserDetails currentUser = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 		model.addAttribute("itemCategories", itemCategoryRepository.findAll());
@@ -47,11 +50,12 @@ public class InventoryController {
 		model.addAttribute("isInventoryActive", true);
 		//User is Doctor else via Items in Clinic of Secretary
 		if (request.isUserInRole(roleRepository.findById(1).get().getName())) {
-			model.addAttribute("itemList", itemRepository.findByIsActiveTrue());
+			itemList = itemRepository.findByIsActiveTrue();
 		} else {
-			model.addAttribute("itemList", itemRepository.findAllByItemLocationAndIsActiveTrue((currentUser.getUser().getClinic())));
+			itemList = itemRepository.findAllByItemLocationAndIsActiveTrue(currentUser.getUser().getClinic());
 		}
-
+		Collections.reverse(itemList);
+		model.addAttribute("itemList", itemList);
 		return "app/inventory";
 	}
 	@GetMapping(path = "/app/inventory",params = {"filter"})

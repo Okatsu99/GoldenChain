@@ -33,56 +33,182 @@
 			<nav th:replace="fragments/top-navbar"></nav>
 			<div class="container">
 				<h2 class="mb-4">Appointments</h2>
-				<div style="float: left; width: 50%;">
-					<div class="card">
-						<div class="card-header">
-							<button class="btn btn-link" data-toggle="collapse"
-								data-target="#collapse-one"
-								style="text-decoration: none; color: black;">
-								<b> 1:00 PM </b> &nbsp; &nbsp; &nbsp; Gaspar, Princess Summer
-							</button>
-						</div>
+				<div style="float: right;">
+					<button type="button" class="btn btn-info" data-toggle="modal"
+						data-target="#addAppointment">
+						<i class="far fa-calendar-check"></i>&nbsp; Add Appointment
+					</button>
+					&nbsp;&nbsp;
+					<button type="button" class="btn btn-danger">
+						<i class="far fa-calendar-check"></i> &nbsp;Delete
+					</button>
+				</div>
 
-						<div id="collapse-one" class="collapse show">
-							<div class="card-body" data-parent="#main-accordion">Lorem
-								ipsum dolor sit amet, consectetur adipisicing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-								enim ad minim veniam, quis nostrud exercitation ullamco laboris
-								nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-								in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-								nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-								sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
-						</div>
+				<br> <br>
+				<table class="table table-striped table-dark">
+					<thead>
+						<tr>
+							<th></th>
+							<th scope="col">Date</th>
+							<th scope="col">Time Slot</th>
+							<th scope="col">Patient ID</th>
+							<th scope="col">Patient First Name</th>
+							<th scope="col">Patient Last Name</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="appointment : ${appointments}">
+							<th><input type="checkbox" /> &nbsp;</th>
+							<th th:text="${appointment.getAppointmentDate()}">23/06/2020</th>
+							<td th:text="${appointment.getAppointmentTime()}">10:00 Am</td>
+							<td th:text="${appointment.record.id}">03</td>
+							<td th:text="${appointment.record.firstName}">Jean</td>
+							<td th:text="${appointment.record.lastName}">Gomez</td>
+							<td><a data-toggle="modal" data-target="#viewAppointment"><button
+										type="button" class="btn btn-success">View</button></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- modal for add appointment -->
+	<div class="modal fade" id="addAppointment" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg ">
+			<div class="modal-content">
+				<div>
+					<div class="modal-header bgcolor">
+						<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Appointments
+						</h3>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 
-					<div class="card">
-						<div class="card-header">
-							<button class="btn btn-link" data-toggle="collapse"
-								data-target="#collapse-one"
-								style="text-decoration: none; color: black;">
-								<b> 1:00 PM </b> &nbsp; &nbsp; &nbsp; Gaspar, Princess Summer
-							</button>
-						</div>
-
-						<div id="collapse-one" class="collapse show">
-							<div class="card-body" data-parent="#main-accordion">Lorem
-								ipsum dolor sit amet, consectetur adipisicing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-								enim ad minim veniam, quis nostrud exercitation ullamco laboris
-								nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-								in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-								nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-								sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+					<div class="modal-body bgcolor">
+						<div class="col">
+							<label for="idPatient" class="text-dark">Patient ID:</label> <select
+								id="displayPatient" class="form form-control"
+								style="width: 100%;">
+								<option th:each="patient : ${patients}"
+									th:text="${patient.id} + ' - ' + ${patient.lastName} + ', ' + ${patient.firstName}"
+									th:value="${patient.id}">Patient Id — Patient Last
+									Name, Patient First Name</option>
+							</select>
 
 						</div>
+						<br>
+						<div class="col">
+							<label for="patientFirstName" class="text-dark">Patient
+								First Name:</label> <input class="form form-control" type="text"
+								name="patientFirstName" placeholder="Patient First Name"
+								style="width: 100%;">
+						</div>
+
+						<br>
+						<div class="col">
+							<label for="patientLastName" class="text-dark">Patient
+								Last Name:</label> <input class="form form-control" type="text"
+								name="patientLastName" placeholder="Patient Last Name"
+								style="width: 100%;">
+						</div>
+
+						<br>
+						<div class="col">
+							<label for="appointmentDate" class="text-dark">Appointment
+								Date:</label> <input class="form form-control" type="date"
+								name="appointmentDate" placeholder="0" style="width: 100%;">
+						</div>
+						<br>
+						<div class="col">
+							<label for="appointmentTime" class="text-dark">Appointment
+								Time:</label> <input class="form form-control" type="time"
+								name="appointmentTime" placeholder="0" style="width: 100%;">
+						</div>
+						<br>
+						<div class="col">
+							<label for="doctorNotes" class="text-dark">Doctor Notes:</label>
+							<textarea class="form form-control sizeText" rows="4"
+								style="width: 100%;" name="doctorNotes" form="Order_Page"
+								id="m_box"></textarea>
+						</div>
+
+					</div>
+
+					<div class="modal-footer bgcolor">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
 					</div>
 				</div>
-				<div style="float: right;">
-					<iframe
-						src="https://calendar.google.com/calendar/embed?height=325&amp;wkst=1&amp;bgcolor=%237986CB&amp;ctz=Asia%2FManila&amp;src=Y2JnY2hhcm1hbmRlckBnbWFpbC5jb20&amp;src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23F4511E&amp;color=%230B8043"
-						style="border: solid 1px #777" width="450" height="325"
-						frameborder="0" scrolling="no"></iframe>
+			</div>
+		</div>
+	</div>
+	<!-- modal for view appointment -->
+	<div class="modal fade" id="viewAppointment" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg ">
+			<div class="modal-content">
+				<div>
+					<div class="modal-header bgcolor">
+						<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Appointments
+						</h3>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body bgcolor">
+						<div id="main-div">
+
+							<label for="patient-id" class="text-dark label">Patient
+								ID:</label>
+							<div class="data">
+								<p name="patient-id" class="info">03</p>
+							</div>
+
+							<label for="patient-fname" class="label text-dark">Patient
+								First Name:</label>
+							<div class="data">
+								<p name="patient-fname" class="info">jean</p>
+							</div>
+
+							<label for="patient-lname" class="label text-dark">Patient
+								Last Name:</label>
+							<div class="data">
+								<p name="patient-lname" class="info">gomez</p>
+							</div>
+
+							<label for="appoint-date" class="label text-dark">Appointment
+								Date:</label>
+							<div class="data">
+								<p name="appoint-date" class="info">23/06/2020</p>
+							</div>
+
+							<label for="appoint-time" class="label text-dark">Appointment
+								time:</label>
+							<div class="data">
+								<p name="appoint-date" class="info">10:00 Am</p>
+							</div>
+
+							<label for="doc-notes" class="label text-dark">Doctor
+								Notes:</label>
+							<div class="data">
+								<p name="doc-notes" class="info">lorem ipsum ......</p>
+							</div>
+
+							<br>
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<span class="modal-btn"><button type="button"
+								class="btn btn-warning" onclick="appoint_edit()">Edit</button></span>
+
+					</div>
 				</div>
 			</div>
 		</div>

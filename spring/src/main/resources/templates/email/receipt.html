@@ -32,7 +32,7 @@
 		</div>
 
 		<div style="margin-top: 35px; width: 95%;">
-			<table align="center" style="width: 100%;" align="center">
+			<table align="center" style="width: 100%;">
 
 				<tr class="row" align="center" style="background-color: white; padding: 5px;">
 					<th class="col-1">  </th>
@@ -40,23 +40,15 @@
 					<th class="col-2"> COST</th>
 				</tr>
 
-				<tr class="row" align="center" style="padding: 5px;">
-					<th class="col-1"> 1 </th>
-					<td class="col-9"> <i>*Insert Description Here (ex. Braces Adjustment)*</i></td>
-					<td class="col-2"> PHP 800 </td>
+				<tr th:each="procedure : ${procedures}" class="row" align="center" style="padding: 5px;">
+					<th class="col-1" th:text="${procedureStat.count}"></th>
+					<td class="col-9"> <i th:text="${procedure.name}"></i></td>
+					<td class="col-2" th:text="'Php ' + ${procedure.price}"></td>
 				</tr>
-
-				<tr class="row" align="center" style="padding: 5px;">
-					<th class="col-1"> 2 </th>
-					<td class="col-9"> <i>*Insert Description Here (ex. Braces Adjustment)*</i></td>
-					<td class="col-2"> PHP 500 </td>
-				</tr>
-
 				<tr class="row" style="background-color: white; padding: 3px;">
 					<th class="col-10" align="left">  </th>
-					<th class="col-2" align="right"> PHP 1300 </th>
+					<th class="col-2" align="right" th:text="'Php ' + ${total}" colspan="2">Total</th>
 				</tr>
-
 			</table>
 		</div>
 
@@ -65,17 +57,17 @@
 
 		<div class="row" style="text-align: right;">
 			<div class="col">
-				<span style="font-size: 16px;"><i> This Receipt was Issued By: </i> &emsp;&emsp; <br>
-				<span style="font-size: 18px;"><b> Name of Doctor Here, MD </b> &emsp;&nbsp; <br>
-				<span style="font-size: 16px;"><b> License No: </b> *Insert Here* &emsp;&nbsp; <br>
-				<span style="font-size: 16px;"><b> PTR No: </b> *Insert Here* &emsp;&nbsp; <br>
+				<span style="font-size: 16px;"><i> This Receipt was Issued By: </i> &emsp;&emsp;</span> <br>
+				<span style="font-size: 18px;"><b th:text="${doctor.getFullNameFormatted()} + ', MD'"> Name of Doctor Here, MD </b> &emsp;&nbsp; </span><br>
+				<span style="font-size: 16px;"><b> License No: </b><span th:text="${doctor.licenseNumber}">*Insert Here*</span>&emsp;&nbsp; </span><br>
+				<span style="font-size: 16px;"><b> PTR No: </b><span th:text="${doctor.ptrNumber}">*Insert Here*</span>&emsp;&nbsp; </span><br>
 			</div>
 		</div>
 
 		<br>
 		<br>
 
-		<span style="font-size: 16px;"><i>This receipt is powered by</i><img src="images/logo.png" style="width: 230px; height: 100px;">
+		<span style="font-size: 16px;"><i>This receipt is powered by</i><img src="/static/images/email/logo.png" style="width: 230px; height: 100px;" data-th-src="|cid:logo|"></span>
 		
 		<br>
 		<br>

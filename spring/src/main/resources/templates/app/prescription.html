@@ -36,70 +36,74 @@
 				<!-- Title -->
 			</h2>
 			<div class="container">
-				<h2 class="mb-4">GENERATED PRESCRIPTION</h2>
-				<center>
-					<div class="col" style="width: 70%; padding: 1%;">
-						<label for="PatientName" class="text-dark" style="float: left;">Patient
-							Name</label> <input type="text" class="form-control" id="inputPassword"
-							placeholder="Patient Name" style="float: right; width: 80%;">
-					</div>
-					<br> <br>
+				<form th:action="@{/app/prescription/send}" th:method="post">
+					<h2 class="mb-4">GENERATED PRESCRIPTION</h2>
+					<center>
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="PatientName" class="text-dark" style="float: left;">Patient
+								Name</label> <input type="text" class="form-control" id="inputPassword" name="patientName"
+								placeholder="Patient Name" style="float: right; width: 80%;">
+						</div>
+						<br> <br>
 
-					<div class="col" style="width: 70%; padding: 1%;">
-						<label for="GenericMedicineName" class="text-dark"
-							style="float: left;">Generic Medicine name</label> <input
-							type="text" class="form-control" id="GenericMedicineName"
-							placeholder="Enter Generic Medicine Name"
-							style="float: right; width: 80%;">
-					</div>
-					<br> <br>
-					<div class="col" style="width: 70%; padding: 1%;">
-						<label for="BrandedMedicineName" class="text-dark"
-							style="float: left;">Branded Medicine name</label> <input
-							type="text" class="form-control" id="BrandedMedicineName"
-							placeholder="Enter Branded Medicine name"
-							style="float: right; width: 80%;">
-					</div>
-					<br> <br>
-					<div class="col" style="width: 70%; padding: 1%;">
-						<label for="DosageMedicine" class="text-dark" style="float: left;">Recommend
-							Dosage</label> <input type="text" class="form-control"
-							id="DosageMedicine" placeholder="Enter How many intake per usee"
-							style="float: right; width: 80%;">
-					</div>
-					<br> <br>
-					<div class="col" id="addMedicine"></div>
-					<br>
-					<div class="col" style="width: 70%; padding: 1%;">
-						<input class="btn btn-outline-success"
-							style="width: 80%; float: right;" type="button"
-							value="Add another Medicine" onClick="addMedicine()">
-					</div>
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="GenericMedicineName" class="text-dark"
+								style="float: left;">Generic Medicine name</label> <input
+								type="text" class="form-control" id="GenericMedicineName"
+								name="genericMedicineName"
+								placeholder="Enter Generic Medicine Name"
+								style="float: right; width: 80%;">
+						</div>
+						<br> <br>
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="BrandedMedicineName" class="text-dark"
+								style="float: left;">Branded Medicine name</label> <input
+								type="text" class="form-control" id="BrandedMedicineName"
+								name="brandedMedicineName"
+								placeholder="Enter Branded Medicine name"
+								style="float: right; width: 80%;">
+						</div>
+						<br> <br>
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="DosageMedicine" class="text-dark"
+								style="float: left;">Recommend Dosage</label> <input type="text"
+								class="form-control" id="DosageMedicine"
+								name="recommendedDosage"
+								placeholder="Enter How many intake per use"
+								style="float: right; width: 80%;">
+						</div>
+						<br> <br>
+						<br>
+						<br>
+						<div class="col" style="width: 70%; padding: 1%;">
+							<label for="Notes" class="text-dark" style="float: left;">Other
+								Notes</label>
+							<textarea class="form-control" id="Notes" name="medicineNotes"
+								aria-label="With textarea" rows="4"
+								style="width: 80%; resize: none; float: right;"></textarea>
 
-					<br> <br>
-					<div class="col" id="testing"></div>
+						</div>
+						
+						<br><br><br><br><br><br>
+						<div id="addMedicine"></div>
+						<br><br>
+						<br> <br>
+						<br> <br>
+						<div class="col" style="width: 70%; padding: 1%;">
+							<input class="btn btn-outline-success"
+								style="width: 80%; float: right;" type="button"
+								value="Add another Medicine" onClick="addMedicine()">
+						</div>
+						
+						<br> <br>
+						<br> <br>
+<br> <br>
+						<br> <br>
+						
+						<button class="btn btn-primary" style="margin-left: 80%">Generate</button>
 
-
-					<br> <br>
-
-					<div class="col" style="width: 70%; padding: 1%;">
-						<label for="Notes" class="text-dark" style="float: left;">Other
-							Notes</label>
-						<textarea class="form-control" id="Notes"
-							aria-label="With textarea" rows="4"
-							style="width: 80%; resize: none; float: right;"></textarea>
-
-					</div>
-
-
-
-					<br>
-					<button class="btn btn-primary" data-toggle="modal"
-						data-target="#cartModal" style="margin-left: 80%">Generate</button>
-
-				</center>
-
-
+					</center>
+				</form>
 			</div>
 		</div>
 	</div>

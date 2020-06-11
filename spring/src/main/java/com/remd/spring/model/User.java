@@ -47,6 +47,12 @@ public class User {
 	private String lastName;
 	@Column(name = "email")
 	private String email;
+	@Column(name = "cellphoneNumber")
+	private String cellphoneNumber;
+	@Column(name = "license_number")
+	private String licenseNumber;
+	@Column(name = "ptr_number")
+	private String ptrNumber;
 	@ManyToOne
 	@JoinColumn(name = "clinic_id")
 	private Clinic clinic;
@@ -66,6 +72,10 @@ public class User {
 		this.roles = null;
 		this.firstName = "";
 		this.lastName = "";
+		this.email = "";
+		this.cellphoneNumber = "";
+		this.licenseNumber = "";
+		this.ptrNumber = "";
 		this.clinic = null;
 		this.doctor = null;
 		this.secretaries = null;
@@ -73,7 +83,7 @@ public class User {
 	//For Doctor Creation
 	public User(String userName, String passWord, Collection<Role> roles, boolean isAccountEnabled,
 			boolean isCredentialsNonExpired, boolean isAccountNonLocked, boolean isAccountNonExpired, String firstName,
-			String lastName, String email) {
+			String lastName, String email, String cellphoneNumber, String licenseNumber, String ptrNumber) {
 		this.userName = userName;
 		this.passWord = passWord;
 		this.roles = roles;
@@ -84,6 +94,9 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.cellphoneNumber = cellphoneNumber;
+		this.licenseNumber = licenseNumber;
+		this.ptrNumber = ptrNumber;
 		//defaults
 		this.clinic = null;
 		this.doctor = null;
@@ -92,7 +105,7 @@ public class User {
 	
 	public User(String userName, String passWord, Collection<Role> roles, boolean isAccountEnabled,
 			boolean isCredentialsNonExpired, boolean isAccountNonLocked, boolean isAccountNonExpired, String firstName,
-			String lastName, String email, Clinic clinic, User doctor) {
+			String lastName, String email, String cellphoneNumber, Clinic clinic, User doctor) {
 		this.userName = userName;
 		this.passWord = passWord;
 		this.roles = roles;
@@ -100,12 +113,16 @@ public class User {
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
 		this.isAccountNonLocked = isAccountNonLocked;
 		this.isAccountNonExpired = isAccountNonExpired;
+		this.email = email;
+		this.cellphoneNumber = cellphoneNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.cellphoneNumber = cellphoneNumber;
 		this.clinic = clinic;
 		this.doctor = doctor;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -172,6 +189,25 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getCellphoneNumber() {
+		return cellphoneNumber;
+	}
+	public void setCellphoneNumber(String cellphoneNumber) {
+		this.cellphoneNumber = cellphoneNumber;
+	}
+	public String getLicenseNumber() {
+		return licenseNumber;
+	}
+	public void setLicenseNumber(String licenseNumber) {
+		this.licenseNumber = licenseNumber;
+	}
+	public String getPtrNumber() {
+		return ptrNumber;
+	}
+	public void setPtrNumber(String ptrNumber) {
+		this.ptrNumber = ptrNumber;
+	}
 	public Clinic getClinic() {
 		return clinic;
 	}
@@ -190,7 +226,6 @@ public class User {
 	public void setSecretaries(Set<User> secretaries) {
 		this.secretaries = secretaries;
 	}
-	
 	/*
 	 * Domain Functions
 	 */

@@ -66,9 +66,10 @@ function addProcedureInput(){
     $.ajax({
   	  url:'/app/receipt/addprocedure',
     	  success: function(data){
-    		console.log(data);
-    		newdiv.innerHTML = data;
-    		document.getElementById('additionalProcedures').append(newdiv);
+    		var procedureInput = document.createElement('div');
+    		procedureInput.innerHTML = data;
+    		document.getElementById('procedureInputs').appendChild(procedureInput);
+    		console.log(procedureInput);
     	  }
     });
 }
@@ -124,26 +125,72 @@ function enableEditItem(event,modalContainerName){
 	console.log(selectList.length);
 
 }
+/*
+ * Query the price of AVAILABLE procedures to Database
+ */
+function queryProcedurePrice(event){
+	var selectNode = event.currentTarget;
+	var priceNode = selectNode.parentNode.querySelectorAll('input')[0];
+	$.ajax({
+		url:'/app/receipt/addprocedure/price',
+		data: {
+			procedureId: selectNode.options[selectNode.selectedIndex].value
+		},
+		type: "GET",
+		success: function(data){
+			priceNode.value = 'Php ' + parseFloat(data).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+			updateReceiptPrice();
+		}
+	});
+}
+/*
+ * Use an Accounting library for this. Never EVER use floating points as you will lose precision which is bad for money.
+ */
+function updateReceiptPrice(){
+	var procedureList = document.getElementById('procedureInputs').querySelectorAll('input');
+	var totalCostText = document.getElementById('totalCost');
+	var price = 0;
+	for (var i = 0; i < procedureList.length; i++) {
+		
+		if(procedureList[i].value.replace('Php ', '').replace(',','') != ''){
+			console.log('is not numeric : ' + !isNaN(procedureList[i].value.replace('Php ', '').replace(',','')))
+			console.log('price: ' + procedureList[i].value.replace('Php ', '').replace(',',''));
+			price += parseFloat(procedureList[i].value.replace('Php ', '').replace(',',''));
+		}
+		console.log(price);
+	}
+	totalCostText.value = 'Php ' + price.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
 function addMedicine(){
     var newdiv = document.createElement('div');
-    var content = `<div class="col"  style=" width: 70%;padding: 1%;">
+    var content = `<div  style=" width: 70%;padding: 1%;">
                 <label for="GenericMedicineName" class="text-dark" style="float: left;">Generic Medicine name</label>
-                <input type="text" class="form-control" id="GenericMedicineName" placeholder="Enter Generic Medicine Name" style="float: right; width: 80%;">
+                <input type="text" class="form-control" id="GenericMedicineName" name="genericMedicineName" placeholder="Enter Generic Medicine Name" style="float: right; width: 80%;">
               </div>
               <br>
               <br>
               <div class="col"  style=" width: 70%;padding: 1%;">
                 <label for="BrandedMedicineName" class="text-dark" style="float: left;">Branded Medicine name</label>
-                <input type="text" class="form-control" id="BrandedMedicineName" placeholder="Enter Branded Medicine name" style="float: right; width: 80%;">
+                <input type="text" class="form-control" id="BrandedMedicineName" name="brandedMedicineName" placeholder="Enter Branded Medicine name" style="float: right; width: 80%;">
               </div>
               <br>
               <br>
               <div class="col"  style=" width: 70%;padding: 1%;">
                 <label for="DosageMedicine" class="text-dark" style="float: left;">Recommend Dosage</label>
-                <input type="text" class="form-control" id="DosageMedicine" placeholder="Enter How many intake per usee" style="float: right; width: 80%;">
+                <input type="text" class="form-control" id="DosageMedicine" name="recommendedDosage" placeholder="Enter How many intake per usee" style="float: right; width: 80%;">
               </div>
               <br>
-              <br>`
+              <br>
+              <div class="col" style="width: 70%; padding: 1%;">
+							<label for="Notes" class="text-dark" style="float: left;">Other
+								Notes</label>
+							<textarea class="form-control" id="Notes" name="medicineNotes"
+								aria-label="With textarea" rows="4"
+								style="width: 80%; resize: none; float: right;"></textarea>
+
+						</div>
+
+						<br>`
     newdiv.innerHTML = content;
     document.getElementById('addMedicine').append(newdiv);
 }

@@ -1,6 +1,9 @@
 package com.remd.spring.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,14 +41,18 @@ public class PatientRecordController {
 		MyUserDetails currentUser = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("record", new PatientRecord());
 		model.addAttribute("isPatientRecordsActive", true);
+		List<PatientRecord> records;
 		/*
 		 * Current DB has only 1 = Doctor and 2 = Secretary
 		 */
 		if (request.isUserInRole(roleRepository.findById(1).get().getName())) {
-			model.addAttribute("patientRecords", patientRecordRepository.findAll());
+			records = patientRecordRepository.findAll();
+			Collections.reverse(records);
 		} else {
-			model.addAttribute("patientRecords", patientRecordRepository.findByPatientClinic(((currentUser.getUser().getClinic()))));
+			records = patientRecordRepository.findByPatientClinic(((currentUser.getUser().getClinic())));
+			Collections.reverse(records);
 		}
+		model.addAttribute("patientRecords",  records);
 		return "app/patientrecords";
 	}
 	@GetMapping(path = "/app/patientrecords", params = {"filter"})

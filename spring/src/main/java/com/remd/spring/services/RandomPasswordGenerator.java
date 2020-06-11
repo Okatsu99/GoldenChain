@@ -1,4 +1,4 @@
-package com.remd.spring.controller.services;
+package com.remd.spring.services;
 
 import java.util.Random;
 

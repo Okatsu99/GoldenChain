@@ -1,6 +1,7 @@
 package com.remd.spring.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,11 +14,11 @@ import com.remd.spring.model.Item;
 import com.remd.spring.model.ItemCategory;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
-	Set<Item>findByCategoryIdAndIsActiveTrue(int categoryId);
-	Set<Item>findByIsActiveTrue();
-	Set<Item>findAllByItemLocationAndIsActiveTrue(Clinic userClinic);
-	Set<Item>findAllByCategoryAndIsActiveTrue(ItemCategory category);
-	Set<Item>findAllByItemLocationAndCategoryAndIsActiveTrue(Clinic userClinic, ItemCategory category);
+	List<Item>findByCategoryIdAndIsActiveTrue(int categoryId);
+	List<Item>findByIsActiveTrue();
+	List<Item>findAllByItemLocationAndIsActiveTrue(Clinic userClinic);
+	List<Item>findAllByCategoryAndIsActiveTrue(ItemCategory category);
+	List<Item>findAllByItemLocationAndCategoryAndIsActiveTrue(Clinic userClinic, ItemCategory category);
 	@Modifying(flushAutomatically = true, clearAutomatically = true)
 	@Transactional
 	@Query(value = "UPDATE Item item SET item.name=?1, item.description=?2, item.quantity=?3, item.category=?4, item.expiration=?5 WHERE item.id=?6")
