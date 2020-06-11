@@ -33,37 +33,43 @@
 							<div style="width: 85px">
 								<button type="button" class="btn btn-secondary">
 									<a data-toggle="modal" data-target="#EditSecretaryModal">Edit
+
+
 									
 								</button>
 								</a>
 							</div>
 							<div style="width: 85px">
-								<button type="button" class="btn btn-danger">
-									<a data-toggle="modal" data-target="#">Delete 
+								<button id="sectBtnDelete" type="button" class="btn btn-danger">
+									Delete 
 								</button>
-								</a>
 							</div>
 						</div>
 						<br> <br> <br>
 
-						<table class="Manager bgcolor">
-							<tr>
-								<th></th>
-								<th>Secretary ID</th>
-								<th>Secretary Name</th>
-								<th>Secretary Email</th>
-								<th>Clinic</th>
-							</tr>
-							<tr th:each="secretary : ${secretaryList}">
-								<td><input type="checkbox" name="checkbx"></td>
-								<td th:text="${secretary.id}">123456tf</td>
-								<td th:text="${secretary.getFullNameFormatted()}">Christian
-									Gaspar</td>
-								<td th:text="${secretary.email}"></td>
-								<td th:text="${secretary.clinic.name}">Clinic 1</td>
-							</tr>
+						<form id="deleteSectsForm" th:action="@{/app/secretary/delete}" th:method="post">
+							<input th:name="currentUrl"
+								th:value="${#httpServletRequest.requestURI}" type="hidden">
+							<table id="sectTable" class="Manager bgcolor">
+								<tr>
+									<th></th>
+									<th>Secretary ID</th>
+									<th>Secretary Name</th>
+									<th>Secretary Email</th>
+									<th>Clinic</th>
+								</tr>
+								<tr th:each="secretary : ${secretaryList}">
+									<td><input type="checkbox" name="secretaryId"
+										th:value="${secretary.id}"></td>
+									<td th:text="${secretary.id}">123456tf</td>
+									<td th:text="${secretary.getFullNameFormatted()}">Christian
+										Gaspar</td>
+									<td th:text="${secretary.email}"></td>
+									<td th:text="${secretary.clinic.name}">Clinic 1</td>
+								</tr>
 
-						</table>
+							</table>
+						</form>
 					</div>
 
 					<div class="modal-footer bgcolor"></div>

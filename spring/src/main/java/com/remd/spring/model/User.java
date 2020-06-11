@@ -56,7 +56,7 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "clinic_id")
 	private Clinic clinic;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "doctor_id")
 	private User doctor;
 	@OneToMany(mappedBy = "doctor")

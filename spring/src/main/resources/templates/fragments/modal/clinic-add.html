@@ -6,7 +6,7 @@
 </head>
 <body>
 	<!-- Add Clinic Modal-->
-	<form th:action="@{/clinic/new}" th:method="post">
+	<form th:action="@{/app/clinic/new}" th:method="post">
 		<input th:name="currentUrl"
 			th:value="${#httpServletRequest.requestURI}" type="hidden">
 		<div class="modal fade " id="AddClinicModal" tabindex="-1"

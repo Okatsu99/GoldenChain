@@ -36,7 +36,7 @@ public class UserController {
 			@RequestParam(name = "sectFirstName")String firstName,
 			@RequestParam(name = "sectLastName")String lastName,
 			@RequestParam(name = "sectEmail")String email,
-			@RequestParam(name = "sectCellPhoneNumber") String cellPhoneNumber,
+			@RequestParam(name = "sectCellNumber") String cellPhoneNumber,
 			@RequestParam(name = "doctorId")Integer doctorId,
 			@RequestParam(name = "clinicId")Integer clinicId
 			){
@@ -53,9 +53,12 @@ public class UserController {
 	@PostMapping(path = "/app/secretary/delete")
 	public String deleteSecretary(
 			@RequestParam(name = "currentUrl")String currentUrl,
-			@RequestParam(name = "secretaryList")List<Integer> secretaryIdList
+			@RequestParam(name = "secretaryId")List<Integer> secretaryIdList
 			) {
-		
+		System.out.println(secretaryIdList);
+		for (int i = 0; i < secretaryIdList.size(); i++) {
+			userRepository.deleteById(secretaryIdList.get(i));
+		}
 		return "redirect:"+currentUrl;
 	}
 	public String updateUserPassword(

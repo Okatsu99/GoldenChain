@@ -37,6 +37,7 @@ public class MyControllerAdvice {
 	}
 	@ModelAttribute("secretaryList")
 	public List<User> getSecretaries(){
+		System.out.println(userRepository.findByDoctorId(getCurrentUser().getUser().getId()));
 		return userRepository.findByDoctorId(getCurrentUser().getUser().getId());
 	}
 }

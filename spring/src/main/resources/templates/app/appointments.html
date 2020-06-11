@@ -39,111 +39,117 @@
 						<i class="far fa-calendar-check"></i>&nbsp; Add Appointment
 					</button>
 					&nbsp;&nbsp;
-					<button type="button" class="btn btn-danger">
+					<button id="deleteItemsBtn" type="button" class="btn btn-danger">
 						<i class="far fa-calendar-check"></i> &nbsp;Delete
 					</button>
 				</div>
 
 				<br> <br>
-				<table class="table table-striped table-dark">
-					<thead>
-						<tr>
-							<th></th>
-							<th scope="col">Date</th>
-							<th scope="col">Time Slot</th>
-							<th scope="col">Patient ID</th>
-							<th scope="col">Patient First Name</th>
-							<th scope="col">Patient Last Name</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="appointment : ${appointments}">
-							<th><input type="checkbox" /> &nbsp;</th>
-							<th th:text="${appointment.getAppointmentDate()}">23/06/2020</th>
-							<td th:text="${appointment.getAppointmentTime()}">10:00 Am</td>
-							<td th:text="${appointment.record.id}">03</td>
-							<td th:text="${appointment.record.firstName}">Jean</td>
-							<td th:text="${appointment.record.lastName}">Gomez</td>
-							<td><a data-toggle="modal" data-target="#viewAppointment"><button
-										type="button" class="btn btn-success">View</button></a></td>
-						</tr>
-					</tbody>
-				</table>
+				<form id="deleteItemForm" th:action="@{/app/appointments/delete}" th:method="post">
+					<table class="table table-striped table-dark">
+						<thead>
+							<tr>
+								<th></th>
+								<th scope="col">Date</th>
+								<th scope="col">Time Slot</th>
+								<th scope="col">Patient ID</th>
+								<th scope="col">Patient First Name</th>
+								<th scope="col">Patient Last Name</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody id="appointmentTableBody">
+							<tr th:each="appointment : ${appointments}">
+								<th><input type="checkbox" name="selectAppointment" th:value="${appointment.id}"/>
+									&nbsp;</th>
+								<th th:text="${appointment.getAppointmentDate()}">23/06/2020</th>
+								<td th:text="${appointment.getAppointmentTime()}">10:00 Am</td>
+								<td th:text="${appointment.record.id}">03</td>
+								<td th:text="${appointment.record.firstName}">Jean</td>
+								<td th:text="${appointment.record.lastName}">Gomez</td>
+								<td><a data-toggle="modal" data-target="#viewAppointment"><button
+											type="button" class="btn btn-success">View</button></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
 			</div>
 		</div>
 	</div>
 	<!-- modal for add appointment -->
 	<div class="modal fade" id="addAppointment" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg ">
-			<div class="modal-content">
-				<div>
-					<div class="modal-header bgcolor">
-						<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Appointments
-						</h3>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-body bgcolor">
-						<div class="col">
-							<label for="idPatient" class="text-dark">Patient ID:</label> <select
-								id="displayPatient" class="form form-control"
-								style="width: 100%;">
-								<option th:each="patient : ${patients}"
-									th:text="${patient.id} + ' - ' + ${patient.lastName} + ', ' + ${patient.firstName}"
-									th:value="${patient.id}">Patient Id — Patient Last
-									Name, Patient First Name</option>
-							</select>
-
-						</div>
-						<br>
-						<div class="col">
-							<label for="patientFirstName" class="text-dark">Patient
-								First Name:</label> <input class="form form-control" type="text"
-								name="patientFirstName" placeholder="Patient First Name"
-								style="width: 100%;">
+		<form th:action="@{/app/appointments/new}" th:method="post">
+			<div class="modal-dialog modal-lg ">
+				<div class="modal-content">
+					<div>
+						<div class="modal-header bgcolor">
+							<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Appointments
+							</h3>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
 
-						<br>
-						<div class="col">
-							<label for="patientLastName" class="text-dark">Patient
-								Last Name:</label> <input class="form form-control" type="text"
-								name="patientLastName" placeholder="Patient Last Name"
-								style="width: 100%;">
+						<div class="modal-body bgcolor">
+							<div class="col">
+								<label for="idPatient" class="text-dark">Patient ID:</label> <select
+									id="displayPatient" name="patientRecordId"
+									class="form form-control" style="width: 100%;">
+									<option th:each="patient : ${patients}"
+										th:text="${patient.id} + ' - ' + ${patient.lastName} + ', ' + ${patient.firstName}"
+										th:value="${patient.id}">Patient Id — Patient Last
+										Name, Patient First Name</option>
+								</select>
+
+							</div>
+							<br>
+							<div class="col">
+								<label for="patientFirstName" class="text-dark">Patient
+									First Name:</label> <input class="form form-control" type="text"
+									name="patientFirstName" placeholder="Patient First Name"
+									style="width: 100%;">
+							</div>
+
+							<br>
+							<div class="col">
+								<label for="patientLastName" class="text-dark">Patient
+									Last Name:</label> <input class="form form-control" type="text"
+									name="patientLastName" placeholder="Patient Last Name"
+									style="width: 100%;">
+							</div>
+
+							<br>
+							<div class="col">
+								<label for="appointmentDate" class="text-dark">Appointment
+									Date:</label> <input class="form form-control" type="date"
+									name="appointmentDate" placeholder="0" style="width: 100%;">
+							</div>
+							<br>
+							<div class="col">
+								<label for="appointmentTime" class="text-dark">Appointment
+									Time:</label> <input class="form form-control" type="time"
+									name="appointmentTime" placeholder="0" style="width: 100%;">
+							</div>
+							<br>
+							<div class="col">
+								<label for="appointmentDoctorNotes" class="text-dark">Doctor
+									Notes:</label>
+								<textarea class="form form-control sizeText" rows="4"
+									style="width: 100%;" name="appointmentDoctorNotes"
+									id="appointmentDoctorNotes"></textarea>
+							</div>
+
 						</div>
 
-						<br>
-						<div class="col">
-							<label for="appointmentDate" class="text-dark">Appointment
-								Date:</label> <input class="form form-control" type="date"
-								name="appointmentDate" placeholder="0" style="width: 100%;">
+						<div class="modal-footer bgcolor">
+							<button type="submit" class="btn btn-success">Submit</button>
 						</div>
-						<br>
-						<div class="col">
-							<label for="appointmentTime" class="text-dark">Appointment
-								Time:</label> <input class="form form-control" type="time"
-								name="appointmentTime" placeholder="0" style="width: 100%;">
-						</div>
-						<br>
-						<div class="col">
-							<label for="doctorNotes" class="text-dark">Doctor Notes:</label>
-							<textarea class="form form-control sizeText" rows="4"
-								style="width: 100%;" name="doctorNotes" form="Order_Page"
-								id="m_box"></textarea>
-						</div>
-
-					</div>
-
-					<div class="modal-footer bgcolor">
-						<button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 	<!-- modal for view appointment -->
 	<div class="modal fade" id="viewAppointment" tabindex="-1"
@@ -165,37 +171,44 @@
 							<label for="patient-id" class="text-dark label">Patient
 								ID:</label>
 							<div class="data">
-								<p name="patient-id" class="info">03</p>
+								<input disabled="disabled"
+									th:value="${appointmentData.record.id}">
 							</div>
 
 							<label for="patient-fname" class="label text-dark">Patient
 								First Name:</label>
 							<div class="data">
-								<p name="patient-fname" class="info">jean</p>
+								<input disabled="disabled" class="info"
+									th:value="${appointmentData.record.firstName}">
 							</div>
 
 							<label for="patient-lname" class="label text-dark">Patient
 								Last Name:</label>
 							<div class="data">
-								<p name="patient-lname" class="info">gomez</p>
+								<input disabled="disabled" class="info"
+									th:value="${appointmentData.record.lastName}">
 							</div>
 
 							<label for="appoint-date" class="label text-dark">Appointment
 								Date:</label>
 							<div class="data">
-								<p name="appoint-date" class="info">23/06/2020</p>
+								<input disabled="disabled" class="info"
+									th:value="${appointmentData.getAppointmentDate()}">
 							</div>
 
 							<label for="appoint-time" class="label text-dark">Appointment
 								time:</label>
 							<div class="data">
-								<p name="appoint-date" class="info">10:00 Am</p>
+								<input disabled="disabled" class="info"
+									th:value="${appointmentData.getAppointmentTime()}">
 							</div>
 
 							<label for="doc-notes" class="label text-dark">Doctor
 								Notes:</label>
 							<div class="data">
-								<p name="doc-notes" class="info">lorem ipsum ......</p>
+								<textarea cols="19" rows="3" draggable="false"
+									disabled="disabled" class="info"
+									th:value="${appointmentData.doctorNotes}" style="resize: none;"></textarea>
 							</div>
 
 							<br>
@@ -207,7 +220,6 @@
 							data-dismiss="modal">Close</button>
 						<span class="modal-btn"><button type="button"
 								class="btn btn-warning" onclick="appoint_edit()">Edit</button></span>
-
 					</div>
 				</div>
 			</div>
@@ -232,5 +244,27 @@
 	<script type="text/javascript" th:src="@{/js/popper.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/main.js}"></script>
+	<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("#deleteItemsBtn").click(
+						function() {
+							//validate check boxes
+							var selectedRows = document.getElementById(
+									"appointmentTableBody").querySelectorAll(
+									"input");
+							for (var i = 0; i < selectedRows.length; i++) {
+								if (selectedRows[i].checked == true) {
+									$("#deleteItemForm").submit();
+									break;
+								} else {
+									console.log(i);
+									console.log("Not true");
+								}
+							}
+							console.log(selectedRows);
+						});
+			});
+	</script>
 </body>
 </html>

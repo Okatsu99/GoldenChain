@@ -21,6 +21,7 @@ import javax.persistence.Table;
 public class PatientRecord {
 	
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "first_name")

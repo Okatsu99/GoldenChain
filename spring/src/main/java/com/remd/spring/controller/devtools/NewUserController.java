@@ -44,6 +44,7 @@ public class NewUserController {
 		user.setUserName(email);
 		user.setPassWord(passwordEncoder.encode(password));
 		user.setEmail(email);
+		user.setCellphoneNumber("1111111");
 		user.setDoctor(null);
 		user.setSecretaries(null);
 		user.setRoles(Arrays.asList(roleRepository.findById(roleId).get()));

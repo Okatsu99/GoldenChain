@@ -69,11 +69,4 @@ public class ReceiptController {
 		return "redirect:/app/receipt";
 	}
 
-	@GetMapping(path = "/app/receipt/addprocedure/price", produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public BigDecimal getProcedurePrice(@RequestParam(name = "procedureId") Integer procedureId) {
-		// Ideally this Exception should be in its own class.
-		return procedureRepository.findPriceById(procedureId)
-				.orElseThrow(() -> new RuntimeException("Procedure could not be found"));
-	}
 }

@@ -1,3 +1,31 @@
+$(document).ready(function(){
+	$("#sectBtnDelete").click(
+			function(){
+				var selectedSects = document.getElementById("sectTable").querySelectorAll("input");
+				for (var i = 0; i < selectedSects.length; i++) {
+					if (selectedSects[i].checked == true) {
+						$("#deleteSectsForm").submit();
+						break;
+					} else {
+						console.log(i);
+						console.log("Not true");
+					}
+				}
+			});
+	$("#clinicBtnDelete").click(
+			function(){
+				var selectedClinics = document.getElementById("clinicTable").querySelectorAll("input");
+				for (var i = 0; i < selectedClinics.length; i++) {
+					if (selectedClinics[i].checked == true) {
+						$("#clinicDeleteForm").submit();
+						break;
+					} else {
+						console.log(i);
+						console.log("Not true");
+					}
+				}
+			});
+});
 (function($) {
 
 	"use strict";
