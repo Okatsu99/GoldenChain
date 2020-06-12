@@ -18,6 +18,8 @@ public interface PatientRecordRepository extends JpaRepository<PatientRecord, In
 	List<PatientRecord> findAllByOrderByLastNameDesc();
 	List<PatientRecord> findAllByOrderByLastNameAsc();
 	List<PatientRecord> findByPatientClinic(Clinic currentClinic);
+	List<PatientRecord> findByPatientClinicOrderByLastNameDesc(Clinic currentClinic);
+	List<PatientRecord> findByPatientClinicOrderByLastNameAsc(Clinic currentClinic);
 	@Modifying(flushAutomatically = true, clearAutomatically = true)
 	@Transactional
 	@Query(value = "UPDATE PatientRecord record SET record.firstName=?1, record.lastName=?2, record.gender=?3, record.contactNumber=?4"

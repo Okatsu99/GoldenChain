@@ -23,10 +23,10 @@
 	<div class="container my-5"
 		style="background-color: #E8FBFB; width: 50%;">
 		<center>
-			<br> <b><span style="font-size: 25px;" th:text="${sectName}"></span>
-				<br> <span style="font-size: 17px;" th:text="${sectPass}">
+			<br> <b><span style="font-size: 25px;" th:text="${profile.user.getFullNameFormatted() + ', MD'}"></span>
+				<br> <span style="font-size: 17px;" th:text="A Dental Associaiton">
 					Insert Name of Association Here (ex. Philippine Dental Association)
-			</span> <br> <span style="padding-bottom: 10px; font-size: 15px;">
+			</span> <br> <span style="padding-bottom: 10px; font-size: 15px;" th:text="${profile.user.cellphoneNumber}">
 					Contact Number: 09123456789 </span></b> <br>
 
 			<!-- 		<div class="row" style="margin-top: 15px; text-align: left; margin-left: 25px;"> -->

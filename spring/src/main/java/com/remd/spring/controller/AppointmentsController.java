@@ -1,6 +1,7 @@
 package com.remd.spring.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -65,7 +66,17 @@ public class AppointmentsController {
 		appointmentRepository.saveAndFlush(appointment);
 		return "redirect:/app/appointments";
 	}
-
+	@PostMapping("/app/appointments/edit")
+	public String editAppointment(
+			@RequestParam(name = "appointmentId")Integer appointmentId, 
+			@RequestParam(name = "appointmentDate") @DateTimeFormat(iso=ISO.DATE) LocalDate appointmentDate,
+			@RequestParam(name = "appointmentTime") @DateTimeFormat(iso=ISO.TIME) LocalTime appointmentTime,
+			@RequestParam(name = "appointmentDoctorNotes")String doctorNotes
+			) {
+		LocalDateTime timeSlot = LocalDateTime.of(appointmentDate, appointmentTime);
+		appointmentRepository.editAppointmentById(timeSlot, doctorNotes, appointmentId);
+		return "redirect:/app/appointments";
+	}
 	@PostMapping("/app/appointments/delete")
 	public String deleteAppointment(
 			@RequestParam(name = "selectAppointment") List<Integer> appointmentIDs
@@ -78,8 +89,10 @@ public class AppointmentsController {
 	
 	@GetMapping("/app/appointments/view/{id}")
 	public String getViewAppointmentModal(
+			Model model,
 			@PathVariable("id")Integer appointmentId
 			) {
-		return "app/appointments :: appointmentModal";
+		model.addAttribute("appointmentData",appointmentRepository.findById(appointmentId).get());
+		return "app/appointments :: editAppointmentModalContent";
 	}
 }

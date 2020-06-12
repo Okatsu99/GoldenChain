@@ -51,9 +51,14 @@
 					Filter By <i class="fas fa-caret-down"></i>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Last Name A-Z</a> <a
-						class="dropdown-item" href="#">Last Name Z-A</a> <a
-						class="dropdown-item" href="#">Clinic/Hospital</a>
+					<button class="dropdown-item"
+						onclick="filterTableView('recordsTable','recordsTableBody','/app/patientrecords','-1')">All</button>
+					<button class="dropdown-item"
+						onclick="filterTableView('recordsTable','recordsTableBody','/app/patientrecords','0')">Last
+						Name A-Z</button>
+					<button class="dropdown-item"
+						onclick="filterTableView('recordsTable','recordsTableBody','/app/patientrecords','1')">Last
+						Name Z-A</button>
 				</div>
 
 				<br> <br>
@@ -168,7 +173,7 @@
 								</div>
 								<div
 									th:unless="${#authorization.expression('hasRole(''ROLE_DOCTOR'')')}">
-									<input name="itemLocation" th:value="${profile.user.clinic.id}"
+									<input th:name="clinicId" th:value="${profile.user.clinic.id}"
 										type="hidden">
 								</div>
 							</div>
@@ -200,7 +205,7 @@
 							</button>
 						</div>
 						<form th:action="@{/app/patientrecords/edit}" th:method="post">
-						<input name="patientId" type="hidden" th:value="${record.id}">
+							<input name="patientId" type="hidden" th:value="${record.id}">
 							<div class="modal-body colorModal">
 								<div class="col">
 									<label for="patientFirstName" class="text-dark">Patient
@@ -300,7 +305,7 @@
 	<!-- ADD Secretary Modal -->
 	<div th:replace="fragments/modal/sect-add"></div>
 	<!-- Edit Secretary Modal -->
-	<div th:replace="fragments/modal/sect-edit"></div>
+	<div id="secretaryEditModalContainer"></div>
 	<!-- Delete Secretary Modal -->
 	<div th:replace="fragments/modal/sect-delete"></div>
 

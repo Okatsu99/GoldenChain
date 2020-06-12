@@ -14,45 +14,50 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
+				<form th:action="@{/app/user/updatepass}" th:method="post">
+					<input name="userId" th:value="${profile.user.id}" type="hidden">
+					<input th:name="currentUrl"
+						th:value="${#httpServletRequest.requestURI}" type="hidden">
+					<div class="modal-body setting">
 
-				<div class="modal-body setting">
-					<center>
-						<table>
-							<tr>
-								<th rowspan="1"><img src="/images/dp-generic.png"
-									class="img logo rounded-circle mb-5" width="250" height="250"></th>
-								<h4 th:text="${profile.user.getFullNameFormatted()}">Christian
-									Gaspar</h4>
-								<br>
-							</tr>
+						<center>
+							<table>
+								<tr>
+									<th rowspan="1"><img src="/images/dp-generic.png"
+										class="img logo rounded-circle mb-5" width="250" height="250"></th>
+									<h4 th:text="${profile.user.getFullNameFormatted()}">Christian
+										Gaspar</h4>
+									<br>
+								</tr>
 
-							<tr>
-								<th><input type="password" class="form-control"
-									id="NewPassword" placeholder="Enter a New Password"
-									required="autofocus"> <br> <input type="password"
-									class="form-control" id="NewPasswordCheck"
-									placeholder="Confirm New Password" required="autofocus"></th>
-							</tr>
-						</table>
-					</center>
-
-				</div>
-
-				<div class="modal-footer setting">
-					<br> <br> <br> <br>
-					<div>
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Set New Password</button>
+								<tr>
+									<th><input type="password" class="form-control"
+										id="NewPassword" placeholder="Enter a New Password"
+										required="autofocus" name="pass"> <br> <input
+										type="password" name="confirmPass" class="form-control"
+										id="NewPasswordCheck" placeholder="Confirm New Password"
+										required="autofocus"></th>
+								</tr>
+							</table>
+						</center>
 					</div>
 
-					<div>
-						<button type="button" class="btn btn-primary" data-dismiss="modal">Save
-							Changes</button>
-					</div>
+					<div class="modal-footer setting">
+						<br> <br> <br> <br>
+						<div>
+							<button type="submit" class="btn btn-secondary">Set
+								New Password</button>
+						</div>
 
-				</div>
+						<div>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal">Save Changes</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

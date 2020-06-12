@@ -1,81 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-	<div class="modal fade" id="manageModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg ">
-			<div class="modal-content">
-				<div>
-					<div class="modal-header bgcolor">
-						<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Secretaries</h3>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-body bgcolor">
-						<div class="row">
-							<div>
-								<label for="staticEmail" class="col-sm-2 col-form-label"><b>Search</b></label>
-							</div>
-							<div
-								style="width: 450px; padding-left: 30px; padding-right: 70px;">
-								<input type="text" class="form-control" id="searchinput"
-									aria-describedby="emailHelp" required="autofocus" width="20px";>
-							</div>
-							<div style="width: 85px">
-								<button type="button" class="btn btn-primary"
-									data-toggle="modal" data-target="#AddSecretaryModal">Add</button>
-							</div>
-							<div style="width: 85px">
-								<button type="button" class="btn btn-secondary">
-									<a data-toggle="modal" data-target="#EditSecretaryModal">Edit
-
-
-									
-								</button>
-								</a>
-							</div>
-							<div style="width: 85px">
-								<button id="sectBtnDelete" type="button" class="btn btn-danger">
-									Delete 
-								</button>
-							</div>
-						</div>
-						<br> <br> <br>
-
-						<form id="deleteSectsForm" th:action="@{/app/secretary/delete}" th:method="post">
-							<input th:name="currentUrl"
-								th:value="${#httpServletRequest.requestURI}" type="hidden">
-							<table id="sectTable" class="Manager bgcolor">
-								<tr>
-									<th></th>
-									<th>Secretary ID</th>
-									<th>Secretary Name</th>
-									<th>Secretary Email</th>
-									<th>Clinic</th>
-								</tr>
-								<tr th:each="secretary : ${secretaryList}">
-									<td><input type="checkbox" name="secretaryId"
-										th:value="${secretary.id}"></td>
-									<td th:text="${secretary.id}">123456tf</td>
-									<td th:text="${secretary.getFullNameFormatted()}">Christian
-										Gaspar</td>
-									<td th:text="${secretary.email}"></td>
-									<td th:text="${secretary.clinic.name}">Clinic 1</td>
-								</tr>
-
-							</table>
-						</form>
-					</div>
-
-					<div class="modal-footer bgcolor"></div>
+<div class="modal fade" id="manageModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg ">
+		<div class="modal-content">
+			<div>
+				<div class="modal-header bgcolor">
+					<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Secretaries</h3>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
+
+				<div class="modal-body bgcolor">
+					<div class="row">
+						<div>
+							<label for="staticEmail" class="col-sm-2 col-form-label"><b>Search</b></label>
+						</div>
+						<div
+							style="width: 450px; padding-left: 30px; padding-right: 70px;">
+							<input type="text" class="form-control" id="searchinput"
+								aria-describedby="emailHelp" required="autofocus" width="20px";>
+						</div>
+						<div style="width: 85px">
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#AddSecretaryModal">Add</button>
+						</div>
+						<div style="width: 85px">
+							<button id="sectBtnDelete" type="button" class="btn btn-danger">
+								Delete</button>
+						</div>
+					</div>
+					<br> <br> <br>
+
+					<form id="deleteSectsForm" th:action="@{/app/secretary/delete}"
+						th:method="post">
+						<input th:name="currentUrl"
+							th:value="${#httpServletRequest.requestURI}" type="hidden">
+						<table id="sectTable" class="Manager bgcolor">
+							<tr>
+								<th colspan="2"></th>
+								<th>Secretary ID</th>
+								<th>Secretary Name</th>
+								<th>Secretary Cellphone Number</th>
+								<th>Secretary Email</th>
+								<th>Clinic</th>
+							</tr>
+							<tr th:each="secretary : ${secretaryList}">
+								<td><button type="button" class="btn btn-success"
+										th:onclick="'javascript:openSectEditModal(\'' + 'secretaryEditModalContainer' + '\', \'' + 'secretaryEditModalContent' + '\' , 
+							\'' + '/app/secretary/view/' + '\', \'' + ${secretary.id} + '\');'">View
+										Record</button></td>
+								<td><input type="checkbox" name="secretaryId"
+									th:value="${secretary.id}"></td>
+								<td th:text="${secretary.id}">123456tf</td>
+								<td th:text="${secretary.getFullNameFormatted()}">Christian
+									Gaspar</td>
+								<td th:text="${secretary.cellphoneNumber}"></td>
+								<td th:text="${secretary.email}"></td>
+								<td th:text="${secretary.clinic.name}">Clinic 1</td>
+							</tr>
+
+						</table>
+					</form>
+				</div>
+
+				<div class="modal-footer bgcolor"></div>
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+</div>

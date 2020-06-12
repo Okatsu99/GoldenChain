@@ -26,8 +26,7 @@ public class EmailConfiguration {
         templateEngine.setTemplateEngineMessageSource(emailMessageSource());
         return templateEngine;
     }
-
-    @Bean
+	@Bean
     public ITemplateResolver thymeleafEmailTemplateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setPrefix("classpath:/templates/email/");

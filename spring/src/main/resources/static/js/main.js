@@ -46,6 +46,13 @@ $(document).ready(function(){
 
 })(jQuery);
 /*
+ * 
+ */
+function closeEditSectModal(){
+	$("#secretaryEditModalContent").modal("hide");
+	$("#manageModal").modal("show");
+}
+/*
  * Function to request a modal fragment and to display the data. Params:
  * modalContainer = Parent div of the moda aka contains the modal modalName =
  * The modal fragment to be used. ID=? queryUrl = The link to the controller
@@ -63,9 +70,27 @@ function openEditModal(modalContainer,modalName,queryUrl,id){
 			}
 		});
 	}
-
+	
+function openSectEditModal(modalContainer,modalName,queryUrl,id){
+	modalContainer = '#' + modalContainer;
+	modalName = '#' + modalName;
+	console.log(window.location.pathname);
+	$.ajax({
+			url: queryUrl+id,
+			data: {
+				"currentUrl" : window.location.pathname
+			},
+			success: function(data){
+				console.log(data);
+				$(modalContainer).append(data);
+				$("#manageModal").modal("hide");
+				$(modalName).modal("show");
+			}
+		});
+}
 /*
- * Query server for table body that is filtered (i.e. Asc Desc by lastname OR All items with Category.id = x)
+ * Query server for table body that is filtered (i.e. Asc Desc by lastname OR
+ * All items with Category.id = x)
  */
 
 function filterTableView(tableId,tableBodyId,queryUrl,sortId){
@@ -108,7 +133,7 @@ function enableEditItem(event,modalContainerName){
 	var modalContainer = document.getElementById(modalContainerName);
 	var modalTitle = modalContainer.querySelector("#editItemModalTitle");
 	var submitBtn = modalContainer.querySelector("#saveEditBtn");
-	//List of inputs and select
+	// List of inputs and select
 	var inputList = modalContainer.querySelector("#editItemModalContent")
 			.querySelectorAll("input");
 	var selectList = modalContainer.querySelector("#editItemModalContent")
@@ -118,7 +143,7 @@ function enableEditItem(event,modalContainerName){
 	console.log(inputList.length);
 	console.log(selectList.length);
 	console.log(textAreaList);
-	//Skip textAreaList since it was just used for address
+	// Skip textAreaList since it was just used for address
 	if(textAreaList  != null){
 		for (var i = 0; i < textAreaList.length; i++) {
 			if (textAreaList [i].hasAttribute("disabled")) {
@@ -126,25 +151,25 @@ function enableEditItem(event,modalContainerName){
 			}
 		}
 	}
-	//Allow edit on all inputs
+	// Allow edit on all inputs
 	for (var i = 0; i < inputList.length; i++) {
 		if (inputList[i].hasAttribute("disabled")) {
 			inputList[i].removeAttribute("disabled");
 		}
 	}
-	//Allow edit on select tags
+	// Allow edit on select tags
 	for (var i = 0; i < selectList.length; i++) {
 		if (selectList[i].hasAttribute("disabled")) {
 			selectList[i].removeAttribute("disabled");
 		}
 	}
-	//Change texts
+	// Change texts
 	modalTitle.innerText = "Edit Item";
 	submitBtn.innerText = "Save Changes";
-	//Change submit button color
+	// Change submit button color
 	submitBtn.classList.remove("btn-warning");
 	submitBtn.classList.add("btn-success");
-	//Change button to submit
+	// Change button to submit
 	if (submitBtn.type == "button") {
 		submitBtn.type = "submit";
 		event.preventDefault();
@@ -152,6 +177,67 @@ function enableEditItem(event,modalContainerName){
 	console.log(inputList.length);
 	console.log(selectList.length);
 
+}
+function enableSectEdit(event,modalContainerName){
+	var modalContainer = document.getElementById(modalContainerName);
+	var modalTitle = modalContainer.querySelector("#editSectModalTitle");
+	var submitBtn = modalContainer.querySelector("#saveSectEditBtn");
+	// List of inputs and select
+	var inputList = modalContainer.querySelector("#secretaryEditModalContent")
+			.querySelectorAll("input");
+	var selectList = modalContainer.querySelector("#secretaryEditModalContent")
+			.querySelectorAll("select");
+	// Allow edit on all inputs
+	for (var i = 0; i < inputList.length; i++) {
+		if (inputList[i].hasAttribute("disabled")) {
+			inputList[i].removeAttribute("disabled");
+		}
+	}
+	// Allow edit on select tags
+	for (var i = 0; i < selectList.length; i++) {
+		if (selectList[i].hasAttribute("disabled")) {
+			selectList[i].removeAttribute("disabled");
+		}
+	}
+	// Change texts
+	modalTitle.innerText = "Edit Item";
+	submitBtn.innerText = "Save Changes";
+	// Change submit button color
+	submitBtn.classList.remove("btn-warning");
+	submitBtn.classList.add("btn-success");
+	// Change button to submit
+	if (submitBtn.type == "button") {
+		submitBtn.type = "submit";
+		event.preventDefault();
+	}
+}
+/*
+ * Enable edit on Appointment textboxes
+ */
+function enableAppointmentEdit(event, modalContainerName){
+	var inputContainer = document.getElementById(modalContainerName);
+	var modalContainer = document.getElementById("viewAppointmentModalContainer");
+	var modalTitle = modalContainer.querySelector("#viewAppointmentTitle");
+	var submitBtn = modalContainer.querySelector("#submitEditedAppointmentBtn");
+	var editableInputs = inputContainer.querySelectorAll(".editable");
+	console.log(modalContainer);
+	console.log(editableInputs);
+	for (var i = 0; i < editableInputs.length; i++) {
+		if(editableInputs[i].hasAttribute("disabled")){
+			editableInputs[i].removeAttribute("disabled");
+		}
+	}
+	// Change texts
+	modalTitle.innerText = "Edit Item";
+	submitBtn.innerText = "Save Changes";
+	// Change submit button color
+	submitBtn.classList.remove("btn-warning");
+	submitBtn.classList.add("btn-success");
+	// Change button to submit
+	if (submitBtn.type == "button") {
+		submitBtn.type = "submit";
+		event.preventDefault();
+	}
 }
 /*
  * Query the price of AVAILABLE procedures to Database
@@ -172,7 +258,8 @@ function queryProcedurePrice(event){
 	});
 }
 /*
- * Use an Accounting library for this. Never EVER use floating points as you will lose precision which is bad for money.
+ * Use an Accounting library for this. Never EVER use floating points as you
+ * will lose precision which is bad for money.
  */
 function updateReceiptPrice(){
 	var procedureList = document.getElementById('procedureInputs').querySelectorAll('input');

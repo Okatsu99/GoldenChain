@@ -82,8 +82,8 @@ public class Appointment {
 		DateTimeFormatter dtf = DateTimeFormatter.ISO_DATE;
 		return this.timeSlot.format(dtf);
 	}
-	public String getAppointmentTime() {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm a");
-		return this.timeSlot.format(dtf);
+	public LocalTime getAppointmentTime() {
+//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm a");
+		return this.timeSlot.toLocalTime();
 	}
 }
