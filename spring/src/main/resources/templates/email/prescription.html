@@ -23,10 +23,10 @@
 	<div class="container my-5"
 		style="background-color: #E8FBFB; width: 50%;">
 		<center>
-			<br> <b><span style="font-size: 25px;" th:text="${profile.user.getFullNameFormatted() + ', MD'}"></span>
-				<br> <span style="font-size: 17px;" th:text="A Dental Associaiton">
+			<br> <b><span style="font-size: 25px;" th:text="${doctor.getFullNameFormatted() + ', MD'}"></span>
+				<br> <span style="font-size: 17px;" th:text="'A Dental Associaiton'">
 					Insert Name of Association Here (ex. Philippine Dental Association)
-			</span> <br> <span style="padding-bottom: 10px; font-size: 15px;" th:text="${profile.user.cellphoneNumber}">
+			</span> <br> <span style="padding-bottom: 10px; font-size: 15px;" th:text="${doctor.cellphoneNumber}">
 					Contact Number: 09123456789 </span></b> <br>
 
 			<!-- 		<div class="row" style="margin-top: 15px; text-align: left; margin-left: 25px;"> -->
@@ -51,7 +51,7 @@
 
 		<div class="row" style="padding-left: 20px;">
 			<div class="col" style="width: 70%;">
-				<b><span style="font-size: 16px;"> Name: </b> <span th:text="${patientName}"></span> </span> <br> <b><span style="font-size: 16px;">
+				<b><span style="font-size: 16px;"> Name: </b> <span th:text="${patient.getFullNameStartingFirstName()}"></span> </span> <br> <b><span style="font-size: 16px;">
 						Date: </b><span th:text="${dateGenerated}"></span> </span>
 			</div>
 		</div>

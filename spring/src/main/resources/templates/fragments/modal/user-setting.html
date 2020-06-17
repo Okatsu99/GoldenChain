@@ -1,63 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-	<div class="modal fade" id="settingModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header setting">
-					<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Settings</h3>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<form th:action="@{/app/user/updatepass}" th:method="post">
-					<input name="userId" th:value="${profile.user.id}" type="hidden">
-					<input th:name="currentUrl"
-						th:value="${#httpServletRequest.requestURI}" type="hidden">
-					<div class="modal-body setting">
-
-						<center>
-							<table>
-								<tr>
-									<th rowspan="1"><img src="/images/dp-generic.png"
-										class="img logo rounded-circle mb-5" width="250" height="250"></th>
-									<h4 th:text="${profile.user.getFullNameFormatted()}">Christian
-										Gaspar</h4>
-									<br>
-								</tr>
-
-								<tr>
-									<th><input type="password" class="form-control"
-										id="NewPassword" placeholder="Enter a New Password"
-										required="autofocus" name="pass"> <br> <input
-										type="password" name="confirmPass" class="form-control"
-										id="NewPasswordCheck" placeholder="Confirm New Password"
-										required="autofocus"></th>
-								</tr>
-							</table>
-						</center>
-					</div>
-
-					<div class="modal-footer setting">
-						<br> <br> <br> <br>
-						<div>
-							<button type="submit" class="btn btn-secondary">Set
-								New Password</button>
-						</div>
-
-						<div>
-							<button type="button" class="btn btn-primary"
-								data-dismiss="modal">Save Changes</button>
-						</div>
-					</div>
-				</form>
+<div class="modal fade" id="settingModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header setting">
+				<h3 class="modal-title w-100 text-center" id="exampleModalLabel">Settings</h3>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			<form th:action="@{/app/user/updatepass}" th:method="post">
+				<input name="userId" th:value="${profile.user.id}" type="hidden">
+				<input th:name="currentUrl"
+					th:value="${#httpServletRequest.requestURI}" type="hidden">
+				<div class="modal-body setting">
+
+					<center>
+						<table>
+							<tr>
+								<th rowspan="1"><img src="/images/dp-generic.png"
+									class="img logo rounded-circle mb-5" width="250" height="250"></th>
+								<h4 th:text="${profile.user.getFullNameFormatted()}">Christian
+									Gaspar</h4>
+								<br>
+							</tr>
+
+							<tr>
+								<th><input type="password" class="form-control"
+									id="NewPassword" placeholder="Enter a New Password"
+									required="autofocus" name="pass"> <br> <input
+									type="password" name="confirmPass" class="form-control"
+									id="NewPasswordCheck" placeholder="Confirm New Password"
+									required="autofocus"></th>
+							</tr>
+						</table>
+					</center>
+				</div>
+
+				<div class="modal-footer setting">
+					<br> <br> <br> <br>
+					<div>
+						<button type="submit" class="btn btn-secondary">Set New
+							Password</button>
+					</div>
+
+					<div>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Save
+							Changes</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
-	</div>
-</body>
-</html>
+</div>

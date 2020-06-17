@@ -1,6 +1,8 @@
 package com.remd.spring.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "patient_record")
 public class PatientRecord {
-	
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +40,13 @@ public class PatientRecord {
 	@Column(name = "home_address")
 	private String homeAddress;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "clinic_id",nullable = false)
+	@JoinColumn(name = "clinic_id", nullable = false)
 	private Clinic patientClinic;
 	@OneToMany(mappedBy = "record")
 	private List<Appointment> appointments;
+	@OneToMany(mappedBy = "patient")
+	private List<MedicinePrescription> prescribedMedicines;
+
 	public PatientRecord() {
 		this.firstName = "";
 		this.lastName = "";
@@ -54,9 +58,15 @@ public class PatientRecord {
 		this.patientClinic = new Clinic();
 		this.appointments = new ArrayList<Appointment>();
 	}
-	
-	public PatientRecord(String firstName, String lastName, String gender, String contactNumber,
-			LocalDate birthDate, String email, String homeAddress, Clinic patientClinic) {
+
+	public PatientRecord(String firstName,
+			String lastName,
+			String gender,
+			String contactNumber,
+			LocalDate birthDate,
+			String email,
+			String homeAddress,
+			Clinic patientClinic) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -66,11 +76,18 @@ public class PatientRecord {
 		this.email = email;
 		this.homeAddress = homeAddress;
 		this.patientClinic = patientClinic;
-		this.appointments = null; //New Patient
+		this.appointments = null; // New Patient
 	}
-	
-	public PatientRecord(String firstName, String lastName, String gender, String contactNumber,
-			LocalDate birthDate, String email, String homeAddress, Clinic patientClinic, List<Appointment> appointments) {
+
+	public PatientRecord(String firstName,
+			String lastName,
+			String gender,
+			String contactNumber,
+			LocalDate birthDate,
+			String email,
+			String homeAddress,
+			Clinic patientClinic,
+			List<Appointment> appointments) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -162,6 +179,19 @@ public class PatientRecord {
 	public void setAppointments(List<Appointment> appointments) {
 		this.appointments = appointments;
 	}
-	
-	
+
+	/*
+	 * Domain Functions
+	 */
+	public String getLongFormatBirthDate() {
+		return this.birthDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+	}
+
+	public String getFullNameStartingFirstName() {
+		return this.firstName + " " + this.lastName;
+	}
+
+	public String getFullNameStartingLastName() {
+		return this.lastName + ", " + this.firstName;
+	}
 }

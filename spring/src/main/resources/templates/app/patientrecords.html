@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
 <head>
 <title>Patient Record</title>
 <meta charset="utf-8">
@@ -89,6 +88,12 @@
 							<td th:text="${patientRecord.contactNumber}"></td>
 							<td th:text="${patientRecord.email}"></td>
 							<td th:text="${patientRecord.patientClinic.name}">/td>
+							<td>
+								<form th:action="@{/app/record/prescription}">
+									<input type="hidden" name="patientId" th:value="${patientRecord.id}">
+									<button class="btn btn-success">Generate</button>
+								</form>
+							</td>
 						</tr>
 					</tbody>
 				</table>

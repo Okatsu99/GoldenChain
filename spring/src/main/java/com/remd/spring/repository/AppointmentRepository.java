@@ -1,11 +1,11 @@
 package com.remd.spring.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +21,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 	@Transactional
 	@Query(value = "UPDATE Appointment appointment SET appointment.timeSlot=?1, appointment.doctorNotes=?2 WHERE appointment.id=?3")
 	int editAppointmentById(LocalDateTime timeSlot,String doctorNotes, Integer appointmentId);
+	@Query(value = "SELECT a FROM Appointment a WHERE CONVERT(time_slot as DATE)=?1")
+	List<Appointment> getAllAppointmentsForTomorrow(String appointmentDate);
 }
