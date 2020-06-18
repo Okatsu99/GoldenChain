@@ -1,4 +1,4 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.time.LocalDate;
 
@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Entity(name = "item_list")
+@Entity
+@Table(name = "item_list")
 public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,11 @@ public class Item {
 	private ItemCategory category;
 	@Column(name = "expiration_date")
 	private LocalDate expiration;
+	@ManyToOne
+	@JoinColumn(name = "clinic_id", nullable = false)
+	private Clinic itemLocation;
+	@Column(name = "is_active")
+	private boolean isActive;
 	
 	public Item() {
 		this.name = "";
@@ -34,48 +41,85 @@ public class Item {
 		this.quantity = 0;
 		this.expiration = null;
 		this.category = new ItemCategory();
+		this.isActive = false;
 	}
-	public Item(String name, String description, Integer quantity, ItemCategory category, LocalDate expiration) {
+	
+	/*
+	 * Constructor for new Item
+	 */
+	public Item(String name, String description, Integer quantity, ItemCategory category, LocalDate expiration,
+			Clinic itemLocation) {
 		this.name = name;
 		this.description = description;
 		this.quantity = quantity;
 		this.category = category;
 		this.expiration = expiration;
+		this.itemLocation = itemLocation;
+		this.isActive = true;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getQuantity() {
+
+	public Integer getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+
 	public ItemCategory getCategory() {
 		return category;
 	}
+
 	public void setCategory(ItemCategory category) {
 		this.category = category;
 	}
+
 	public LocalDate getExpiration() {
 		return expiration;
 	}
+
 	public void setExpiration(LocalDate expiration) {
 		this.expiration = expiration;
 	}
+
+	public Clinic getItemLocation() {
+		return itemLocation;
+	}
+
+	public void setItemLocation(Clinic itemLocation) {
+		this.itemLocation = itemLocation;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 }

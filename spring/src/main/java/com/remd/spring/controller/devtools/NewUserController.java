@@ -1,6 +1,5 @@
 package com.remd.spring.controller.devtools;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.remd.spring.bean.User;
+import com.remd.spring.model.User;
 import com.remd.spring.repository.RoleRepository;
 import com.remd.spring.repository.UserRepository;
 
@@ -32,6 +31,7 @@ public class NewUserController {
 			@RequestParam(name = "firstName")String firstName,
 			@RequestParam(name = "lastName")String lastName,
 			@RequestParam(name = "password")String password,
+			@RequestParam(name = "email")String email,
 			@RequestParam(name = "role")Integer roleId
 			) {
 		User user = new User();
@@ -39,10 +39,14 @@ public class NewUserController {
 		user.setAccountNonExpired(true);
 		user.setAccountNonLocked(true);
 		user.setCredentialsNonExpired(true);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setUserName(capitalizeFirstLetter(firstName).strip()+"."+capitalizeFirstLetter(lastName).strip());
+		user.setFirstName(capitalizeFirstLetter(firstName));
+		user.setLastName(capitalizeFirstLetter(lastName));
+		user.setUserName(email);
 		user.setPassWord(passwordEncoder.encode(password));
+		user.setEmail(email);
+		user.setCellphoneNumber("1111111");
+		user.setDoctor(null);
+		user.setSecretaries(null);
 		user.setRoles(Arrays.asList(roleRepository.findById(roleId).get()));
 		userRepository.save(user);
 		return "redirect:/login";

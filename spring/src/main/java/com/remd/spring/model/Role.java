@@ -1,4 +1,4 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.util.Collection;
 
@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-@Entity(name = "roles")
+@Entity
+@Table(name = "roles")
 public class Role {
 	@Id
 	@Column(name = "id")

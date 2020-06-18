@@ -1,22 +1,28 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "patient_record")
 public class PatientRecord {
-	
+
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "first_name")
@@ -33,9 +39,14 @@ public class PatientRecord {
 	private String email;
 	@Column(name = "home_address")
 	private String homeAddress;
-	@ManyToOne
-	@JoinColumn(name = "clinic_id",nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "clinic_id", nullable = false)
 	private Clinic patientClinic;
+	@OneToMany(mappedBy = "record")
+	private List<Appointment> appointments;
+	@OneToMany(mappedBy = "patient")
+	private List<MedicinePrescription> prescribedMedicines;
+
 	public PatientRecord() {
 		this.firstName = "";
 		this.lastName = "";
@@ -45,10 +56,17 @@ public class PatientRecord {
 		this.email = "";
 		this.homeAddress = "";
 		this.patientClinic = new Clinic();
+		this.appointments = new ArrayList<Appointment>();
 	}
-	
-	public PatientRecord(String firstName, String lastName, String gender, String contactNumber,
-			LocalDate birthDate, String email, String homeAddress, Clinic patientClinic) {
+
+	public PatientRecord(String firstName,
+			String lastName,
+			String gender,
+			String contactNumber,
+			LocalDate birthDate,
+			String email,
+			String homeAddress,
+			Clinic patientClinic) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -58,6 +76,28 @@ public class PatientRecord {
 		this.email = email;
 		this.homeAddress = homeAddress;
 		this.patientClinic = patientClinic;
+		this.appointments = null; // New Patient
+	}
+
+	public PatientRecord(String firstName,
+			String lastName,
+			String gender,
+			String contactNumber,
+			LocalDate birthDate,
+			String email,
+			String homeAddress,
+			Clinic patientClinic,
+			List<Appointment> appointments) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.contactNumber = contactNumber;
+		this.birthDate = birthDate;
+		this.email = email;
+		this.homeAddress = homeAddress;
+		this.patientClinic = patientClinic;
+		this.appointments = appointments;
 	}
 
 	public int getId() {
@@ -132,5 +172,26 @@ public class PatientRecord {
 		this.patientClinic = patientClinic;
 	}
 
-	
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	/*
+	 * Domain Functions
+	 */
+	public String getLongFormatBirthDate() {
+		return this.birthDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+	}
+
+	public String getFullNameStartingFirstName() {
+		return this.firstName + " " + this.lastName;
+	}
+
+	public String getFullNameStartingLastName() {
+		return this.lastName + ", " + this.firstName;
+	}
 }

@@ -1,7 +1,6 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;

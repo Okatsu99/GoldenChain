@@ -1,4 +1,4 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.util.List;
 
@@ -9,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity(name = "item_category")
+@Entity
+@Table(name = "item_category")
 public class ItemCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package com.remd.spring.bean;
+package com.remd.spring.model;
 
 import java.util.Collection;
 
@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-@Entity(name = "privileges")
+@Entity
+@Table(name = "privileges")
 public class Privilege {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

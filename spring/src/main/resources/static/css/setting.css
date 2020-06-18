@@ -1,23 +1,28 @@
-.setting{
+.setting {
 	background-color: #CED7E1;
 }
-.backgroundColor{
+
+.backgroundColor {
 	background-color: #E7F4F6;
 }
-.backgroundColorSec{
+
+.backgroundColorSec {
 	background-color: #FAE1E1;
 }
-.colorModal{
+
+.colorModal {
 	background-color: #EAD9E3;
 }
-@font-face{
+
+@font-face {
 	font-family: "KeepCalm-Medium";
 	src: url('fonts/KeepCalm-Medium.ttf');
 }
-.font{
-	font-family: "KeepCalm-Medium";
 
+.font {
+	font-family: "KeepCalm-Medium";
 }
-.sizeText{
+
+.sizeText {
 	resize: none;
 }

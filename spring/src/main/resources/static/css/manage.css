@@ -1,10 +1,10 @@
-.Manager{
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+.Manager {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
 }
 
-.bgcolor{
+.bgcolor {
 	background-color: #b8b6cb;
 	color: black;
 }

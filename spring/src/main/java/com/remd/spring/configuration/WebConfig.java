@@ -1,12 +1,14 @@
-package com.remd.spring.controller.configuration;
+package com.remd.spring.configuration;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableScheduling
 @ComponentScan(basePackages = {"com.remd.spring.controller.configuration"})
 public class WebConfig implements WebMvcConfigurer {
 	

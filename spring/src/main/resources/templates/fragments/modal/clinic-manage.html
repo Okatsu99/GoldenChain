@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 	<!-- Manage Clinic Modal -->
 	<div class="modal fade" id="manageClinicModal" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -34,29 +27,30 @@
 									data-toggle="modal" data-target="#AddClinicModal">Add</button>
 							</div>
 							<div style="width: 85px";>
-								<button type="button" class="btn btn-danger">
-									<a data-toggle="modal" data-target="#">Delete
-								</button>
-								</a>
+								<button id="clinicBtnDelete" type="button" class="btn btn-danger">Delete</button>
 							</div>
 						</div>
 						<br>
 
-						<table class="table table-striped table-dark">
-							<tr>
-								<th></th>
-								<th>Clinic ID</th>
-								<th>Clinic Name</th>
-								<th>Clinic Location</th>
-							</tr>
-							<tr th:each="clinic : ${clinicList}">
-								<td><input type="checkbox" name="checkbx"></td>
-								<td th:text="${clinic.id}"></td>
-								<td th:text="${clinic.name}"></td>
-								<td th:text="${clinic.location}"></td>
-							</tr>
+						<form id="clinicDeleteForm" th:action="@{/app/clinic/delete}" th:method="post">
+						<input th:name="currentUrl"
+								th:value="${#httpServletRequest.requestURI}" type="hidden">
+							<table id="clinicTable" class="table table-striped table-dark">
+								<tr>
+									<th></th>
+									<th>Clinic ID</th>
+									<th>Clinic Name</th>
+									<th>Clinic Location</th>
+								</tr>
+								<tr th:each="clinic : ${clinicList}">
+									<td><input type="checkbox" name="clinicId" th:value="${clinic.id}"></td>
+									<td th:text="${clinic.id}"></td>
+									<td th:text="${clinic.name}"></td>
+									<td th:text="${clinic.location}"></td>
+								</tr>
 
-						</table>
+							</table>
+						</form>
 					</div>
 
 					<div class="modal-footer bgcolor"></div>
@@ -64,7 +58,3 @@
 			</div>
 		</div>
 	</div>
-
-
-</body>
-</html>
