@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -27,6 +29,7 @@ import com.remd.spring.repository.RoleRepository;
 
 @Controller
 public class AppointmentsController {
+	private static final Logger log = LoggerFactory.getLogger(AppointmentsController.class);
 	@Autowired
 	private AppointmentRepository appointmentRepository;
 	@Autowired
@@ -60,38 +63,47 @@ public class AppointmentsController {
 			@RequestParam(name = "appointmentDate") @DateTimeFormat(iso = ISO.DATE) LocalDate appointmentDate,
 			@RequestParam(name = "appointmentTime") @DateTimeFormat(iso = ISO.TIME) LocalTime appointmentTime,
 			@RequestParam(name = "appointmentDoctorNotes") String appointDoctorNotes) {
+		MyUserDetails currentUser = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 		Appointment appointment = new Appointment(appointmentDate, appointmentTime, appointDoctorNotes,
 				patientRecordRepository.findById(patientRecordId).get());
 		appointmentRepository.saveAndFlush(appointment);
+		log.info("User " + currentUser.getUser().getFullNameFormatted() + " has added an appointment for "
+				+ appointment.getRecord().getFullNameStartingFirstName() + " on " + appointment.getAppointmentDate());
 		return "redirect:/app/appointments";
 	}
+
 	@PostMapping("/app/appointments/edit")
-	public String editAppointment(
-			@RequestParam(name = "appointmentId")Integer appointmentId, 
-			@RequestParam(name = "appointmentDate") @DateTimeFormat(iso=ISO.DATE) LocalDate appointmentDate,
-			@RequestParam(name = "appointmentTime") @DateTimeFormat(iso=ISO.TIME) LocalTime appointmentTime,
-			@RequestParam(name = "appointmentDoctorNotes")String doctorNotes
-			) {
+	public String editAppointment(@RequestParam(name = "appointmentId") Integer appointmentId,
+			@RequestParam(name = "appointmentDate") @DateTimeFormat(iso = ISO.DATE) LocalDate appointmentDate,
+			@RequestParam(name = "appointmentTime") @DateTimeFormat(iso = ISO.TIME) LocalTime appointmentTime,
+			@RequestParam(name = "appointmentDoctorNotes") String doctorNotes) {
 		LocalDateTime timeSlot = LocalDateTime.of(appointmentDate, appointmentTime);
 		appointmentRepository.editAppointmentById(timeSlot, doctorNotes, appointmentId);
+		MyUserDetails currentUser = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		log.info("User " + currentUser.getUser().getFullNameFormatted() + " has edited "
+				+ appointmentRepository.getOne(appointmentId).getRecord().getFullNameStartingFirstName()
+				+ "'s appointment with id:" + appointmentId);
 		return "redirect:/app/appointments";
 	}
+
 	@PostMapping("/app/appointments/delete")
-	public String deleteAppointment(
-			@RequestParam(name = "selectAppointment") List<Integer> appointmentIDs
-			) {
+	public String deleteAppointment(@RequestParam(name = "selectAppointment") List<Integer> appointmentIDs) {
+		MyUserDetails currentUser = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 		for (int i = 0; i < appointmentIDs.size(); i++) {
-			appointmentRepository.deleteById(appointmentIDs.get(i));;
+			Appointment deletingAppointment = appointmentRepository.findById(appointmentIDs.get(i)).get();
+			log.info("User " + currentUser.getUser().getFullNameFormatted() + " has deleted the appointment with id " + deletingAppointment.getId() + " of "
+					+ deletingAppointment.getRecord().getFullNameStartingFirstName() + " scheduled on "+ deletingAppointment.getAppointmentDate());
+			appointmentRepository.deleteById(appointmentIDs.get(i));
 		}
 		return "redirect:/app/appointments";
 	}
-	
+
 	@GetMapping("/app/appointments/view/{id}")
-	public String getViewAppointmentModal(
-			Model model,
-			@PathVariable("id")Integer appointmentId
-			) {
-		model.addAttribute("appointmentData",appointmentRepository.findById(appointmentId).get());
+	public String getViewAppointmentModal(Model model, @PathVariable("id") Integer appointmentId) {
+		model.addAttribute("appointmentData", appointmentRepository.findById(appointmentId).get());
 		return "app/appointments :: editAppointmentModalContent";
 	}
 }

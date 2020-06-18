@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import com.remd.spring.services.EmailService;
 
 @Controller
 public class ReceiptController {
+	private static final Logger log = LoggerFactory.getLogger(ReceiptController.class);
 	@Autowired
 	private ProcedureRepository procedureRepository;
 	@Autowired
@@ -63,6 +66,7 @@ public class ReceiptController {
 		params.put("procedures", procedures);
 		params.put("total", totalPrice);
 		emailService.sendReceiptEmailTemplate("someeobscuremailaddress@gmail.com", "test", params);
+		log.info("User " + currentUserDetails.getFullNameFormatted() + " has sent a receipt for patient ");
 		return "redirect:/app/receipt";
 	}
 

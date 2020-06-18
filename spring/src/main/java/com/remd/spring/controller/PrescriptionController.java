@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +29,7 @@ import com.remd.spring.services.EmailService;
 
 @Controller
 public class PrescriptionController {
+	private static final Logger log = LoggerFactory.getLogger(PrescriptionController.class);
 	@Autowired
 	private EmailService emailService;
 	@Autowired
@@ -64,6 +67,7 @@ public class PrescriptionController {
 		params.put("medicineList", medicineList);
 		params.put("dateGenerated", currentDate);
 		emailService.sendPrescriptionEmailTemplate("someeobscuremailaddress@gmail.com", "test", params);
+		log.info("User " + currentUserDetails.getFullNameFormatted() + " has a sent a prescription for " + patient.getFullNameStartingFirstName());
 		return "redirect:/app/prescription";
 	}
 }
